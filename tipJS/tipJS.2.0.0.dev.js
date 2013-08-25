@@ -34,14 +34,15 @@
 	 *  Date
 	 *  RegExp
 	 */
-	var types__ = [ 'Arguments', 'Function', 'String', 'Number', 'Boolean', 'Date', 'RegExp' ];
-	for(var t = 0, lt=types__.length; t < lt; t++) {
-		(function(type) {
-			util__['is' + type] = function(obj) {
-				return __protoToString.call(obj) === '[object '+type+']';
-			}
-		})(types__[t]);
-	}
+  var types = [ 'Arguments', 'Function', 'Number', 'String', 'Date', 'RegExp', 'Boolean' ],
+    checker = function(type) {
+      util__['is' + type] = function(obj) {
+        return __protoToString.call(obj) === '[object ' + type + ']';
+      };
+    };
+  for(var t = 0,len = types.length; t < len; t++) {
+    checker(types[t]);
+  }
 
 	/**
 	 * obj 가 Array 인지 체크
@@ -72,7 +73,9 @@
 	util__.toArray = function(obj) {
 		var _ret = [];
 		if (obj.length) {
-			for(var i=0, len=obj.length;i<len; i++) _ret[i] = obj[i];
+			for(var i=0, len=obj.length;i<len; i++) {
+        _ret[i] = obj[i];
+      }
 		}
 		return _ret;
 	};

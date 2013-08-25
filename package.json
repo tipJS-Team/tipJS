@@ -1,0 +1,22 @@
+{
+  "name": "tipJS",
+  "version": "0.10.0",
+  "description": "tipJS is a MVC Framework",
+  "main": "build/tipJS.min.js",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "grunt": "*",
+    "grunt-contrib-jshint": "*",
+    "grunt-contrib-nodeunit": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-qunit": "*",
+    "grunt-contrib-watch": "*",
+    "grunt-contrib-connect": "*"
+  },
+  "repository": "https://github.com/tipJS-Team/tipJS.git",
+  "author": [
+    "javarouka@gmail.com"
+  ],
+  "license": "MIT"
+}
