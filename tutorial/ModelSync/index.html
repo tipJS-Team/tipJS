@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<head>
+<title>tipJS.com - Javascript MVC Framework ModelSync Tutorial</title>
+<script src="../../tipJS/tipJS.2.0.0.dev.js"></script>
+<script src="app.js"></script>
+<script>
+window.onload = function(){
+	var input="input value";
+	tipJS.loadApp(input);
+};
+</script>
+</head>
+<body>
+<h1>tipJS.com - Javascript MVC Framework <br />ModelSync Tutorial</h1>
+    <h1 id="contentsA"></h1>
+    <h1 id="contentsB"></h1>
+    <input type="button" value="Controller 1"
+    onclick="tipJS.action.controller1();"/>
+    <input type="button" value="Controller 2"
+    onclick="tipJS.action.controller2()"/>
+    <input type="button" value="Controller 3"
+    onclick="tipJS.action.controller3()"/>
+<h4><a href="app.js" target="_blank">app.js</a></h4>
+<h4>ModelSync</h4>
+<ul>
+	<li>controllers</li>
+	<ul>
+		<li><a href="controllers/controller1.js" target="_blank">controller1.js</a></li>
+		<li><a href="controllers/controller2.js" target="_blank">controller2.js</a></li>
+		<li><a href="controllers/controller3.js" target="_blank">controller3.js</a></li>
+	</ul>
+</ul>
+<ul>
+	<li>models</li>
+	<ul>
+		<li><a href="models/modelA.js" target="_blank">modelA.js</a></li>
+		<li><a href="models/modelB.js" target="_blank">modelB.js</a></li>
+	</ul>
+</ul>
+</body>
+</html>

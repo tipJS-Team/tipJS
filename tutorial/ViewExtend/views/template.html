@@ -1,0 +1,8 @@
+<div>
+	<ul>
+		<@ for(var i=0; i<data.length; i++) { @>
+			<@ if (i != 0) {@><li class="<@=( (i==2) ? "foo":"bar" )@>"><@= data[i] @></li>
+			<@}else{@><div class="<@=( (i==2) ? "foo":"bar" )@>"><@= data[i] @></div><@}@>
+		<@ } @>
+	</ul>
+</div>
