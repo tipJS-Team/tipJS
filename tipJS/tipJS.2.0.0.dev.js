@@ -235,7 +235,7 @@
 			};
 		} else {
 			__cloneObjN = function(o) {
-				function F() {}
+				function F() {};
 				F.prototype = o;
 				return new F();
 			};
@@ -576,9 +576,9 @@
 						setTimeout(_doCtrler, (!ctrler.delay ? 15 : ctrler.delay));
 					else
 						_doCtrler();
-				}
+				}; // return function
 			})(_ctrlerWrapper, _ctrler);
-		}
+		} // for
 	};
 
 	/**
@@ -622,7 +622,7 @@
 			}
 			func.apply(depart, arguments);
 		};
-	}
+	};
 
 	/**
 	 * After Advice 를 원 method 에 설정
@@ -640,7 +640,7 @@
 				_after[i].apply(depart, arguments);
 			}
 		};
-	}
+	};
 
 	/**
 	 * 각 point cut별로 intercept 처리
@@ -685,7 +685,7 @@
 				}
 			}
 		}
-	}
+	};
 
 	/**
 	 * 각 파트별로 intercept 처리
@@ -1241,7 +1241,7 @@
 	templateCache__ = {}, reservedStack__,
 	config__ = util__.cloneObject(DEF_BASE__.config),
 	isFlat__ = {}, define__,
-	_winLoc = window.location, _pathname = _winLoc.pathname, _queryString = _winLoc.search, _scripts = util__.getByTag('script'), _scriptSrc, _match, _isDevelopment = null, _lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage).substr(0,2);
+	_winLoc = window.location, _pathname = _winLoc.pathname, _queryString = _winLoc.search, _isDevelopment = null, _lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage).substr(0,2);
 
 	if (_queryString.match('(\\?|&)debug') !== null || _pathname.match('debug') !== null)
 		_isDevelopment = true;
