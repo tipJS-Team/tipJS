@@ -416,16 +416,15 @@
 	 * @return File Path를 포함한 List
 	 */
 	var __getAppReqList = function(define, depart) {
-		var _sLoadOdr = DEF_BASE__.loadOrder;
+		var _path = config__.path[depart],
+			_appRoot = define.appPath ? define.appPath : ".";
 
 		if (depart === "lang" && define.localSet) {
-			define[depart] = [config__.path.lang+"/"+tipJS.lang+".js"];
+			define[depart] = [_appRoot + "/" + _path + "/" + tipJS.lang + ".js"];
 			return define[depart];
 		}
 
-		var _path = config__.path[depart],
-			_appRoot = define.appPath ? define.appPath : ".",
-			_departs = util__.uniqArray(define[depart]),
+		var _departs = util__.uniqArray(define[depart]),
 			_ret = [];
 		for (var i = _departs.length; i--;) {
 			_ret.push(_appRoot + "/" + _path + "/" + _departs[i]);
@@ -1172,10 +1171,8 @@
 			return url;
 		};
 		app__.define = _define;
-		app__.loadOrder = {};
-		util__.mergeObject(app__.loadOrder, DEF_BASE__.loadOrder);
-		var _depart = app__.loadOrder.presentOrder();
-		__loadDepart(_depart);
+		util__.mergeObject(app__.loadOrder = {}, DEF_BASE__.loadOrder);
+		__loadDepart(app__.loadOrder.presentOrder());
 	};
 
 	/*
@@ -1193,11 +1190,10 @@
 		config : {
 			noCache : false,
 			noCacheVersion : tipJS.ver,
-			noCacheParam : "noCacheVersion",
+			noCacheParam : "tipJS",
 			noCacheAuto : false,
 			templateCache : true,
 			charSet : "utf-8",
-			defineFileName : "define",
 			path : {
 				lang : "lang",
 				interceptors : "interceptors",
@@ -1205,8 +1201,7 @@
 				models : "models",
 				views : "views"
 			},
-			developmentHostList : [],
-			applicationPath : {}
+			developmentHostList : []
 		},
 		define : {
 			lang : [],
