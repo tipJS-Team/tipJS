@@ -917,7 +917,7 @@
 
 			return _retTxt;
 		} else
-			throw new Error("Can't find templates file: " + _fileUrl);
+			throw new Error("Can't find templates file: " + config.url);
 	};
 
 	/**
