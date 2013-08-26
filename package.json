@@ -3,10 +3,9 @@
   "version": "0.10.0",
   "description": "tipJS is a MVC Framework",
   "main": "build/tipJS.min.js",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
-    "grunt": "*",
+    "grunt": "~0.4.1",
     "grunt-contrib-jshint": "*",
     "grunt-contrib-nodeunit": "*",
     "grunt-contrib-uglify": "*",
