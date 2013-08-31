@@ -12,16 +12,5 @@
     "public/components",
     "test"
   ],
-  "main": "build/tipJS.min.js",
-  "dependencies": {
-  },
-  "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-contrib-jshint": "*",
-    "grunt-contrib-nodeunit": "*",
-    "grunt-contrib-uglify": "*",
-    "grunt-contrib-qunit": "*",
-    "grunt-contrib-watch": "*",
-    "grunt-contrib-connect": "*"
-  }
+  "main": "build/tipJS.min.js"
 }
