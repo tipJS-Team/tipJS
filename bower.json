@@ -12,6 +12,7 @@
     "public/components",
     "test"
   ],
+  "main": "build/tipJS.min.js",
   "dependencies": {
   },
   "devDependencies": {
