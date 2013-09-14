@@ -16,14 +16,28 @@ module.exports = function(grunt) {
       ],
       buildDirPath = "build/",
       banner = "/*\n <%= pkg.name %> - OpenSource Javascript MVC Framework ver.2.0.0\n" +
-        " Copyright 2013.08 SeungHyun PAEK\n" +
+        " Copyright 2013.08 SeungHyun PAEK, Hanghee, Yi\n" +
         " Dual licensed under the MIT or GPL Version 2 licenses\n" +
         " HomePage: http://www.tipjs.com\n" +
         " Contact: http://www.tipjs.com/contact\n" +
         " license: MIT, GPL V2\n" +
         " create date: <%= grunt.template.today('yyyy-mm-dd') %> */";
+
+  var cleanPaths = [ "test/tipJS", buildDirPath + "*" ];
+
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    clean: {
+      test: cleanPaths,
+      build: cleanPaths
+    },
+    copy: {
+      test: {
+        files: [
+          {src: sources, dest: 'test/'}
+        ]
+      }
+    },
     uglify: {
       options: {
         banner: banner
@@ -49,9 +63,6 @@ module.exports = function(grunt) {
         }
       }
     },
-//    nodeunit: {
-//      all: ['test/**/*-test.js']
-//    },
     qunit: {
       all: {
         options: {
@@ -80,7 +91,7 @@ module.exports = function(grunt) {
           }
         }
       },
-      qunit: {
+      test: {
         options: {
           port: 9001,
           base: "test"
@@ -102,19 +113,20 @@ module.exports = function(grunt) {
     }
   });
 
+  grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-qunit');
-//  grunt.loadNpmTasks('grunt-contrib-nodeunit');
+  grunt.loadNpmTasks('grunt-contrib-copy');
 
   grunt.registerTask('server',
     ['uglify:examples', 'connect:live', 'watch']);
 
   grunt.registerTask('test',
-    ['uglify:test', 'connect:qunit', 'qunit']);
+    ['clean:test', 'copy:test', 'connect:test', 'qunit', 'clean:test']);
 
-  grunt.registerTask('default',
-    ['jshint', /*'connect' 'nodeunit', 'qunit'*/ 'uglify:build']);
+  grunt.registerTask('build',
+    ['clean:build', 'jshint', /*'connect' 'nodeunit',*/ 'qunit', 'uglify:build']);
 };

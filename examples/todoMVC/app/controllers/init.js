@@ -11,6 +11,8 @@ tipJS.controller("init", {
 
 	invoke : function(){
 
+    console.log(this);
+
 		var globalTodos = this.getModel("globalTodos", true);
 
 		globalTodos.init();
