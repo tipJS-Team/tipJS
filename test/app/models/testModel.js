@@ -1,0 +1,3 @@
+tipJS.model("testModel", {
+	
+});

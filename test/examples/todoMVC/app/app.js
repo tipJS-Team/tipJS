@@ -19,17 +19,17 @@ tipJS.app({
 		"destroyCompleted.js",
 		"toggle.js",
 		"edit.js",
-		"blurOnEnter.js",
+		"testController.js",
 		"update.js",
 		"destroy.js"
 	],
 	models:[
-		"bindAction.js",
+		"testModel.js",
 		"globalTodos.js",
 		"utils.js"
 	],
 	views:[
-		"renderer.js"
+		"testView.js"
 	],
 	onLoad:function(){
 		tipJS.log("todoMVC.onLoad()");

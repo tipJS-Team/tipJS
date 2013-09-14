@@ -3,6 +3,11 @@
  * Date: 13. 7. 27
  * Time: 오후 5:18
  */
+
+var mountFolder = function (connect, dir) {
+  return connect.static(require('path').resolve(dir));
+};
+
 module.exports = function(grunt) {
 
   var destinationName = '<%= pkg.name %>',
@@ -10,7 +15,6 @@ module.exports = function(grunt) {
         'tipJS/tipJS.2.0.0.dev.js'
       ],
       buildDirPath = "build/",
-      taskOrder = ['jshint', /*'connect' 'nodeunit', 'qunit'*/ 'uglify'],
       banner = "/*\n <%= pkg.name %> - OpenSource Javascript MVC Framework ver.2.0.0\n" +
         " Copyright 2013.08 SeungHyun PAEK\n" +
         " Dual licensed under the MIT or GPL Version 2 licenses\n" +
@@ -27,12 +31,19 @@ module.exports = function(grunt) {
       build: {
         src: sources,
         dest: buildDirPath + destinationName + '.min.js'
+      },
+      examples: {
+        src: sources,
+        dest: 'examples/' + destinationName + '.min.js'
+      },
+      test: {
+        src: sources,
+        dest: 'test/' + destinationName + '.min.js'
       }
     },
     watch: {
       scripts: {
         files: sources,
-        tasks: taskOrder,
         options: {
           interrupt: true
         }
@@ -41,23 +52,41 @@ module.exports = function(grunt) {
 //    nodeunit: {
 //      all: ['test/**/*-test.js']
 //    },
-//    qunit: {
-//      all: {
-//        options: {
-//          urls: [
-//            'http://localhost:8000/test/crosscutting.html'
-//          ]
-//        }
-//      }
-//    },
-//    connect: {
-//      server: {
-//        options: {
-//          port: 9999,
-//          base: '.'
-//        }
-//      }
-//    },
+    qunit: {
+      all: {
+        options: {
+          urls: [
+            'http://localhost:9001/test.html'
+          ]
+        }
+      }
+    },
+    connect: {
+      options: {
+        hostname: 'localhost'
+      },
+      live: {
+        options: {
+          port: 9000,
+          base: "examples",
+          middleware: function(connect, options) {
+            return [
+              function(req, res, next) {
+                console.log('accept from ' + req.url);
+                next();
+              },
+              connect.static(options.base)
+            ];
+          }
+        }
+      },
+      qunit: {
+        options: {
+          port: 9001,
+          base: "test"
+        }
+      }
+    },
     jshint: {
       options: {
         curly: true,
@@ -65,7 +94,6 @@ module.exports = function(grunt) {
         eqnull: true,
         browser: true,
         globals: {
-          jQuery: true,
           window: true,
           document: true
         }
@@ -77,9 +105,16 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
-//  grunt.loadNpmTasks('grunt-contrib-connect');
-//  grunt.loadNpmTasks('grunt-contrib-qunit');
+  grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-contrib-qunit');
 //  grunt.loadNpmTasks('grunt-contrib-nodeunit');
 
-  grunt.registerTask('default', taskOrder);
+  grunt.registerTask('server',
+    ['uglify:examples', 'connect:live', 'watch']);
+
+  grunt.registerTask('test',
+    ['uglify:test', 'connect:qunit', 'qunit']);
+
+  grunt.registerTask('default',
+    ['jshint', /*'connect' 'nodeunit', 'qunit'*/ 'uglify:build']);
 };
