@@ -68,6 +68,6 @@ test('interceptor test', function() {
   ok(true, 'implement test required')
 });
 
-test('util test', function() {
+test('i18n test', function() {
   ok(true, 'implement test required')
 });
