@@ -23,7 +23,7 @@ module.exports = function(grunt) {
         " license: MIT, GPL V2\n" +
         " create date: <%= grunt.template.today('yyyy-mm-dd') %> */";
 
-  var cleanPaths = [ "test/tipJS", buildDirPath + "*" ];
+  var cleanPaths = [ "test/tipJS" ];
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -128,5 +128,5 @@ module.exports = function(grunt) {
     ['clean:test', 'copy:test', 'connect:test', 'qunit', 'clean:test']);
 
   grunt.registerTask('build',
-    ['clean:build', 'jshint', /*'connect' 'nodeunit',*/ 'qunit', 'uglify:build']);
+    ['clean:build', /*'jshint',*/ 'connect', 'qunit', 'uglify:build']);
 };
