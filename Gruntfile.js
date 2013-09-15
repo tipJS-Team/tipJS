@@ -1,29 +1,26 @@
-/**
- * User: javarouka
- * Date: 13. 7. 27
- * Time: 오후 5:18
- */
-
-var mountFolder = function (connect, dir) {
-  return connect.static(require('path').resolve(dir));
-};
-
 module.exports = function(grunt) {
 
   var destinationName = '<%= pkg.name %>',
-      sources = [
-        'tipJS/tipJS.2.0.0.dev.js'
-      ],
-      buildDirPath = "build/",
-      banner = "/*\n <%= pkg.name %> - OpenSource Javascript MVC Framework ver.2.0.0\n" +
-        " Copyright 2013.08 SeungHyun PAEK, Hanghee, Yi\n" +
-        " Dual licensed under the MIT or GPL Version 2 licenses\n" +
-        " HomePage: http://www.tipjs.com\n" +
-        " Contact: http://www.tipjs.com/contact\n" +
-        " license: MIT, GPL V2\n" +
-        " create date: <%= grunt.template.today('yyyy-mm-dd') %> */";
+    sources = [
+      'tipJS/tipJS.2.0.0.dev.js'
+    ],
+    testHostURL = 'localhost',
+    livePort = 9000,
+    testPort = 9001,
+    buildDirPath = "build/",
+    banner = "/*\n <%= pkg.name %> - OpenSource Javascript MVC Framework ver.2.0.0\n" +
+      " Copyright 2013.08 \n" +
+      " Dual licensed under the MIT or GPL Version 2 licenses\n" +
+      " Author: SeungHyun PAEK, Hanghee Yi\n" +
+      " HomePage: http://www.tipjs.com\n" +
+      " Contact: http://www.tipjs.com/contact\n" +
+      " License: MIT, GPL V2\n" +
+      " create date: <%= grunt.template.today('yyyy-mm-dd') %> */";
 
-  var cleanPaths = [ "test/tipJS" ];
+  var cleanPaths = [ "test/tipJS" ],
+    testURLs = [
+      'http://'+testHostURL+':'+testPort+'/test.html'
+    ];
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -66,9 +63,7 @@ module.exports = function(grunt) {
     qunit: {
       all: {
         options: {
-          urls: [
-            'http://localhost:9001/test.html'
-          ]
+          urls: testURLs
         }
       }
     },
@@ -78,7 +73,7 @@ module.exports = function(grunt) {
       },
       live: {
         options: {
-          port: 9000,
+          port: livePort,
           base: "examples",
           middleware: function(connect, options) {
             return [
@@ -93,7 +88,7 @@ module.exports = function(grunt) {
       },
       test: {
         options: {
-          port: 9001,
+          port: testPort,
           base: "test"
         }
       }
@@ -122,10 +117,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
 
   grunt.registerTask('server',
-    ['uglify:examples', 'connect:live', 'watch']);
+    ['uglify:examples', /*'jshint',*/ 'connect:live', 'watch']);
 
   grunt.registerTask('test',
-    ['clean:test', 'copy:test', 'connect:test', 'qunit', 'clean:test']);
+    ['clean:test', 'copy:test', /*'jshint',*/ 'connect:test', 'qunit', 'clean:test']);
 
   grunt.registerTask('build',
     ['clean:test', 'copy:test', /*'jshint',*/ 'connect:test', 'qunit', 'uglify:build']);

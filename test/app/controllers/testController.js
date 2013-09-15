@@ -1,6 +1,5 @@
 tipJS.controller("test", {
-  name: "testCont",
-	invoke : function($scope) {
+  invoke : function($scope) {
 //    tipJS.log('controller:test is Ready');
     $scope.controllers.push(this);
 
@@ -13,5 +12,5 @@ tipJS.controller("test", {
     v.init($scope);
 
     v.updateView(m.getTestData());
-	}
+  }
 });
