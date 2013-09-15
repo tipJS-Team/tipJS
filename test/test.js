@@ -58,7 +58,7 @@ test('simple app test', function() {
   // test start
   setTimeout(function() {
     start();
-  }, 5000);
+  }, 3000);
 
   tipJS.loadApp($scope);
 

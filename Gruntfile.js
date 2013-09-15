@@ -128,5 +128,5 @@ module.exports = function(grunt) {
     ['clean:test', 'copy:test', 'connect:test', 'qunit', 'clean:test']);
 
   grunt.registerTask('build',
-    ['clean:build', /*'jshint',*/ 'connect', 'qunit', 'uglify:build']);
+    ['clean:test', 'copy:test', /*'jshint',*/ 'connect:test', 'qunit', 'uglify:build']);
 };
