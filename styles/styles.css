@@ -1,7 +1,49 @@
-#tipJS-topwrapper {
-    margin: 5px auto;
-    width: 100%;
-    max-width: 820px;
-    font-size: 0.9em;
-    color: #113b64;
+/*Reset Browser*/
+p, article, section, nav, aside, ul, body{
+	padding: 0;
+	margin: 0;
+	display: block;
+}
+
+body{
+	background-color: #eee;
+}
+
+
+nav{
+	position: fixed;
+	top: 0;
+	left: 0;
+	margin: 0;
+	width: 250px;
+	padding: 10px;
+	overflow: scroll;
+	height: 100%;
+	z-index: 1000;
+	background-color: #fff;
+	box-shadow: 3px 6px 6px rgba(0, 0, 0, 0.3);
+}
+
+nav dl{
+	padding: 10px;
+}
+
+dt{
+	font-weight: bold;
+	padding: 10px;
+}
+
+dd{
+	padding: 2px 20px;
+	margin: 0;
+}
+
+dd:before{
+	content:'- ';
+}
+
+.contents{
+	margin-left: 270px;
+	max-width: 740px;
+	padding: 30px;
 }
