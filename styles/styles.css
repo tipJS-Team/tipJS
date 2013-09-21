@@ -94,6 +94,10 @@ nav dd{
 		right: 20px;
 		opacity: 1;
 	}
+	#menuButton,
+	.menuButton{
+		display: none;
+	}
 
 .basicButton{
 	display: inline-block;
@@ -117,7 +121,7 @@ nav dd{
 
 .contents{
 	margin-left: 250px;
-	max-width: 680px;
+	max-width: 768px;
 	padding: 30px;
 }
 	.contents section{
@@ -160,7 +164,10 @@ nav dd{
 .languageSelector{
 	position: relative;
 	top: -30px;
-	margin-bottom: -60px;
+}
+
+.logo{
+	margin-top: -60px;
 }
 
 	.languageSelector ul{
@@ -187,13 +194,34 @@ nav dd{
 		display: none;
 	}
 
-	nav{
+	nav,
+	.menuButton{
 		-webkit-transition: all .25s ease;
 		   -moz-transition: all .25s ease;
 		    -ms-transition: all .25s ease;
 		     -o-transition: all .25s ease;
 		        transition: all .25s ease;
 		left: -220px;
+	}
+
+	.contents{
+		padding: 0;
+	}
+	
+	.menuButton{
+		position: fixed;
+		display: inline-block;
+		top: 0;
+		margin-left: 220px;
+		background-color: #333;
+		padding: 10px 12px 8px;
+		color: #fff;
+		z-index: 2000;
+	}
+
+	#menuButton:checked ~ nav,
+	#menuButton:checked ~ label .menuButton{
+		left: 0;
 	}
 
 	h1, 
