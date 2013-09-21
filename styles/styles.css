@@ -167,8 +167,14 @@ nav dd{
 }
 
 .logo{
+	width: 320px;
+	text-align: center;
 	margin-top: -60px;
 }
+
+	.logo h3{
+		padding: 10px;
+	}
 
 	.languageSelector ul{
 		display: inline-block;
