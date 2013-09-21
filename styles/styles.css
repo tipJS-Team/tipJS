@@ -161,6 +161,10 @@ nav dd{
 		color: #fff;
 	}
 
+	pre{
+		text-align: left;
+	}
+
 .languageSelector{
 	position: relative;
 	top: -30px;
