@@ -145,17 +145,134 @@ Controller Tutorial[http://tipjs.com/tipJS/tutorial/Controller/]
 tipJS.action method의 두번째 argument 는 tipJS.app method에서 정의한 beforeController method, afterController method 와 호출된 Controller의 beforeInvoke, invoke, afterInvoke, exceptionInvoke method 에서 input argument로 사용가능합니다.
 
 beforeController / afterController method 안에서 this.controllerName 속성으로 현재 처리중인 controller 명이 참조 가능합니다.
+<pre>
+tipJS.app({
+    ...
+    onLoad:function(params){
+        // call Controller
+        tipJS.action("someController", "someValue");
+        // or
+        tipJS.action.someController("someValue");
+    },
+    beforeController:function(params){
+        console.log(params); // result is "someValue" 
+        console.log(this.controllerName); // result is "someController"
+    },
+    afterController:function(params){
+        console.log(params); // result is "someValue" 
+        console.log(this.controllerName); // result is "someController"
+    },
+    ...
+});
+</pre>
+<pre>
+// controller.js
+tipJS.controller("someController", {
+    beforeInvoke:function(params){
+        console.log(params); // result is "someValue"
+    },
+    invoke:function(params){
+        console.log(params); // result is "someValue"
+    },
+    afterInvoke:function(params){
+        console.log(params); // result is "someValue"
+    },
+    exceptionInvoke:function(exception, params){
+        console.log(params); // result is "someValue"
+    }
+});
+</pre>
+tipJS.action method 의 호출 위치는 tipJS.loadApp method 호출 이후 자유롭습니다.
 
+Controller 는 보통 아래와 같은 구성으로 이루어 집니다.
 <pre>
+// controller.js
+tipJS.controller("someController", {
+    beforeInvoke:function(params){
+        ....
+    },
+    invoke:function(params){
+        console.log("invoke Start");
+        // load Application Model
+        var initModel = this.getModel("initModel");
+        // load Application ViewModel
+        var initView = this.getView("initView");
+ 
+        initView.drawBody(bodyHtml);
+ 
+        console.log("invoke Done");
+    },
+    afterInvoke:function(params){
+        ....
+    },
+    exceptionInvoke:function(exception, params){
+        alert(exception);
+    }
+});
 </pre>
 <pre>
+tipJS.app({
+    ...
+    onLoad:function(params){
+        tipJS.action("someController", params);
+    },
+    ...
+});
 </pre>
+Controller는 기본 4가지의 method 가 조건에 의해 실행됩니다.
+
+기본적으로 Controller 는 tipJS Javascript MVC Framework에 의해 beforeInvoke, invoke, afterInvoke method 의 순서로 자동호출되며 exceptionInvoke method 는 Controller에 exceptionInvoke method가 정의되어 있고 Controller 실행중 exception 이 발생할 경우에만 호출됩니다.
+
+물론 Controller 내부에서 사용자가 작성한 method 를 호출하는 것도 가능합니다.
 <pre>
+// controller.js
+tipJS.controller("someController", {
+    ...
+    invoke:function(params){
+        this.userFn();
+    },
+    userFn:function(){
+        ...
+        Some Process..
+        ...
+    }
+});
 </pre>
+Controller 선언시 async 속성을 true로 설정하면 Controller 호출시 비동기 모드로 작동합니다. delay 속성을 1/1000 초단위 로 지정하여 비동기 지연시간을 지정할 수 있습니다.
 <pre>
+tipJS.controller("someController", {
+    async:true, // AnSynchronized Controller
+    delay:500, // 0.5 sec.
+    ...
+    invoke:function(params){
+        this.userFn();
+    },
+    userFn:function(){
+        ...
+        Some Process..
+        ...
+    }
+});
 </pre>
-<pre>
-</pre>
+아래는 Controller 에 설정된 속성에 대한 설명입니다.(기본 4 method 이외)
+-async
+Controller 동작을 비동기모드로 실행할것인지 설정합니다.(true – 비동기모드)
+-delay
+Controller 비동기모드 시간을 1/1000 초 단위로 지정합니다.(defalut:15)
+-getModel(ModelName)
+tipJS.model method에서 정의한 Application Model Object 를 load 합니다.
+-getView(ViewName)
+tipJS.view method에서 정의한 Application ViewModel Object 를 load 합니다.
+-renderTemplate(option)
+HTML Template 항목 참고
+-getById(id)
+document.getElementById 와 동일합니다.
+-getByName(name)
+document.getElementsByName 와 동일합니다.
+-getByTag(tagName)
+document.getElementsByTagName 와 동일합니다.
+
+
 <pre>
 </pre>
 <pre>
