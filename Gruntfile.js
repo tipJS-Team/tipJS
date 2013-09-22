@@ -1,3 +1,6 @@
+var LIVERELOAD_PORT = 35279,
+  liveReloadSnippet = require('connect-livereload')({ port: LIVERELOAD_PORT });
+
 module.exports = function(grunt) {
 
   var destinationName = '<%= pkg.name %>',
@@ -53,11 +56,14 @@ module.exports = function(grunt) {
       }
     },
     watch: {
-      scripts: {
-        files: sources,
-        options: {
-          interrupt: true
-        }
+      files: [
+        'examples/**/*.html',
+        'examples/**/*.css',
+        'examples/**/*.js',
+        'examples/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+      ],
+      options: {
+        livereload: LIVERELOAD_PORT
       }
     },
     qunit: {
@@ -77,10 +83,7 @@ module.exports = function(grunt) {
           base: "examples",
           middleware: function(connect, options) {
             return [
-              function(req, res, next) {
-                console.log('accept from ' + req.url);
-                next();
-              },
+              liveReloadSnippet,
               connect.static(options.base)
             ];
           }
@@ -91,6 +94,11 @@ module.exports = function(grunt) {
           port: testPort,
           base: "test"
         }
+      }
+    },
+    open: {
+      server: {
+        url: 'http://'+testHostURL+':<%= connect.live.options.port %>'
       }
     },
     jshint: {
@@ -115,12 +123,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-open');
 
   grunt.registerTask('server',
-    ['uglify:examples', /*'jshint',*/ 'connect:live', 'watch']);
+    ['clean:test', 'uglify:test', 'connect:live', 'open', 'watch']);
 
   grunt.registerTask('test',
-    ['clean:test', 'copy:test', /*'jshint',*/ 'connect:test', 'qunit', 'clean:test']);
+    ['clean:test', 'copy:test', /*'jshint',*/ 'connect:test', 'qunit']);
 
   grunt.registerTask('build',
     ['clean:test', 'copy:test', /*'jshint',*/ 'connect:test', 'qunit', 'uglify:build']);
