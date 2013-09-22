@@ -77,7 +77,6 @@ tipJS.app({
     },
     ...
 });
-
 // JQuery
 $(document).ready(function(e){
     var param = {param1:"some value"}
@@ -442,13 +441,69 @@ tipJS.controller("someController", {
 </pre>
 
 
-ViewModel
-    template
+#ViewModel
+##template
 
-Utility
-    i18n
+#Utility
+##i18n
+tipJS JavaScript MVC Framework 를 통한 다국어지원(internationalization/i18n) 기능을 설명합니다.
+기능을 활성화 하기 위해서 tipJS.app method 에서 localSet 속성을 추가하고 true 값을 설정합니다.
+<pre>
+tipJS.app({
+    ...
+    localSet:true,
+    ...
+});
+</pre>
+controllers 등이 있는 application 폴더에 lang 폴더를 작성하고 lang폴더 안에 언어코드.js 파일을 아래와 같이 작성합니다. 언어코드는 tipJS가 브라우저 언어정보(navigator.language || navigator.systemLanguage || navigator.userLanguage)를 읽어 자동으로 기본값을 설정합니다.
+<pre>
+// lang/ko.js
+tipJS.localSet({
+    "Save":"저장",
+    "Load":"불러오기"
+});
+</pre>
+<pre>
+// lang/ja.js
+tipJS.localSet({
+    "Save":"保存",
+    "Load":"読み込み"
+});
+</pre>
+언어코드를 수동으로 설정하려면 아래와 같이 tipJS.loadApp 메소드를 호출하기 전에 tipJS.lang 속성값을 설정하려는 언어코드로 변경해 줍니다.
+<pre>
+...
+    tipJS.lang = "ja"; // set to Japaness
+    tipJS.loadApp();
+...
+</pre>
 
-AOP
+해당 language set의 message 를 취득하려면 tipJS.msg 메소드를 사용합니다.
+<pre>
+tipJS.controller("someCtrler", {
+    invoke:function(params){
+        console.log( tipJS.msg("Save") ); // result "저장"
+    }
+});
+</pre>
+<pre>
+tipJS.model({
+    __name : "someApp.someModel",
+    someMethod:function(params){
+        console.log( tipJS.msg("Load") ); // result "불러오기"
+    }
+});
+</pre>
+언어코드.js 파일에서 tipJS.localSet method 로 등록되지 않은 메세지를 취득하려 하면 tipJS.msg method 는 입력한 메세지를 그대로 반환합니다.
+<pre>
+tipJS.model("someModel", {
+    someMethod:function(params){
+        console.log( tipJS.msg("Some Message") ); // result "Some Message"
+    }
+});
+</pre>
+
+##AOP
 
 ETC
     Debug Mode
