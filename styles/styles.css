@@ -99,7 +99,7 @@ nav dd{
 		display: none;
 	}
 
-.basicButton{
+.basicButton {
 	display: inline-block;
 	padding: 12px 20px 10px;
 	margin: 10px;
@@ -145,20 +145,6 @@ nav dd{
 
 	.contents p{
 		margin-left: 20px;
-	}
-
-	.sourceCode{
-		font-family: 'Source Code Pro';
-		line-height: 40px;
-		letter-spacing: 1px;
-		word-spacing: 2px;
-		margin: 16px 0;
-		background-color: rgba( 0, 0, 0, 0.4 );
-		border: 0px solid rgba( 255, 255, 255, 0.5 );
-		border-width: 1px 0;
-		box-shadow: 4px 2px 4px rgba( 0, 0, 0, 0.2 );
-		padding: 20px;
-		color: #fff;
 	}
 
 	pre{
@@ -245,4 +231,64 @@ nav dd{
 	.contents{
 		margin-left: 0;
 	}
+}
+@-ms-keyframes target {
+    from {
+        background:#ffffff;
+        border-radius: 20px;
+    }
+    50% {
+        background:#fdfdd3;
+        border-radius: 10px;
+    }
+    to {
+        background:transparent;
+        border-radius: 0;
+    }
+}
+@-moz-keyframes target {
+    from {
+        background:#ffffff;
+        border-radius: 20px;
+    }
+    50% {
+        background:#fdfdd3;
+        border-radius: 10px;
+    }
+    to {
+        background:transparent;
+        border-radius: 0;
+    }
+}
+@-webkit-keyframes target {
+    from {
+        background:#ffffff;
+        border-radius: 20px;
+    }
+    50% {
+        background:#fdfdd3;
+        border-radius: 10px;
+    }
+    to {
+        background:transparent;
+        border-radius: 0;
+    }
+}
+@keyframes target {
+    from {
+        background:#ffffff;
+        border-radius: 20px;
+    }
+    50% {
+        background:yellow;
+        border-radius: 10px;
+    }
+    to {
+        background:transparent;
+        border-radius: 0;
+    }
+}
+/* pseudo element */
+:target {
+    -webkit-animation:target 1s linear;
 }
