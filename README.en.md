@@ -61,7 +61,7 @@ window.onload = function() {
 	tipJS.loadApp();
 }
 </pre>
-아래는 tipJS.app method에서 설정할 수 있는 속성에 대한 설명입니다.
+tipJS.app method that you can set in the property description.
 
 - controllers
 array type으로 Controller file들을 정의합니다.
