@@ -37,7 +37,7 @@ Dual licensed under the MIT or GPL Version 2 licenses.
     ...
 #App Configuration
 ## Essentional
-tipJS the setting is done by tipJS.app method. In all settings to default (default value) exists, ThpJS.app method for changing the default settings to arguments of the object would specify.
+tipJS the setting is done by tipJS.app method. In all settings to default (default value) exists, tipJS.app method for changing the default settings to arguments of the object would specify.
 <pre>
 tipJS.app({
     controllers:[
