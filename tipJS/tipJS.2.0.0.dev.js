@@ -1200,7 +1200,6 @@
 	app__ = {},
 	msg__ = {},
 	templateCache__ = {}, reservedStack__,
-	config__ = util__.cloneObject(DEF_BASE__.config),
 	isFlat__ = {}, define__,
 	_winLoc = window.location, _pathname = _winLoc.pathname, _queryString = _winLoc.search, _isDevelopment = null, _lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage).substr(0,2);
 
