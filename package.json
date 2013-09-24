@@ -1,6 +1,6 @@
 {
   "name": "tipJS",
-  "version": "0.10.0",
+  "version": "2.0.0",
   "description": "tipJS is a MVC Framework",
   "main": "build/tipJS.min.js",
   "dependencies": {},
