@@ -6,15 +6,12 @@
  * HomePage: http://www.tipjs.com
  * Contact: http://www.tipjs.com/contact
  */
-tipJS.config({
+tipJS.app({
 	developmentHostList:[
 		'localhost'
 		,'127.0.0.1'
 		,'tipjs.com'
-	]
-});
-
-tipJS.app({
+	],
 	noCache:true,
 	noCacheAuto:true,
 	controllers:[

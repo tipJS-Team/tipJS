@@ -199,7 +199,6 @@
 		var _tagScript = document.createElement('script');
 		_tagScript.type = 'text/javascript';
 		_tagScript.src = app__.define ? app__.define.getNoCacheUrl(file) : file;
-		_tagScript.charset = config__.charSet;
 		if (callbackFn) {
 			if (_tagScript.readyState) {
 				_tagScript.onreadystatechange = function() {
@@ -416,7 +415,7 @@
 	 * @return File Path를 포함한 List
 	 */
 	var __getAppReqList = function(define, depart) {
-		var _path = config__.path[depart],
+		var _path = app__.define.path[depart],
 			_appRoot = define.appPath ? define.appPath : ".";
 
 		if (depart === "lang" && define.localSet) {
@@ -802,23 +801,6 @@
 		return true;
 	};
 
-	/**
-	 * tipJS 의 config.js 에 정의되어 있는 내용을 tipJS에 반영
-	 *
-	 * @param config
-	 */
-	tipJS.config = function(config) {
-		config__ = util__.mergeObject(config, DEF_BASE__.config);
-		if (tipJS.isDevelopment === null) {
-			for (var i = config__.developmentHostList.length; i--;) {
-				if (_winLoc.hostname.match(config__.developmentHostList[i]) !== null) {
-					tipJS.isDevelopment = true;
-					break;
-				}
-			}
-		}
-	};
-
 	/* Benchmark */
 	tipJS.benchmark = {};
 
@@ -1119,7 +1101,7 @@
 	 * @param params
 	 */
 	tipJS.loadApp = function() {
-		if (!define__) return;// 여긴 에러처리가 맞을거 같은데?
+		if (!define__) return;
 		var _args = util__.toArray(arguments);
 		if (_args.length) {
 			app__.onLoadArgs = _args;
@@ -1139,32 +1121,14 @@
 	var __define = function() {
 		var _define = define__;
 		util__.mergeObject(_define, DEF_BASE__.define);
-		if (_define.templateCache === undefined)
-			_define.templateCache = config__.templateCache;
-
-		if (_define.noCache === undefined) {
-			_define.noCache = config__.noCache;
-			_define.noCacheVersion = config__.noCacheVersion;
-			_define.noCacheParam = config__.noCacheParam;
-			_define.noCacheAuto = config__.noCacheAuto;
-		} else {
-			if (_define.noCache === true) {
-				if (_define.noCacheVersion === undefined)
-					_define.noCacheVersion = config__.noCacheVersion;
-
-				if (_define.noCacheParam === undefined)
-					_define.noCacheParam = config__.noCacheParam;
-
-				if (_define.noCacheAuto === undefined)
-					_define.noCacheAuto = config__.noCacheAuto;
+		if (tipJS.isDevelopment === null) {
+			for (var i = _define.developmentHostList.length; i--;) {
+				if (_winLoc.hostname.match(_define.developmentHostList[i]) !== null) {
+					tipJS.isDevelopment = true;
+					break;
+				}
 			}
 		}
-		_define.getNoCacheUrl = function(url){
-			if (this.noCache === false) return url;
-			url += (url.indexOf("?") < 0) ? "?" : "&";
-			url += this.noCacheParam + "=" + (this.noCacheAuto === true ? "" + Math.random() : this.noCacheVersion);
-			return url;
-		};
 		app__.define = _define;
 		util__.mergeObject(app__.loadOrder = {}, DEF_BASE__.loadOrder);
 		__loadDepart(app__.loadOrder.presentOrder());
@@ -1183,12 +1147,21 @@
 	sortedInterceptors__ = [],
 	DEF_BASE__ = {
 		config : {
+			
+			
+		},
+		define : {
 			noCache : false,
 			noCacheVersion : tipJS.ver,
 			noCacheParam : "tipJS",
 			noCacheAuto : false,
+			getNoCacheUrl : function(url){
+				if (this.noCache === false) return url;
+				url += (url.indexOf("?") < 0) ? "?" : "&";
+				url += this.noCacheParam + "=" + (this.noCacheAuto === true ? "" + Math.random() : this.noCacheVersion);
+				return url;
+			},
 			templateCache : true,
-			charSet : "utf-8",
 			path : {
 				lang : "lang",
 				interceptors : "interceptors",
@@ -1196,9 +1169,7 @@
 				models : "models",
 				views : "views"
 			},
-			developmentHostList : []
-		},
-		define : {
+			developmentHostList : [],
 			lang : [],
 			interceptors : [],
 			controllers : [],

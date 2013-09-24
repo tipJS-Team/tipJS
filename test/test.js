@@ -4,7 +4,6 @@ test('exists test', function() {
 
   var u = tipJS.util;
   ok(u.isFunction(tipJS.app), 'tipJS controller constructor exists');
-  ok(u.isFunction(tipJS.config), 'tipJS config function exists');
   ok(u.isFunction(tipJS.controller), 'tipJS define function exists');
   ok(u.isFunction(tipJS.model), 'tipJS model function exists');
   ok(u.isFunction(tipJS.view), 'tipJS view function exists');
