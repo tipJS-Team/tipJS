@@ -37,6 +37,10 @@ body{
 		line-height: 24px;
 	}
 
+	pre{
+		box-shadow: 3px 4px 8px rgba( 0, 0, 0, 0.4 );
+	}
+
 
 nav{
 	position: fixed;
