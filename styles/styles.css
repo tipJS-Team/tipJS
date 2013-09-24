@@ -37,6 +37,10 @@ body{
 		line-height: 24px;
 	}
 
+	pre{
+		box-shadow: 3px 4px 8px rgba( 0, 0, 0, 0.4 );
+	}
+
 
 nav{
 	position: fixed;
@@ -103,8 +107,10 @@ nav dd{
 	display: inline-block;
 	padding: 12px 20px 10px;
 	margin: 10px;
-	background: #999; /* for non-css3 browsers */
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f05a28', endColorstr='#be1e2d'); 
+	background: #f05a28; 
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f05a28', endColorstr='#be1e2d');
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#f05a28', endColorstr='#be1e2d')";
+	background: -ms-linear-gradient(top,  #f05a28,  #be1e2d);
 	background: -webkit-gradient(linear, left top, left bottom, from(#f05a28), to(#be1e2d));
 	background: -moz-linear-gradient(top,  #f05a28,  #be1e2d);
 	-webkit-border-radius: 10px;
@@ -232,6 +238,7 @@ nav dd{
 		margin-left: 0;
 	}
 }
+
 @-ms-keyframes target {
     from {
         background:#ffffff;

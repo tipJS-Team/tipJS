@@ -3,8 +3,13 @@
 */
 
 pre code {
-  display: block; padding: 0.5em;
-  background: #000; color: #f8f8f8;
+  display: block;
+  padding: 30px;
+  background: #000;
+  background: rgba( 0, 0, 0, 0.6 );
+  color: #f8f8f8;
+  border: 0px solid rgba( 0, 0, 0, 0.2 );
+  border-width: 0 4px;
 }
 
 pre .shebang,
