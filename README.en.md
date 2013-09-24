@@ -7,8 +7,8 @@ tipJS JavaScript MVC Framework is a small, simple, and effective JavaScript MVC 
 
 
 ##Download
-[Stable 2.0](https://github.com/tipJS-Team/tipJS/releases/tag/2.0.0) / 
-[1.4.3](https://github.com/tipjs/tipjs-JavaScript-MVC-Framework/blob/master/last_version/tipJS-MVC-1.43-dev.js) (Support Ends)
+- [2.0](https://github.com/tipJS-Team/tipJS/releases/tag/2.0.0) (Stable)  
+- [1.4.3](https://github.com/tipjs/tipjs-JavaScript-MVC-Framework/blob/master/last_version/tipJS-MVC-1.43-dev.js) (Support Ends)
 
 ##Feature
 - tipJS implements complex JavaScript Application in the form of MVC Pattern.
@@ -322,7 +322,7 @@ tipJS.controller("someController", {
 });
 </pre>
 
-##동기 모델 - Syncronous Model
+## Syncronous Model
 tipJS JavaScript MVC Framework는 Model의 동기화 기능을 제공합니다.
 Model 의 동기화 기능이란 하나의 생성된 Model Object가 소멸되지 않고 변경되어지는 값을 가진채 유지되는 것을 말합니다.
 
@@ -409,7 +409,7 @@ tipJS.controller("someController", {
 });
 </pre>
 
-##Model 의 extension(Inheritance)
+##Model extension(Inheritance)
 tipJS JavaScript MVC Framework는 Model의 확장 기능을 제공합니다.
 
 ModelExtend Tutorial[ModelExtend Tutorial]
@@ -513,7 +513,7 @@ ETC
     Benchmark
     echo
 
-튜토리얼 - Tutorials
+Tutorials
     Controller
     Model
     ModelSync
@@ -522,5 +522,5 @@ ETC
     View(HTML Template)
     ViewExtend
 
-예제들 - Examples
+Examples
 Contributor
