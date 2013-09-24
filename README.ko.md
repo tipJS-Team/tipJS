@@ -60,6 +60,8 @@ window.onload = function() {
 </pre>
 아래는 tipJS.app method에서 설정할 수 있는 속성에 대한 설명입니다.
 
+- appPath
+tipJS 의 application 실행폴더를 지정합니다. 이 옵션은 controllers, models, views, lang 폴더등의 상위폴더를 지정합니다. 기본값은 "."(tipJS를 포함한 html의 현재경로) 으로 상대/절대경로로 재설정 가능합니다.
 - controllers
 array type으로 Controller file들을 정의합니다.
 - models
