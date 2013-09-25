@@ -64,13 +64,14 @@ window.onload = function() {
 tipJS.app method that you can set in the property description.
 
 - controllers
-array type으로 Controller file들을 정의합니다.
+Controller files are defined as the array type.
 - models
-array type으로 Model file들을 정의합니다.
+Model files are defined as the array type.
 - views
-array type으로 View file들을 정의합니다.
+View files are defined as the array type.
 - onLoad
-function type으로 등록된 onLoad method 는 application 이 tipJS.loadApp method 로 load된 직후에 단 한번 실행되는 method입니다. argument로 tipJS.loadApp method 호출시 지정한 argument 인 parameter 를 사용할 수 있습니다.
+The onLoad event occurs once after tipJS.loadApp method is called.
+The arguments cat set from the parameters of tipJS.loadApp method.
 <pre>
 // tipJS
 tipJS.app({
@@ -87,7 +88,9 @@ $(document).ready(function(e){
 });
 </pre>
 - beforeController
-function type으로 등록된 beforeController method 는 AOP의 개념으로 application 내에서 어떤 Controller 를 호출하더라도 공통적으로 실행되는 method입니다.이 method 는 Controller 의 그 어떤 method보다 우선적으로 실행됩니다. argument로 Controller를 호출하는 tipJS.action method의 두번째 argument 인 parameter를 사용할 수 있습니다. Controller 와 동일한 method들을 사용할 수 있습니다.
+The Application will invoke The beforeController method of function type when called any Controller.  
+The method is called before executing any method in Controller.
+And the method can use the parameter of tipJS.action method's second argument, Controller's same method.
 <pre>
 tipJS.app({
     ...
@@ -101,18 +104,23 @@ tipJS.app({
 });
 </pre>
 - afterController
-function type으로 등록된 afterController method 는 application 내에서 어떤 Controller 를 호출하더라도 공통적으로 실행되는 method입니다.이 method 는 Controller 가 실행종료된 후 실행됩니다. argument로 Controller를 호출하는 tipJS.action method의 두번째 argument 인 parameter를 사용할 수 있습니다. Controller 와 동일한 method들을 사용할 수 있습니다.
+The Application will invoke The afterController method of function type when called any Controller.  
+The method is called after executing the Controller.
+And the method can use the parameter of tipJS.action method's second argument, Controller's same method.
 - noCache
-Browser cache 를 boolean type으로 설정할 수 있으며, true일 경우 noCacheAuto, noCacheVersion, noCacheParam 속성과 연동되어 version value 가 변경 될때마다 JavaScript file을 다시 load 하게합니다.(default:false)
+Browser cache can be set to a boolean type, If value is true, 
+whenever modify version value with noCacheAuto, noCacheVersion, noCacheParam propertiy, 
+be reload JavaScript file. (default:false)
 - noCacheVersion
-Browser cache 제어를 위한 버젼 정보를 설정합니다.(default:"1.000")
+It is set Version information for Browser cache control.(default:"1.000")
 - noCacheAuto
-true로 설정된 경우 noCacheVersion option의 value와는 상관없이 version을 랜덤하게 출력하여 Browser cache를 무효하게 합니다.(default:false)
+If value is true,  Browser cache is disabled by output version random 
+that irrespective of noCacheVersion option value.(default:false)
 - noCacheParam
-Browser cache 제어를 위한 parameter name을 설정합니다.(default:"noCacheVersion")
+It is set parameter name for Browser cache control.(default:"noCacheVersion")
 
 ##Cache Control
-tipJS JavaScript MVC Framework 는 tipJS.app method 의 설정을 통해 Browser cache를 control합니다.
+tipJS JavaScript MVC Framework control Browser cache through properties of tipJS.app method.
 <pre>
 tipJS.app({
     noCache:false,
@@ -122,7 +130,7 @@ tipJS.app({
     ...
 });
 </pre>
-noCache attribute가 false일 경우 tipJS 는 아래와 같이 JavaScript file 을 읽어들입니다.
+If noCache attribute is false, tipJS 는 아래와 같이 JavaScript file 을 읽어들입니다.
 <pre>
 <script type="text/javascript" src="./controllers/some.js"></script>
 </pre>
