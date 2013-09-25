@@ -856,17 +856,65 @@ interceptor.after #2-2 : some Message
 
 #ETC
 ##Debug Mode
+tipJS JavaScript MVC Framework는 당신의 debug 작업을 위해 tipJS.debug method 를 제공합니다.
+
+tipJS.debug method 를 간단히 설명하면 development mode 에서만 작동하는 browser console logger method 입니다.
+
+tipJS.debug method 는 tipJS.app method에서 정의한 developmentHostList 속성에 등록된 host 의 경우 console log를 출력합니다.
+<pre>
+tipJS.app({
+    ...
+    developmentHostList:[
+        'localhost'
+        ,'127.0.0.1'
+        ,'tipjs.com'
+    ],
+    ...
+});
+</pre>
+<pre>
+var someValue = someMethod();
+tipJS.debug("someValue is " + someValue);
+</pre>
+만약 당신의 browser에 표시된 host name 이 developmentHostList 속성에 등록된 host의 경우 위의 source는 browser console 에 당신이 설정한 message를 출력할 것입니다.
+
+development mode 와 상관없이 console log 를 출력하고 싶다면 browser 의 console.log method 혹은 tipJS.log method 를 사용하시기 바랍니다.
+
 ##Benchmark
+tipJS JavaScript MVC Framework는 tipJS.benchmark 기능을 제공합니다.
+
+tipJS.benchmark 기능을 사용하기 위한 별도의 설정작업은 필요하지 않습니다.
+
+tipJS.benchmark.mark method 로 기점들을 등록합니다.
+tipJS.benchmark.elapsedTime method 로 두 기점간의 경과시간을 console 에 출력합니다.
+
+<pre>
+tipJS.benchmark.mark("point1");
+... 
+tipJS.benchmark.mark("point2");
+tipJS.benchmark.elapsedTime("point1", "point2");
+</pre>
+
+tipJS.benchmark.elapsedTime의 세번째 인수로 callback function을 지정 할 수 있습니다.
+<pre>
+tipJS.benchmark.mark("point1");
+... 
+tipJS.benchmark.mark("point2");
+tipJS.benchmark.elapsedTime("point1", "point2", function(startName, endName, startTime, endTime, elapsedTime){
+    ...
+});
+</pre>
+
 ##echo
 
 #튜토리얼 - Tutorials
-##Controller
-##Model
-##ModelSync
-##ModelVO
-##ModelExtend
-##View(HTML Template)
-##ViewExtend
+- Controller
+- Model
+- ModelSync
+- ModelVO
+- ModelExtend
+- View(HTML Template)
+- ViewExtend
 
 #예제들 - Examples
 #Contributor
