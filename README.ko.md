@@ -32,6 +32,7 @@ Dual licensed under the MIT or GPL Version 2 licenses.
 #설치하기 - Installation 
     ...
     ...
+
 #App Configuration
 ##기본 - Essentional
 tipJS 의 설정은 tipJS.app method 에 의해 이루어집니다. 모든 설정값에는 기본값(default value)가 존재하고, 기본값의 변경을 위해서는 thpJS.app method 의 인수 객체에 설정값을 지정하면 됩니다.
@@ -60,15 +61,15 @@ window.onload = function() {
 </pre>
 아래는 tipJS.app method에서 설정할 수 있는 속성에 대한 설명입니다.
 
-- appPath
+- appPath  
 tipJS 의 application 실행폴더를 지정합니다. 이 옵션은 controllers, models, views, lang 폴더등의 상위폴더를 지정합니다. 기본값은 "."(tipJS를 포함한 html의 현재경로) 으로 상대/절대경로로 재설정 가능합니다.
-- controllers
+- controllers  
 array type으로 Controller file들을 정의합니다.
-- models
+- models  
 array type으로 Model file들을 정의합니다.
-- views
+- views  
 array type으로 View file들을 정의합니다.
-- onLoad
+- onLoad  
 function type으로 등록된 onLoad method 는 application 이 tipJS.loadApp method 로 load된 직후에 단 한번 실행되는 method입니다. argument로 tipJS.loadApp method 호출시 지정한 argument 인 parameter 를 사용할 수 있습니다.
 <pre>
 // tipJS
@@ -99,15 +100,15 @@ tipJS.app({
     ...
 });
 </pre>
-- afterController
+- afterController  
 function type으로 등록된 afterController method 는 application 내에서 어떤 Controller 를 호출하더라도 공통적으로 실행되는 method입니다.이 method 는 Controller 가 실행종료된 후 실행됩니다. argument로 Controller를 호출하는 tipJS.action method의 두번째 argument 인 parameter를 사용할 수 있습니다. Controller 와 동일한 method들을 사용할 수 있습니다.
-- noCache
+- noCache  
 Browser cache 를 boolean type으로 설정할 수 있으며, true일 경우 noCacheAuto, noCacheVersion, noCacheParam 속성과 연동되어 version value 가 변경 될때마다 JavaScript file을 다시 load 하게합니다.(default:false)
-- noCacheVersion
+- noCacheVersion  
 Browser cache 제어를 위한 버젼 정보를 설정합니다.(default:"1.000")
-- noCacheAuto
+- noCacheAuto  
 true로 설정된 경우 noCacheVersion option의 value와는 상관없이 version을 랜덤하게 출력하여 Browser cache를 무효하게 합니다.(default:false)
-- noCacheParam
+- noCacheParam  
 Browser cache 제어를 위한 parameter name을 설정합니다.(default:"noCacheVersion")
 
 ##Cache Control
@@ -123,15 +124,15 @@ tipJS.app({
 </pre>
 noCache attribute가 false일 경우 tipJS 는 아래와 같이 JavaScript file 을 읽어들입니다.
 <pre>
-<script type="text/javascript" src="./controllers/some.js"></script>
+&lt;script type="text/javascript" src="./controllers/some.js"&gt;&lt;/script&gt;
 </pre>
 그러나 noCache attribute 가 true일 경우 아래와 같은 결과와 같습니다.
 <pre>
-<script type="text/javascript" src="./controllers/some.js?noCacheVersion=1.000"></script>
+&lt;script type="text/javascript" src="./controllers/some.js?noCacheVersion=1.000"&gt;&lt;/script&gt;
 </pre>
 noCache attribute 가 true 그리고 noCacheAuto attribute 가 true일 경우 noCacheVersion 의 parameter 값이 random 하게 생성되어 항상 새로 JavaScript file 을 load 하게 됩니다.
 <pre>
-<script type="text/javascript" src="./controllers/some.js?noCacheVersion=0.5478912648"></script>
+&lt;script type="text/javascript" src="./controllers/some.js?noCacheVersion=0.5478912648"&gt;&lt;/script&gt;
 </pre>
 만약 당신의 application이 갱신되었다면 noCacheVersion 속성의 값을 변경하거나 noCacheAuto 속성의 값을 true 로 하는것 만으로 Browser는 cache 처리없이 최신의JavaScript file을 load하게 될 것입니다.
 
@@ -259,21 +260,21 @@ tipJS.controller("someController", {
 });
 </pre>
 아래는 Controller 에 설정된 속성에 대한 설명입니다.(기본 4 method 이외)
-- async
+- async  
 Controller 동작을 비동기모드로 실행할것인지 설정합니다.(true – 비동기모드)
-- delay
+- delay  
 Controller 비동기모드 시간을 1/1000 초 단위로 지정합니다.(defalut:15)
-- getModel(ModelName)
+- getModel(ModelName)  
 tipJS.model method에서 정의한 Application Model Object 를 load 합니다.
-- getView(ViewName)
+- getView(ViewName)  
 tipJS.view method에서 정의한 Application ViewModel Object 를 load 합니다.
-- render(options)
+- render(options)  
 HTML Template 항목 참고
-- getById(id)
+- getById(id)  
 document.getElementById 와 동일합니다.
-- getByName(name)
+- getByName(name)  
 document.getElementsByName 와 동일합니다.
-- getByTag(tagName)
+- getByTag(tagName)  
 document.getElementsByTagName 와 동일합니다.
 
 #Model
@@ -283,11 +284,16 @@ Model 에서는 같은 Layer인 다른 Model을 load할 수 있습니다.
 
 Model 정의시 Framework에 의해 자동으로 정의되는 method는 다음과 같습니다.
 
-- __init:__init 메서드는 선언후 해당 Model 이 getModel 메서드에 의해 호출되어 생성되는 시점에서 단 한번 실행되는 메서드 입니다.
-- getModel(modelName):tipJS.model method에서 정의한 Application Model을 반환합니다.
-- getById(id) – document.getElementById 와 동일합니다.
-- getByName(name) – document.getElementsByName 와 동일합니다.
-- getByTag(tagName) – document.getElementsByTagName 와 동일합니다.
+- __init  
+__init 메서드는 선언후 해당 Model 이 getModel 메서드에 의해 호출되어 생성되는 시점에서 단 한번 실행되는 메서드 입니다.
+- getModel(modelName)  
+tipJS.model method에서 정의한 Application Model을 반환합니다.
+- getById(id)  
+document.getElementById 와 동일합니다.
+- getByName(name)  
+document.getElementsByName 와 동일합니다.
+- getByTag(tagName)  
+document.getElementsByTagName 와 동일합니다.
 
 자동으로 정의되는 method가 필요치 않을 경우 VO(Value Object) Model 을 사용하시기 바랍니다. 자세한 설명은 VO(Value Object) Model 항목을 참고하시기 바랍니다.
 Model Tutorial[Model Tutorial]
@@ -533,30 +539,31 @@ renderTo 속성은 생략 가능하며 render method는 항상 data가 mapping�
 
 // index.html
 <pre>
-<html>
-<head>
-<script type="text/javascript" src="/tipJS/tipJS-MVC-x.xx.js">
-</script>
-<script>
+&lt;html&gt;
+&lt;head&gt;
+&lt;script type="text/javascript" src="/tipJS/tipJS-MVC-x.xx.js"&gt;
+&lt;/script&gt;
+&lt;script&gt;
 window.onload = function(){
     tipJS.loadApp(["someApplication"]);
 };
-</script>
-<body>
-    <div id="target_id"></div>
-</body>
-</html>
+&lt;/script&gt;
+&lt;body&gt;
+    &lt;div id="target_id"&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
 </pre>
+
 // someTpl.tpl
 <pre>
-<h1>
-<@= data.someString @>
-</h1>
-<ul>
-<@ for(var i=0; i<data.someArray.length; i++) { @>
-    <li> <@= data.someArray[i] @> </li>
-<@ } @>
-</ul>
+&lt;h1&gt;
+&lt;@= data.someString @&gt;
+&lt;/h1&gt;
+&lt;ul&gt;
+&lt;@ for(var i=0; i&lt;data.someArray.length; i++) { @&gt;
+    &lt;li&gt; &lt;@= data.someArray[i] @&gt; &lt;/li&gt;
+&lt;@ } @&gt;
+&lt;/ul&gt;
 </pre>
 <pre>
 // controllers/someController.js
@@ -579,26 +586,27 @@ ViewModel(HTML Template) Tutorial[View(HTML Template) Tutorial]
 
 // someTpl.tpl
 <pre>
-<div>
-    <ul>
-        <@ for(var i=0; i<data.length; i++) { @>
-            <@ if (i != 0) {@><li class="<@=( (i==2) ? "foo":"bar" )@>"><@= data[i] @></li>
-            <@}else{@><div class="<@=( (i==2) ? "foo":"bar" )@>"><@= data[i] @></div><@}@>
-        <@ } @>
-    </ul>
-</div>
+&lt;div&gt;
+    &lt;ul&gt;
+        &lt;@ for(var i=0; i&lt;data.length; i++) { @&gt;
+            &lt;@ if (i != 0) {@&gt;&lt;li class="&lt;@=( (i==2) ? "foo":"bar" )@&gt;"&gt;&lt;@= data[i] @&gt;&lt;/li&gt;
+            &lt;@}else{@&gt;&lt;div class="&lt;@=( (i==2) ? "foo":"bar" )@&gt;"&gt;&lt;@= data[i] @&gt;&lt;/div&gt;&lt;@}@&gt;
+        &lt;@ } @&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
 </pre>
+
 ViewExtend(HTML Template) Tutorial[ViewExtend(HTML Template) Tutorial]
 
 HTML Template 에서의 값의 출력은 <@= value @> 사이에서 이루어 지며, 루프등의 제어는 <@ for(…) @> 사이에서 이루어집니다.
 종료태그 @> 앞에 종료문자(;)를 넣을 경우 에러를 발생하니 주의하십시오.
 
 render method의 argument인 설정 Object의 속성은 다음과 같습니다.
-- url
+- url  
 HTML Template file의 url를 정의합니다. file의 extention name에 대한 제한은 없습니다.
-- renderTo
+- renderTo  
 HTML Template의 내용이 data속성에 의해 mapping 된 후에 반환되는 html이 출력 될 html요소의 id를 정의합니다.(생략가능)
-- data
+- data  
 HTML Template 에서 정의한 data변수에 mapping될 data를 정의합니다.
 
 단순히 html string 과 data object 를 통해 렌더링된 html 을 받을 수도 있습니다.
@@ -606,7 +614,7 @@ HTML Template 에서 정의한 data변수에 mapping될 data를 정의합니다.
 <pre>
 tipJS.controller("someController", {
     invoke:function(params){
-        var htmlString = "<div><@= data.foo @></div>";
+        var htmlString = "&lt;div&gt;&lt;@= data.foo @&gt;&lt;/div&gt;";
         var data = {
             foo:"foo"
         };
@@ -622,12 +630,12 @@ tipJS.controller("someController", {
 
 // someTpl.tpl
 <pre>
-[[#template01]] <!-- id : "template01" -->
-<ul>
-    <li><@= data.foo @></li>
-</ul>
-[[#template02]] <!-- id : "template02" -->
-<span><@= data.bar @></span>
+[[#template01]] &lt;!-- id : "template01" --&gt;
+&lt;ul&gt;
+    &lt;li&gt;&lt;@= data.foo @&gt;&lt;/li&gt;
+&lt;/ul&gt;
+[[#template02]] &lt;!-- id : "template02" --&gt;
+&lt;span&gt;&lt;@= data.bar @&gt;&lt;/span&gt;
 </pre>
 
 <pre>
@@ -723,21 +731,142 @@ tipJS.model("someModel", {
 });
 </pre>
 
-##AOP
+#AOP(Aspect-Oriented Programming)
+여기서는 tipJS JavaScript MVC Framework 를 통한 AOP(Aspect-Oriented Programming) 기능을 설명합니다.
 
-ETC
-    Debug Mode
-    Benchmark
-    echo
+AOP 를 활성화 하기 위해서 tipJS.app method 에 interceptors 속성을 추가합니다.
 
-튜토리얼 - Tutorials
-    Controller
-    Model
-    ModelSync
-    ModelVO
-    ModelExtend
-    View(HTML Template)
-    ViewExtend
+<pre>
+tipJS.app({
+    ...
+    interceptors:[
+        "interceptor.js"
+    ]
+    ...
+});
+</pre>
 
-예제들 - Examples
-Contributor
+application 폴더 하위에 interceptors 폴더를 작성하고 interceptor JS 파일을 작성합니다.
+
+interceptor 의 등록은 tipJS.interceptor method를 사용합니다.
+
+<pre>
+tipJS.interceptor("interceptor", {
+    target:"controllers",
+    before:function(){
+        console.log("interceptor.before : " + this.msg);
+    },
+    after:[
+        function(){
+            console.log("interceptor.after #1 : " + this.msg);
+        },
+        function(){
+            console.log("interceptor.after #2 : " + this.msg);
+        }
+    ]
+});
+</pre>
+
+target 속성은 적용할 범위(point cut)를 의미합니다.
+
+예를 들어 Model 전체에 적용할 때는 models 를(ex:”models”)
+특정 Model을 지정하고 싶을때는 Model 명을(ex:”models.modelName” or “models.modelNam*”)
+특정 Model의 특정 method 를 지정하고 싶을때는 method 명을(ex:”models.modelName.getName” or “models.modelName.get*”) 작성합니다.
+
+target 속성은 배열타입으로 복수개 지정 가능합니다.
+
+상기 before, after 안의 this context는 target 의 context를 의미합니다.
+
+before, after 또한 배열타입으로 복수개 지정 가능합니다.
+
+아래와 같은 Controller 가 있다고 가정한다면
+<pre>
+tipJS.controller("someCtrler", {
+    msg:"some Message",
+    invoke:function(params){
+        console.log( this.msg ); // "some Message"
+    }
+});
+</pre>
+
+상기의 Controller 의 실행결과는 아래와 같이 console에 출력됩니다.
+<pre>
+interceptor.before : some Message
+some Message
+interceptor.after #1 : some Message
+interceptor.after #2 : some Message
+</pre>
+
+## 실행 우선순위 지정
+interceptor 의 order 속성값을 지정하여 interceptor들간의 실행 우선순위를 지정할수 있습니다.
+<pre>
+tipJS.controller("someCtrler", {
+    msg:"some Message",
+    invoke:function(params){
+        console.log( this.msg ); // "some Message"
+    }
+});
+</pre>
+<pre>
+tipJS.interceptor("interceptor1", {
+    order:1,
+    target:"controllers",
+    before:function(){
+        console.log("interceptor.before #1-1 : " + this.msg);
+    },
+    after:[
+        function(){
+            console.log("interceptor.after #1-1 : " + this.msg);
+        },
+        function(){
+            console.log("interceptor.after #1-2 : " + this.msg);
+        }
+    ]
+});
+</pre>
+<pre>
+tipJS.interceptor({
+    __name:"someApp.interceptor2",
+    order:2,
+    target:"controllers",
+    before:function(){
+        console.log("interceptor.before #2-1 : " + this.msg);
+    },
+    after:[
+        function(){
+            console.log("interceptor.after #2-1 : " + this.msg);
+        },
+        function(){
+            console.log("interceptor.after #2-2 : " + this.msg);
+        }
+    ]
+});
+</pre>
+
+상기 예의 실행결과는 아래와 같습니다.
+<pre>
+interceptor.before #1-1 : some Message
+interceptor.before #2-1 : some Message
+some Message
+interceptor.after #1-1 : some Message
+interceptor.after #1-2 : some Message
+interceptor.after #2-1 : some Message
+interceptor.after #2-2 : some Message
+</pre>
+
+#ETC
+##Debug Mode
+##Benchmark
+##echo
+
+#튜토리얼 - Tutorials
+##Controller
+##Model
+##ModelSync
+##ModelVO
+##ModelExtend
+##View(HTML Template)
+##ViewExtend
+
+#예제들 - Examples
+#Contributor
