@@ -38,7 +38,7 @@ Dual licensed under the MIT or GPL Version 2 licenses.
 #App Configuration
 ## Essentional
 tipJS the setting is done by tipJS.app method. In all settings to default (default value) exists, tipJS.app method for changing the default settings to arguments of the object would specify.
-<pre>
+```javascript
 tipJS.app({
     controllers:[
         "someController1.js",
@@ -60,19 +60,19 @@ tipJS.app({
 window.onload = function() {
 	tipJS.loadApp();
 }
-</pre>
+```
 tipJS.app method that you can set in the property description.
 
-- controllers
+- controllers   
 Controller files are defined as the array type.
-- models
+- models  
 Model files are defined as the array type.
-- views
+- views  
 View files are defined as the array type.
-- onLoad
+- onLoad  
 The onLoad event occurs once after tipJS.loadApp method is called.
 The arguments cat set from the parameters of tipJS.loadApp method.
-<pre>
+```javascript
 // tipJS
 tipJS.app({
     ...
@@ -86,12 +86,12 @@ $(document).ready(function(e){
     var param = {param1:"some value"}
     tipJS.loadApp(param);
 });
-</pre>
-- beforeController
-The Application will invoke The beforeController method of function type when called any Controller.  
+```
+- beforeController  
+The Application will invoke The beforeController method of function type when called any Controller.
 The method is called before executing any method in Controller.
 And the method can use the parameter of tipJS.action method's second argument, Controller's same method.
-<pre>
+```javascript
 tipJS.app({
     ...
     onLoad:function(params){
@@ -102,26 +102,26 @@ tipJS.app({
     }
     ...
 });
-</pre>
-- afterController
+```
+- afterController  
 The Application will invoke The afterController method of function type when called any Controller.  
 The method is called after executing the Controller.
 And the method can use the parameter of tipJS.action method's second argument, Controller's same method.
-- noCache
+- noCache  
 Browser cache can be set to a boolean type, If value is true, 
 whenever modify version value with noCacheAuto, noCacheVersion, noCacheParam propertiy, 
 be reload JavaScript file. (default:false)
-- noCacheVersion
+- noCacheVersion  
 It is set Version information for Browser cache control.(default:"1.000")
-- noCacheAuto
+- noCacheAuto  
 If value is true,  Browser cache is disabled by output version random 
 that irrespective of noCacheVersion option value.(default:false)
-- noCacheParam
+- noCacheParam  
 It is set parameter name for Browser cache control.(default:"noCacheVersion")
 
 ##Cache Control
 tipJS JavaScript MVC Framework control Browser cache through properties of tipJS.app method.
-<pre>
+```javascript
 tipJS.app({
     noCache:false,
     noCacheVersion:"1.000",
@@ -129,19 +129,19 @@ tipJS.app({
     noCacheParam:"noCacheVersion",
     ...
 });
-</pre>
+```
 If noCache attribute is false, tipJS 는 아래와 같이 JavaScript file 을 읽어들입니다.
-<pre>
+```javascript
 &lt;script type="text/javascript" src="./controllers/some.js"&gt;&lt;/script&gt;
-</pre>
+```
 그러나 noCache attribute 가 true일 경우 아래와 같은 결과와 같습니다.
-<pre>
+```javascript
 &lt;script type="text/javascript" src="./controllers/some.js?noCacheVersion=1.000"&gt;&lt;/script&gt;
-</pre>
+```
 noCache attribute 가 true 그리고 noCacheAuto attribute 가 true일 경우 noCacheVersion 의 parameter 값이 random 하게 생성되어 항상 새로 JavaScript file 을 load 하게 됩니다.
-<pre>
+```javascript
 &lt;script type="text/javascript" src="./controllers/some.js?noCacheVersion=0.5478912648"&gt;&lt;/script&gt;
-</pre>
+```
 만약 당신의 application이 갱신되었다면 noCacheVersion 속성의 값을 변경하거나 noCacheAuto 속성의 값을 true 로 하는것 만으로 Browser는 cache 처리없이 최신의JavaScript file을 load하게 될 것입니다.
 
 #Controller
