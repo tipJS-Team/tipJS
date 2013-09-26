@@ -26,7 +26,6 @@ tipJS JavaScript MVC Framework is a small, simple, and effective JavaScript MVC 
 - tipJS is a multi-lingual(i18n) support.
 - etc...
 
-
 ## Structure
 
 #License
@@ -35,6 +34,7 @@ Dual licensed under the MIT or GPL Version 2 licenses.
 # Installation 
     ...
     ...
+
 #App Configuration
 ## Essentional
 tipJS the setting is done by tipJS.app method. In all settings to default (default value) exists, tipJS.app method for changing the default settings to arguments of the object would specify.
@@ -132,15 +132,15 @@ tipJS.app({
 </pre>
 If noCache attribute is false, tipJS 는 아래와 같이 JavaScript file 을 읽어들입니다.
 <pre>
-<script type="text/javascript" src="./controllers/some.js"></script>
+&lt;script type="text/javascript" src="./controllers/some.js"&gt;&lt;/script&gt;
 </pre>
 그러나 noCache attribute 가 true일 경우 아래와 같은 결과와 같습니다.
 <pre>
-<script type="text/javascript" src="./controllers/some.js?noCacheVersion=1.000"></script>
+&lt;script type="text/javascript" src="./controllers/some.js?noCacheVersion=1.000"&gt;&lt;/script&gt;
 </pre>
 noCache attribute 가 true 그리고 noCacheAuto attribute 가 true일 경우 noCacheVersion 의 parameter 값이 random 하게 생성되어 항상 새로 JavaScript file 을 load 하게 됩니다.
 <pre>
-<script type="text/javascript" src="./controllers/some.js?noCacheVersion=0.5478912648"></script>
+&lt;script type="text/javascript" src="./controllers/some.js?noCacheVersion=0.5478912648"&gt;&lt;/script&gt;
 </pre>
 만약 당신의 application이 갱신되었다면 noCacheVersion 속성의 값을 변경하거나 noCacheAuto 속성의 값을 true 로 하는것 만으로 Browser는 cache 처리없이 최신의JavaScript file을 load하게 될 것입니다.
 
@@ -292,11 +292,16 @@ Model 에서는 같은 Layer인 다른 Model을 load할 수 있습니다.
 
 Model 정의시 Framework에 의해 자동으로 정의되는 method는 다음과 같습니다.
 
-- __init:__init 메서드는 선언후 해당 Model 이 getModel 메서드에 의해 호출되어 생성되는 시점에서 단 한번 실행되는 메서드 입니다.
-- getModel(modelName):tipJS.model method에서 정의한 Application Model을 반환합니다.
-- getById(id) – document.getElementById 와 동일합니다.
-- getByName(name) – document.getElementsByName 와 동일합니다.
-- getByTag(tagName) – document.getElementsByTagName 와 동일합니다.
+- __init  
+__init 메서드는 선언후 해당 Model 이 getModel 메서드에 의해 호출되어 생성되는 시점에서 단 한번 실행되는 메서드 입니다.
+- getModel(modelName)  
+tipJS.model method에서 정의한 Application Model을 반환합니다.
+- getById(id)  
+document.getElementById 와 동일합니다.
+- getByName(name)  
+document.getElementsByName 와 동일합니다.
+- getByTag(tagName)  
+document.getElementsByTagName 와 동일합니다.
 
 자동으로 정의되는 method가 필요치 않을 경우 VO(Value Object) Model 을 사용하시기 바랍니다. 자세한 설명은 VO(Value Object) Model 항목을 참고하시기 바랍니다.
 Model Tutorial[Model Tutorial]
@@ -514,21 +519,171 @@ tipJS.model("someModel", {
 });
 </pre>
 
-##AOP
+#AOP(Aspect-Oriented Programming)
+여기서는 tipJS JavaScript MVC Framework 를 통한 AOP(Aspect-Oriented Programming) 기능을 설명합니다.
 
-ETC
-    Debug Mode
-    Benchmark
-    echo
+AOP 를 활성화 하기 위해서 tipJS.app method 에 interceptors 속성을 추가합니다.
 
-Tutorials
-    Controller
-    Model
-    ModelSync
-    ModelVO
-    ModelExtend
-    View(HTML Template)
-    ViewExtend
+<pre>
+tipJS.app({
+    ...
+    interceptors:[
+        "interceptor.js"
+    ]
+    ...
+});
+</pre>
 
-Examples
-Contributor
+application 폴더 하위에 interceptors 폴더를 작성하고 interceptor JS 파일을 작성합니다.
+
+interceptor 의 등록은 tipJS.interceptor method를 사용합니다.
+
+<pre>
+tipJS.interceptor("interceptor", {
+    target:"controllers",
+    before:function(){
+        console.log("interceptor.before : " + this.msg);
+    },
+    after:[
+        function(){
+            console.log("interceptor.after #1 : " + this.msg);
+        },
+        function(){
+            console.log("interceptor.after #2 : " + this.msg);
+        }
+    ]
+});
+</pre>
+
+target 속성은 적용할 범위(point cut)를 의미합니다.
+
+예를 들어 Model 전체에 적용할 때는 models 를(ex:”models”)
+특정 Model을 지정하고 싶을때는 Model 명을(ex:”models.modelName” or “models.modelNam*”)
+특정 Model의 특정 method 를 지정하고 싶을때는 method 명을(ex:”models.modelName.getName” or “models.modelName.get*”) 작성합니다.
+
+target 속성은 배열타입으로 복수개 지정 가능합니다.
+
+상기 before, after 안의 this context는 target 의 context를 의미합니다.
+
+before, after 또한 배열타입으로 복수개 지정 가능합니다.
+
+아래와 같은 Controller 가 있다고 가정한다면
+<pre>
+tipJS.controller("someCtrler", {
+    msg:"some Message",
+    invoke:function(params){
+        console.log( this.msg ); // "some Message"
+    }
+});
+</pre>
+
+상기의 Controller 의 실행결과는 아래와 같이 console에 출력됩니다.
+<pre>
+interceptor.before : some Message
+some Message
+interceptor.after #1 : some Message
+interceptor.after #2 : some Message
+</pre>
+
+## 실행 우선순위 지정
+interceptor 의 order 속성값을 지정하여 interceptor들간의 실행 우선순위를 지정할수 있습니다.
+<pre>
+tipJS.controller("someCtrler", {
+    msg:"some Message",
+    invoke:function(params){
+        console.log( this.msg ); // "some Message"
+    }
+});
+</pre>
+<pre>
+tipJS.interceptor("interceptor1", {
+    order:1,
+    target:"controllers",
+    before:function(){
+        console.log("interceptor.before #1-1 : " + this.msg);
+    },
+    after:[
+        function(){
+            console.log("interceptor.after #1-1 : " + this.msg);
+        },
+        function(){
+            console.log("interceptor.after #1-2 : " + this.msg);
+        }
+    ]
+});
+</pre>
+<pre>
+tipJS.interceptor({
+    __name:"someApp.interceptor2",
+    order:2,
+    target:"controllers",
+    before:function(){
+        console.log("interceptor.before #2-1 : " + this.msg);
+    },
+    after:[
+        function(){
+            console.log("interceptor.after #2-1 : " + this.msg);
+        },
+        function(){
+            console.log("interceptor.after #2-2 : " + this.msg);
+        }
+    ]
+});
+</pre>
+
+상기 예의 실행결과는 아래와 같습니다.
+<pre>
+interceptor.before #1-1 : some Message
+interceptor.before #2-1 : some Message
+some Message
+interceptor.after #1-1 : some Message
+interceptor.after #1-2 : some Message
+interceptor.after #2-1 : some Message
+interceptor.after #2-2 : some Message
+</pre>
+
+#ETC
+##Debug Mode
+tipJS JavaScript MVC Framework는 당신의 debug 작업을 위해 tipJS.debug method 를 제공합니다.
+
+tipJS.debug method 를 간단히 설명하면 development mode 에서만 작동하는 browser console logger method 입니다.
+
+tipJS.debug method 는 tipJS.app method에서 정의한 developmentHostList 속성에 등록된 host 의 경우 console log를 출력합니다.
+<pre>
+tipJS.app({
+    ...
+    developmentHostList:[
+        'localhost'
+        ,'127.0.0.1'
+        ,'tipjs.com'
+    ],
+    ...
+});
+</pre>
+<pre>
+var someValue = someMethod();
+tipJS.debug("someValue is " + someValue);
+</pre>
+만약 당신의 browser에 표시된 host name 이 developmentHostList 속성에 등록된 host의 경우 위의 source는 browser console 에 당신이 설정한 message를 출력할 것입니다.
+
+development mode 와 상관없이 console log 를 출력하고 싶다면 browser 의 console.log method 혹은 tipJS.log method 를 사용하시기 바랍니다.
+
+##Benchmark
+tipJS JavaScript MVC Framework는 tipJS.benchmark 기능을 제공합니다.
+
+tipJS.benchmark 기능을 사용하기 위한 별도의 설정작업은 필요하지 않습니다.
+
+tipJS.benchmark.mark method 로 기점들을 등록합니다.
+tipJS.benchmark.elapsedTime method 로 두 기점간의 경과시간을 console 에 출력합니다.
+
+<pre>
+tipJS.benchmark.mark("point1");
+... 
+tipJS.benchmark.mark("point2");
+tipJS.benchmark.elapsedTime("point1", "point2");
+</pre>
+
+tipJS.benchmark.elapsedTime의 세번째 인수로 callback function을 지정 할 수 있습니다.
+<pre>
+tipJS.benchmark.mark("point1");
+... 
