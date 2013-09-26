@@ -395,7 +395,7 @@
 		if (!app__)
 			throw new Error(__getDefErrMsg(departType));
 
-		if (app__.loadOrder.presentOrder() === departType) {
+		if (app__.loadOrder.presentOrder() === departType || tipJS.isRelease) {
 			switch(departType) {
 				case "interceptors":
 				case "controllers":
@@ -422,7 +422,10 @@
 			define[depart] = [_appRoot + "/" + _path + "/" + tipJS.lang + ".js"];
 			return define[depart];
 		}
-
+		if (depart === "tipJSRelease") {
+			define[depart] = [_appRoot + "/" + app__.define.releaseFile];
+			return define[depart];
+		}
 		var _departs = util__.uniqArray(define[depart]),
 			_ret = [];
 		for (var i = _departs.length; i--;) {
@@ -1128,9 +1131,18 @@
 					break;
 				}
 			}
+			if (!tipJS.isDevelopment) {
+				for (var i = _define.releaseHostList.length; i--;) {
+					if (_winLoc.hostname.match(_define.releaseHostList[i]) !== null) {
+						tipJS.isRelease = true;
+						break;
+					}
+				}
+			}
 		}
 		app__.define = _define;
 		util__.mergeObject(app__.loadOrder = {}, DEF_BASE__.loadOrder);
+		if (tipJS.isRelease) app__.loadOrder.order = ["lang", "tipJSRelease"];
 		__loadDepart(app__.loadOrder.presentOrder());
 	};
 
@@ -1146,10 +1158,6 @@
 	},
 	sortedInterceptors__ = [],
 	DEF_BASE__ = {
-		config : {
-			
-			
-		},
 		define : {
 			noCache : false,
 			noCacheVersion : tipJS.ver,
@@ -1169,7 +1177,9 @@
 				models : "models",
 				views : "views"
 			},
+			releaseFile : "tipJSFile.js",
 			developmentHostList : [],
+			releaseHostList : [],
 			lang : [],
 			interceptors : [],
 			controllers : [],
@@ -1208,5 +1218,5 @@
 
 	tipJS.lang = _lang;
 	tipJS.isDevelopment = _isDevelopment;
-
+	//tipJS.isRelease = null;
 })(this);
