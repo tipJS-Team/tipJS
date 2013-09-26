@@ -130,34 +130,42 @@ tipJS.app({
     ...
 });
 ```
-If noCache attribute is false, tipJS 는 아래와 같이 JavaScript file 을 읽어들입니다.
+If noCache attribute is false, tipJS will be load JavaScript file as follows:
 ```javascript
-&lt;script type="text/javascript" src="./controllers/some.js"&gt;&lt;/script&gt;
+<script type="text/javascript" src="./controllers/some.js"></script>
 ```
-그러나 noCache attribute 가 true일 경우 아래와 같은 결과와 같습니다.
+If noCache attribute is true, the result is as follows:
 ```javascript
-&lt;script type="text/javascript" src="./controllers/some.js?noCacheVersion=1.000"&gt;&lt;/script&gt;
+<script type="text/javascript" src="./controllers/some.js?noCacheVersion=1.000"></script>
 ```
-noCache attribute 가 true 그리고 noCacheAuto attribute 가 true일 경우 noCacheVersion 의 parameter 값이 random 하게 생성되어 항상 새로 JavaScript file 을 load 하게 됩니다.
+When the noCache attribute is true and noCacheAuto attribute is true,
+any time loads a new JavaScript file by parameter of noCacheVersion generate is generated randomly.
 ```javascript
-&lt;script type="text/javascript" src="./controllers/some.js?noCacheVersion=0.5478912648"&gt;&lt;/script&gt;
+<script type="text/javascript" src="./controllers/some.js?noCacheVersion=0.5478912648"></script>
 ```
-만약 당신의 application이 갱신되었다면 noCacheVersion 속성의 값을 변경하거나 noCacheAuto 속성의 값을 true 로 하는것 만으로 Browser는 cache 처리없이 최신의JavaScript file을 load하게 될 것입니다.
+If your application is updated, Browser will load latest JavaScript file without cache through modify the value of noCacheVersion or set true of noCacheAuto.
 
 #Controller
-Controller의 호출은 아래의 방식으로 이루어 집니다.
-- tipJS.action("controller name", parameter)
-- tipJS.action.controllerName(parameter)
+To invoke Controller, as follows:
+- ```tipJS.action("controller name", parameter)```
+- ```tipJS.action.controllerName(parameter)```
 
-tipJS.controller method 에서 정의된 Controller 처리가 실행되기 전에 tipJS.app method에서 정의한 beforeController method 가 실행되며 Controller 처리가 모두 완료된 후에 define.js에서 정의한 afterController method가 실행됩니다.
+It invokes beforeController method that defined in tipJS.app method
+before processing the Controller that defined in tipJS.controller method. 
+And it is invoked afterController method that defeind in define.js
+after completed process of Controller.
 
-http://tipjs.com/wp/wp-content/uploads/2012/08/tipJS_MVC_Framework_process_flow.png
-Controller Tutorial[http://tipjs.com/tipJS/tutorial/Controller/]
+![tipJS_MVC_Framework_process_flow](http://tipjs.com/wp/wp-content/uploads/2012/08/tipJS_MVC_Framework_process_flow.png)  
+  
+[Controller Tutorial](http://tipjs.com/tipJS/tutorial/Controller/)
 
-tipJS.action method의 두번째 argument 는 tipJS.app method에서 정의한 beforeController method, afterController method 와 호출된 Controller의 beforeInvoke, invoke, afterInvoke, exceptionInvoke method 에서 input argument로 사용가능합니다.
+The second argument of tipJS.action method can be used as input argument for:
+- beforeController method and afterController method in tipJS.define method
+- beforeInvoke, invoke, afterInvoke and exceptionInvoke method in Controller
 
-beforeController / afterController method 안에서 this.controllerName 속성으로 현재 처리중인 controller 명이 참조 가능합니다.
-<pre>
+An attribute “this.controllerName” in beforeController / afterController method represents a name of a controller currently running.
+
+```javascript
 tipJS.app({
     ...
     onLoad:function(params){
@@ -176,8 +184,8 @@ tipJS.app({
     },
     ...
 });
-</pre>
-<pre>
+```
+```javascript
 // controllers/someController.js
 tipJS.controller("someController", {
     beforeInvoke:function(params){
@@ -193,11 +201,11 @@ tipJS.controller("someController", {
         console.log(params); // result is "someValue"
     }
 });
-</pre>
-tipJS.action method 의 호출 위치는 tipJS.loadApp method 호출 이후 자유롭습니다.
+```
+You can invoke tipJS.action method at any location since you have invoked tipJS.loadApp method.
 
-Controller 는 보통 아래와 같은 구성으로 이루어 집니다.
-<pre>
+Here is a general structure of Controller:
+```javascript
 // controllers/someController.js
 tipJS.controller("someController", {
     beforeInvoke:function(params){
@@ -221,8 +229,8 @@ tipJS.controller("someController", {
         alert(exception);
     }
 });
-</pre>
-<pre>
+```
+```javascript
 tipJS.app({
     ...
     onLoad:function(params){
@@ -230,13 +238,13 @@ tipJS.app({
     },
     ...
 });
-</pre>
-Controller는 기본 4가지의 method 가 조건에 의해 실행됩니다.
+```
+There are four basic methods in Controller. They run as below.
 
-기본적으로 Controller 는 tipJS Javascript MVC Framework에 의해 beforeInvoke, invoke, afterInvoke method 의 순서로 자동호출되며 exceptionInvoke method 는 Controller에 exceptionInvoke method가 정의되어 있고 Controller 실행중 exception 이 발생할 경우에만 호출됩니다.
+The tipJS Javascript MVC Framework in general cases runs beforeInvoke method first, invoke method second and afterInvoke method last. The exceptionInvoke method is called only if 1) exceptionInvoke method is defined in Controller and 2) an exception is raised while running Controller.
 
-물론 Controller 내부에서 사용자가 작성한 method 를 호출하는 것도 가능합니다.
-<pre>
+You can call any user defined methods in Controller.
+```javascript
 // controllers/someController.js
 tipJS.controller("someController", {
     ...
@@ -249,9 +257,9 @@ tipJS.controller("someController", {
         ...
     }
 });
-</pre>
-Controller 선언시 async 속성을 true로 설정하면 Controller 호출시 비동기 모드로 작동합니다. delay 속성을 1/1000 초단위 로 지정하여 비동기 지연시간을 지정할 수 있습니다.
-<pre>
+```
+If “async” attribute is set as true when Controller declared, the controller runs in async mode. You can also set delay time with “delay” attribute. Its unit value is 1/1000 sec.
+```javascript
 // controllers/someController.js
 tipJS.controller("someController", {
     async:true, // AnSynchronized Controller
@@ -266,24 +274,24 @@ tipJS.controller("someController", {
         ...
     }
 });
-</pre>
-아래는 Controller 에 설정된 속성에 대한 설명입니다.(기본 4 method 이외)
-- async
-Controller 동작을 비동기모드로 실행할것인지 설정합니다.(true – 비동기모드)
-- delay
-Controller 비동기모드 시간을 1/1000 초 단위로 지정합니다.(defalut:15)
-- getModel(ModelName)
-tipJS.model method에서 정의한 Application Model Object 를 load 합니다.
-- getView(ViewName)
-tipJS.view method에서 정의한 Application ViewModel Object 를 load 합니다.
-- renderTemplate(option)
-HTML Template 항목 참고
-- getById(id)
-document.getElementById 와 동일합니다.
-- getByName(name)
-document.getElementsByName 와 동일합니다.
-- getByTag(tagName)
-document.getElementsByTagName 와 동일합니다.
+```
+Here are attributes details defined in Controller besides four basic methods.
+- async  
+sets async mode (true – async mode)
+- delay  
+sets async delay in 1/1000 sec unit (default: 15)
+- getModel(ModelName)  
+get Application Model Object defined in tipJS.model method
+- getView(ViewName)  
+get Application View Object defined in tipJS.view method
+- renderTemplate(option)  
+see HTML Template
+- getById(id)  
+equivalent to document.getElementById
+- getByName(name)  
+equivalent to document.getElementsByName
+- getByTag(tagName)  
+equivalent to document.getElementsByTagName
 
 #Model
 tipJS JavaScript MVC Framework 서 Model Object 는 필요에 따라 구현하시기 바랍니다.
