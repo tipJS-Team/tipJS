@@ -294,11 +294,12 @@ equivalent to document.getElementsByName
 equivalent to document.getElementsByTagName
 
 #Model
-tipJS JavaScript MVC Framework 서 Model Object 는 필요에 따라 구현하시기 바랍니다.
+You don’t necessarily have to implement Model Object in tipJS JavaScript MVC Framework.
+Model Object can be implemented if required.
 
-Model 에서는 같은 Layer인 다른 Model을 load할 수 있습니다.
+You can load a different Model in the same Layer.
 
-Model 정의시 Framework에 의해 자동으로 정의되는 method는 다음과 같습니다.
+When you define Model, methods automatically defined by Framework are as follows:
 
 - __init  
 __init 메서드는 선언후 해당 Model 이 getModel 메서드에 의해 호출되어 생성되는 시점에서 단 한번 실행되는 메서드 입니다.
