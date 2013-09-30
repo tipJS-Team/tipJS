@@ -1,0 +1,23 @@
+tipJS.app({
+	appPath:"./js/app",
+	noCache:true,
+	noCacheParam:"tipJS",
+	noCacheAuto:true,
+	controllers:[
+		"initController.js",
+		"parseController.js",
+		"saveController.js",
+		"removeController.js",
+		"listController.js",
+		"sampleController.js"
+	],
+	models:[
+		"parserModel.js"
+	],
+	views:[
+		"parserView.js"
+	],
+	onLoad:function(){
+		tipJS.action.initController();
+	}
+});
