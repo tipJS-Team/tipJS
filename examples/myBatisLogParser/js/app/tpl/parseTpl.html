@@ -1,0 +1,17 @@
+<@ if ( data.length > 0 ) { @>
+<table class="table">
+	<thead>
+		<th>#</th>
+		<th>query</th>
+	</thead>
+	<tbody>
+	<@ for (var i=0,iLen=data.length; i<iLen; i++) { @>
+		<tr>
+			<td><@= i @></td>
+			<td><@=data[i] @></td>
+		</tr>
+	<@ } @>
+	</tbody>
+</table>
+<@ } @>
+ 
