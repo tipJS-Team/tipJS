@@ -32,7 +32,7 @@ tipJS.view("parserView", {
             //renderTo:"span_cnt",
             data: param
         };
-        return $("#div_history").html ( this.renderTemplate(_templateConfig) );
+        return $("#div_history").html ( this.render(_templateConfig) );
 
         //return $("#div_history").html(param);
     },
