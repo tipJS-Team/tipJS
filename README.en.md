@@ -470,26 +470,24 @@ tipJS.controller("someController", {
 
 
 #ViewModel
-tipJS JavaScript MVC Framework 서 ViewModel Object 는 필요에 따라 구현하시기 바랍니다.
+You don’t necessarily have to implement ViewModel Object in tipJS JavaScript MVC Framework.
+Model Object and View Object can be implemented if required.
 
-ViewModel 은 HTML Template 기능을 Controller로 부터 분리하여 수행하기 위한 Model 입니다.
+ViewModel is for seperating logics of HTML Template from Controller.
 
-ViewModel 에서는 같은 Layer인 다른 ViewModel을 load할 수 있습니다.
+You can load a different ViewModel in the same Layer.
 
-ViewModel 정의시 Framework에 의해 자동으로 정의되는 method는 다음과 같습니다.
+When you define ViewModel, methods automatically defined by Framework are as follows.
 
 - __init
-__init 메서드는 선언후 해당 ViewModel 이 getView 메서드에 의해 호출되어 생성되는 시점에서 단 한번 실행되는 메서드 입니다.
+__init method will invoke only once when corresponding ViewModel is created following call by getView.
 - getView(viewName)
-tipJS.model method에서 정의한 Application ViewModel을 반환합니다.
-- getById(id)
-document.getElementById 와 동일합니다.
-- getByName(name)
-document.getElementsByName 와 동일합니다.
-- getByTag(tagName)
-document.getElementsByTagName 와 동일합니다.
+loads Application ViewModel defined in tipJS.model method.
+- getById(id) equivalent to document.getElementById.
+- getByName(name) equivalent to document.getElementsByName.
+- getByTag(tagName) equivalent to document.getElementsByTagName
 - render(options)
-HTML Template[HTML Template] 항목을 참고합니다.
+Please refer to following HTML Template[HTML Template] section for further details.
 
 View(HTML Template) Tutorial[View(HTML Template) Tutorial]
 <pre>
@@ -517,7 +515,8 @@ tipJS.controller({
 
 
 ##ViewModel 의 extension(Inheritance)
-tipJS JavaScript MVC Framework는 ViewModel의 확장 기능을 제공합니다.
+
+tipJS JavaScript MVC Framework has provided functions for extension of ViewModel.
 
 ViewModel Extend Tutorial[ViewModel Extend Tutorial]
 <pre>
@@ -551,12 +550,15 @@ tipJS.controller("someController", {
 </pre>
 
 #HTML Template
-tipJS JavaScript MVC Framework는 Model과 View의 분리를 위한 HTML 형식의 Template 기능을 제공합니다.
+tipJS JavaScript MVC Framework provides HTML based template engine.
 
-render method 는 HTML Template 에 data를 맵핑한후 renderTo 속성에 id 값이 지정되어 있으면 해당 element에 HTML Template 의 내용을 출력한 후  data가 mapping된 html 을 반환합니다. 한번 읽어들인 HTML template file은 tipJS에 의해 cache 처리됩니다.
-만약 template의 cache 처리를 원하지 않을경우에는 tipJS.app method 의 templateCache 속성값을 false로 설정하시기 바랍니다.(default:true)
+render method implements data mapping in HTML template
+Then, if id value is defined as renderTo property, the method will return HTML string including mapping data after printing it out to corresponding element.
 
-renderTo 속성은 생략 가능하며 render method는 항상 data가 mapping된 html 을 반환합니다.
+Once a HTML template file has been loaded, tipJS will load it from cache.
+if you don’t want to load a template file from cache, please change templateCache property of tipJS.app method from default value to ‘false’.(default:true)
+
+If renderTo property is skipped, renderTemplate method always returns HTML string including mapping data without printing it out.
 
 // index.html
 <pre>
@@ -619,18 +621,19 @@ ViewModel(HTML Template) Tutorial[View(HTML Template) Tutorial]
 
 ViewExtend(HTML Template) Tutorial[ViewExtend(HTML Template) Tutorial]
 
-HTML Template 에서의 값의 출력은 <@= value @> 사이에서 이루어 지며, 루프등의 제어는 <@ for(…) @> 사이에서 이루어집니다.
-종료태그 @> 앞에 종료문자(;)를 넣을 경우 에러를 발생하니 주의하십시오.
+tipJS prints out values to <@= value @> in HTML Template, and loop control statement should be located in <@for(…)@>.
+Please note with caution that an error occurs when you put a termination character (;) in front of a termination tag (@>).
 
-render method의 argument인 설정 Object의 속성은 다음과 같습니다.
+Properties of Object, an argument of this.renderTemplate method, are as follows:
+
 - url  
-HTML Template file의 url를 정의합니다. file의 extention name에 대한 제한은 없습니다.
+It defines url of HTML Template file. There is no limit on extention name of files.
 - renderTo  
-HTML Template의 내용이 data속성에 의해 mapping 된 후에 반환되는 html이 출력 될 html요소의 id를 정의합니다.(생략가능)
+It defines id value of HTML element in which HTML string including mapping data will be printed. (Not necessary).
 - data  
-HTML Template 에서 정의한 data변수에 mapping될 data를 정의합니다.
+It defines data will be mapped.
 
-단순히 html string 과 data object 를 통해 렌더링된 html 을 받을 수도 있습니다.
+You can receive rendered HTML as formats of HTML string and data Object.
 
 <pre>
 tipJS.controller("someController", {
@@ -644,10 +647,10 @@ tipJS.controller("someController", {
 });
 </pre>
 
-## HTML Template file 의 논리적 분할
-하나의 물리적 file 을 논리적으로 분할하여 사용하는 기능에 대해 설명합니다.
+## Logical split of HTML Template file
+tipJS provides function spliting a file logically and using it.
 
-논리 id 명은 tplId 속성에 지정하여 사용해야 하며 template file 의 [[#id]] 와 matching 됩니다.
+Logical id name used in specified tplId property, it will be matching the template file with [[#id]].
 
 // someTpl.tpl
 <pre>
