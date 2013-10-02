@@ -304,13 +304,13 @@ When you define Model, methods automatically defined by Framework are as follows
 - __init  
 __init 메서드는 선언후 해당 Model 이 getModel 메서드에 의해 호출되어 생성되는 시점에서 단 한번 실행되는 메서드 입니다.
 - getModel(modelName)  
-tipJS.model method에서 정의한 Application Model을 반환합니다.
+get Application Model Object defined in tipJS.model method.
 - getById(id)  
-document.getElementById 와 동일합니다.
+equivalent to document.getElementById.
 - getByName(name)  
-document.getElementsByName 와 동일합니다.
+equivalent to document.getElementsByName.
 - getByTag(tagName)  
-document.getElementsByTagName 와 동일합니다.
+equivalent to document.getElementsByTagName
 
 자동으로 정의되는 method가 필요치 않을 경우 VO(Value Object) Model 을 사용하시기 바랍니다. 자세한 설명은 VO(Value Object) Model 항목을 참고하시기 바랍니다.
 Model Tutorial[Model Tutorial]
