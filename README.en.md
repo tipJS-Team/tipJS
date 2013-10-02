@@ -470,7 +470,228 @@ tipJS.controller("someController", {
 
 
 #ViewModel
-##template
+tipJS JavaScript MVC Framework 서 ViewModel Object 는 필요에 따라 구현하시기 바랍니다.
+
+ViewModel 은 HTML Template 기능을 Controller로 부터 분리하여 수행하기 위한 Model 입니다.
+
+ViewModel 에서는 같은 Layer인 다른 ViewModel을 load할 수 있습니다.
+
+ViewModel 정의시 Framework에 의해 자동으로 정의되는 method는 다음과 같습니다.
+
+- __init
+__init 메서드는 선언후 해당 ViewModel 이 getView 메서드에 의해 호출되어 생성되는 시점에서 단 한번 실행되는 메서드 입니다.
+- getView(viewName)
+tipJS.model method에서 정의한 Application ViewModel을 반환합니다.
+- getById(id)
+document.getElementById 와 동일합니다.
+- getByName(name)
+document.getElementsByName 와 동일합니다.
+- getByTag(tagName)
+document.getElementsByTagName 와 동일합니다.
+- render(options)
+HTML Template[HTML Template] 항목을 참고합니다.
+
+View(HTML Template) Tutorial[View(HTML Template) Tutorial]
+<pre>
+// views/someView.js
+tipJS.view("someView", {
+    properties:...
+    methods:function(){
+        ...
+    }
+});
+</pre>
+<pre>
+// controllers/someController.js
+tipJS.controller({
+    ...
+    invoke:function(params){
+        // load Application ViewModel
+        var someView = this.loadView("someView");
+ 
+        someView.someMethod();
+    },
+    ...
+});
+</pre>
+
+
+##ViewModel 의 extension(Inheritance)
+tipJS JavaScript MVC Framework는 ViewModel의 확장 기능을 제공합니다.
+
+ViewModel Extend Tutorial[ViewModel Extend Tutorial]
+<pre>
+tipJS.view("viewParent", {
+    parent1 : "viewParent",
+    parentFn : function() {
+        console.log(this.parent1); // viewParent
+    }
+});
+</pre>
+<pre>
+tipJS.view("viewChild",{
+    __extend : "viewParent",
+    child1 : "viewChild",
+    childFn : function() {
+        console.log(this.child1); // viewChild
+    }
+});
+</pre>
+<pre>
+// controllers/someController.js
+tipJS.controller("someController", {
+    ...
+    invoke : function() {
+        var viewChild = this.getView("viewChild");
+        viewChild.parentFn(); // viewParent
+        viewChild.childFn(); // viewChild
+    },
+    ...
+});
+</pre>
+
+#HTML Template
+tipJS JavaScript MVC Framework는 Model과 View의 분리를 위한 HTML 형식의 Template 기능을 제공합니다.
+
+render method 는 HTML Template 에 data를 맵핑한후 renderTo 속성에 id 값이 지정되어 있으면 해당 element에 HTML Template 의 내용을 출력한 후  data가 mapping된 html 을 반환합니다. 한번 읽어들인 HTML template file은 tipJS에 의해 cache 처리됩니다.
+만약 template의 cache 처리를 원하지 않을경우에는 tipJS.app method 의 templateCache 속성값을 false로 설정하시기 바랍니다.(default:true)
+
+renderTo 속성은 생략 가능하며 render method는 항상 data가 mapping된 html 을 반환합니다.
+
+// index.html
+<pre>
+&lt;html&gt;
+&lt;head&gt;
+&lt;script type="text/javascript" src="/tipJS/tipJS-MVC-x.xx.js"&gt;
+&lt;/script&gt;
+&lt;script&gt;
+window.onload = function(){
+    tipJS.loadApp(["someApplication"]);
+};
+&lt;/script&gt;
+&lt;body&gt;
+    &lt;div id="target_id"&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+// someTpl.tpl
+<pre>
+&lt;h1&gt;
+&lt;@= data.someString @&gt;
+&lt;/h1&gt;
+&lt;ul&gt;
+&lt;@ for(var i=0; i&lt;data.someArray.length; i++) { @&gt;
+    &lt;li&gt; &lt;@= data.someArray[i] @&gt; &lt;/li&gt;
+&lt;@ } @&gt;
+&lt;/ul&gt;
+</pre>
+<pre>
+// controllers/someController.js
+tipJS.controller("someController", {
+    invoke:function(params){
+        var _templateConfig = {
+            url:"/templates/someTemplate.tpl",
+            renderTo:"target_id",
+            data:{
+                someString:"some String " + params,
+                someArray:["some1","some2","some3"]
+            }
+        };
+        var returnHTML = this.render(_templateConfig); // return html
+    }
+});
+</pre>
+
+ViewModel(HTML Template) Tutorial[View(HTML Template) Tutorial]
+
+// someTpl.tpl
+<pre>
+&lt;div&gt;
+    &lt;ul&gt;
+        &lt;@ for(var i=0; i&lt;data.length; i++) { @&gt;
+            &lt;@ if (i != 0) {@&gt;&lt;li class="&lt;@=( (i==2) ? "foo":"bar" )@&gt;"&gt;&lt;@= data[i] @&gt;&lt;/li&gt;
+            &lt;@}else{@&gt;&lt;div class="&lt;@=( (i==2) ? "foo":"bar" )@&gt;"&gt;&lt;@= data[i] @&gt;&lt;/div&gt;&lt;@}@&gt;
+        &lt;@ } @&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+</pre>
+
+ViewExtend(HTML Template) Tutorial[ViewExtend(HTML Template) Tutorial]
+
+HTML Template 에서의 값의 출력은 <@= value @> 사이에서 이루어 지며, 루프등의 제어는 <@ for(…) @> 사이에서 이루어집니다.
+종료태그 @> 앞에 종료문자(;)를 넣을 경우 에러를 발생하니 주의하십시오.
+
+render method의 argument인 설정 Object의 속성은 다음과 같습니다.
+- url  
+HTML Template file의 url를 정의합니다. file의 extention name에 대한 제한은 없습니다.
+- renderTo  
+HTML Template의 내용이 data속성에 의해 mapping 된 후에 반환되는 html이 출력 될 html요소의 id를 정의합니다.(생략가능)
+- data  
+HTML Template 에서 정의한 data변수에 mapping될 data를 정의합니다.
+
+단순히 html string 과 data object 를 통해 렌더링된 html 을 받을 수도 있습니다.
+
+<pre>
+tipJS.controller("someController", {
+    invoke:function(params){
+        var htmlString = "&lt;div&gt;&lt;@= data.foo @&gt;&lt;/div&gt;";
+        var data = {
+            foo:"foo"
+        };
+        var returnHTML = this.render(htmlString, data); // return html
+    }
+});
+</pre>
+
+## HTML Template file 의 논리적 분할
+하나의 물리적 file 을 논리적으로 분할하여 사용하는 기능에 대해 설명합니다.
+
+논리 id 명은 tplId 속성에 지정하여 사용해야 하며 template file 의 [[#id]] 와 matching 됩니다.
+
+// someTpl.tpl
+<pre>
+[[#template01]] &lt;!-- id : "template01" --&gt;
+&lt;ul&gt;
+    &lt;li&gt;&lt;@= data.foo @&gt;&lt;/li&gt;
+&lt;/ul&gt;
+[[#template02]] &lt;!-- id : "template02" --&gt;
+&lt;span&gt;&lt;@= data.bar @&gt;&lt;/span&gt;
+</pre>
+
+<pre>
+// someController1.js
+tipJS.controller("someController1", {
+    invoke : function(params){
+        var _templateConfig = {
+            url:"/templates/someTemplate.tpl",
+            renderTo:"target_id",
+            tplId:"template01",  // id : "template01"
+            data:{
+                foo:"foo"
+            }
+        };
+        var returnHTML = this.render(_templateConfig); // return template01 html
+    }
+});
+</pre>
+
+<pre>
+// someController2.js
+tipJS.controller("someController2", {
+    invoke : function(params){
+        var _templateConfig = {
+            url:"/templates/someTemplate.tpl",
+            renderTo:"target_id",
+            tplId:"template02", // id : "template02"
+            data:{
+                bar:"bar"
+            }
+        };
+        var returnHTML = this.render(_templateConfig); // return template02 html
+    }
+});
+</pre>
 
 #Utility
 ##i18n
@@ -699,3 +920,22 @@ tipJS.benchmark.elapsedTime의 세번째 인수로 callback function을 지정 �
 <pre>
 tipJS.benchmark.mark("point1");
 ... 
+tipJS.benchmark.mark("point2");
+tipJS.benchmark.elapsedTime("point1", "point2", function(startName, endName, startTime, endTime, elapsedTime){
+    ...
+});
+</pre>
+
+##echo
+
+#튜토리얼 - Tutorials
+- Controller
+- Model
+- ModelSync
+- ModelVO
+- ModelExtend
+- View(HTML Template)
+- ViewExtend
+
+#예제들 - Examples
+#Contributor
