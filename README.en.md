@@ -313,6 +313,7 @@ equivalent to document.getElementsByName.
 equivalent to document.getElementsByTagName
 
 VO (Value Object) Model should be used if you don’t need methods automatically defined. Please refer to following VO (Value Object) Model section for further details.
+
 Model Tutorial[Model Tutorial]
 <pre>
 // models/someModel.js
