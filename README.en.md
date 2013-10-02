@@ -302,7 +302,7 @@ You can load a different Model in the same Layer.
 When you define Model, methods automatically defined by Framework are as follows:
 
 - __init  
-__init 메서드는 선언후 해당 Model 이 getModel 메서드에 의해 호출되어 생성되는 시점에서 단 한번 실행되는 메서드 입니다.
+__init method will invoke only once when corresponding Model or View is created following call by loadModel or loadView.
 - getModel(modelName)  
 get Application Model Object defined in tipJS.model method.
 - getById(id)  
@@ -312,7 +312,7 @@ equivalent to document.getElementsByName.
 - getByTag(tagName)  
 equivalent to document.getElementsByTagName
 
-자동으로 정의되는 method가 필요치 않을 경우 VO(Value Object) Model 을 사용하시기 바랍니다. 자세한 설명은 VO(Value Object) Model 항목을 참고하시기 바랍니다.
+VO (Value Object) Model should be used if you don’t need methods automatically defined. Please refer to following VO (Value Object) Model section for further details.
 Model Tutorial[Model Tutorial]
 <pre>
 // models/someModel.js
