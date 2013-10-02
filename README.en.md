@@ -319,7 +319,7 @@ Model Tutorial[Model Tutorial]
 // models/someModel.js
 tipJS.model("someModel", {
     __init:function(){
-        // Object 생성시 framework에 의해 한번만 실행되고 소멸한다.
+        // Object was created by the framework is executed only once and destroyed.
         ...
     },
     properties:...
@@ -346,15 +346,15 @@ tipJS.controller("someController", {
 </pre>
 
 ## Syncronous Model
-tipJS JavaScript MVC Framework는 Model의 동기화 기능을 제공합니다.
-Model 의 동기화 기능이란 하나의 생성된 Model Object가 소멸되지 않고 변경되어지는 값을 가진채 유지되는 것을 말합니다.
+tipJS JavaScript MVC Framework has provided synchronization of Model.
+Synchronization of Model means that a Model Object created by a user remains with changed values and will not be destroyed.
 
 ModelSync Tutorial[ModelSync Tutorial]
 <pre>
 // models/someModel.js
 tipJS.model("someModel", {
     __init:function(){
-        // Object 생성시 framework에 의해 한번만 실행되고 소멸한다.
+        // Object was created by the framework is executed only once and destroyed.
         ...
     },
     someValue:"foo"
@@ -396,22 +396,24 @@ tipJS.controller("someController2", {
     ...
 });
 </pre>
-getModel method 의 두번째 인자에 true를 설정하였을 경우 사용 할 수 있습니다.
+You can use functions for synchronization of Model when the second parameter of getModel method is defined as ‘true’.
+
 
 ##VO(Value Object) Model
-tipJS JavaScript MVC Framework는 VO(Value Object) Model 기능을 제공합니다.
+tipJS Javacript MVC Framework has provided VO (Value Object) Model.
 
-VO Model 은 tipJS에서 일반 model선언시 자동으로 추가되는 속성/method 를 추가하지 않습니다. 사용자가 선언한 내용만이 반환되는 model입니다.
+VO model will not introduce properties or methods added automatically when defining Model in tipJS.
+It will only reflect properties and methods defined by users.
 
-VO Model 을 사용하기 위해 별도의 설정작업은 필요하지 않습니다.
-Model 선언시 Model Name 값의 마지막이 “VO”로 선언되어 있으면 해당 Model은 VO Model로 동작합니다.
+Configuration is not required to use VO Model.
+If the last value of  Model Name is “VO”, the Model will be VO Model.
 
 ModelVO Tutorial[ModelVO Tutorial]
 <pre>
 // models/modelVO.js
 tipJS.model("modelVO", {
     __init:function(){
-        // Object 생성시 framework에 의해 한번만 실행되고 소멸한다.
+        // Object was created by the framework is executed only once and destroyed.
         ...
     },
     value1 : "123",
@@ -433,7 +435,7 @@ tipJS.controller("someController", {
 </pre>
 
 ##Model extension(Inheritance)
-tipJS JavaScript MVC Framework는 Model의 확장 기능을 제공합니다.
+tipJS JavaScript MVC Framework has provided functions for extension of Model.
 
 ModelExtend Tutorial[ModelExtend Tutorial]
 <pre>
