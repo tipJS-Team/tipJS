@@ -16,6 +16,9 @@ body{
 	background: url('../noisePattern.png') repeat;
 	min-width: 320px;
 }
+    section ul {
+        padding-left: 25px;
+    }
 
 	a{
 		color: #444;
@@ -131,7 +134,7 @@ nav dd{
 	padding: 30px;
 }
 	.contents section{
-		margin-bottom: 100px ;
+		margin-bottom: 30px;
 	}
 
 	.contents section h1{
@@ -146,10 +149,10 @@ nav dd{
 	}
 
 	.contents section article{
-		padding: 20px;
+		padding: 5px;
 	}
 
-	.contents p{
+	.contents p {
 		margin-left: 20px;
 	}
 
