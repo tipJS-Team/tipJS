@@ -514,7 +514,7 @@ tipJS.controller({
 </pre>
 
 
-##ViewModel 의 extension(Inheritance)
+##ViewModel extension(Inheritance)
 
 tipJS JavaScript MVC Framework has provided functions for extension of ViewModel.
 

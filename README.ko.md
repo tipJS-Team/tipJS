@@ -1,15 +1,13 @@
-#Language
-##KR
-    
-#about
-##소개글 - Introduction
-tipJS JavaScript MVC Framework 는 작고(gzip 5.x KByte) Simple하며 강력한 JavaScript MVC Framework 입니다.
+#Introduction
+tipJS JavaScript MVC Framework 는 작고 Simple하며 강력한 JavaScript MVC Framework 입니다.
 당신은 tipJS 를 이용해 복잡한 구조의 Web Application 을 Controller로 제어되는 Model과 ViewModel, HTMLTemplate로 간단하게 구현할 수 있습니다. tipJS JavaScript MVC Framework로 당신의 Web Application의 개발과 Maintenance 효율을 월등히 높힐 수 있을 것입니다.
 
+##Download
 
-##다운로드 - Download
+##License
+Dual licensed under the MIT or GPL Version 2 licenses.
 
-##기능 - Feature
+##Feature
 - 복잡한 JavaScript Application을 MVC Pattern 형태로 구현할 수 있습니다.
 - Back-end 개발자를 위한 최적의 JavaScript MVC Framework 입니다.
 - AOP(Aspect-Oriented Programming) 가능한 JavaScript MVC Framework 입니다.
@@ -24,17 +22,56 @@ tipJS JavaScript MVC Framework 는 작고(gzip 5.x KByte) Simple하며 강력한
 - 다국어 지원(국제화/i18n) 기능을 제공합니다.
 - etc…
 
-##구조 - Structure
+##Structure
 
-#License
-Dual licensed under the MIT or GPL Version 2 licenses.
+#Getting Started 
+Folder Structure는 아래의 구조를 권장합니다.
+```
+/tipJS/tipJS.min.js.js
+/examples/helloWorld/index.html
+/examples/helloWorld/app.js
+/examples/helloWorld/controllers/hello.js
+```
+html file 의 tipJS.min.js file 경로를 설정합니다.
+```
+<html>
+<head>
+<script src="/tipJS/tipJS.min.js"></script>
+<script src="/examples/helloWorld/app.js"></script>
+<body>
+    <div id="contents"></div>
+    <input type="button" value="click me"
+    onclick="tipJS.action.hello('tipJS.com')"/>
+</body>
+</html>
+```
+app.js 에서 controller file 을 설정합니다.
+```
+// app.js
+tipJS.app({
+    controllers : [
+        "hello.js"
+    ]
+});
+window.onload = function(){
+    tipJS.loadApp(); // application 시작
+};
+```
+controller file 에 처리내용을 작성합니다.
+```
+// controllers/hello.js
+tipJS.controller("hello", {
 
-#설치하기 - Installation 
-    ...
-    ...
+    invoke : function(params){
+        document.getElementById('contents').innerHTML 
+        = "Hello World!! from " + params;
+    }
+
+});
+```
 
 #App Configuration
-##기본 - Essentional
+##Essentional
 tipJS 의 설정은 tipJS.app method 에 의해 이루어집니다. 모든 설정값에는 기본값(default value)가 존재하고, 기본값의 변경을 위해서는 thpJS.app method 의 인수 객체에 설정값을 지정하면 됩니다.
 <pre>
 tipJS.app({
@@ -672,65 +709,6 @@ tipJS.controller("someController2", {
 });
 </pre>
 
-#Utility
-##i18n
-tipJS JavaScript MVC Framework 를 통한 다국어지원(internationalization/i18n) 기능을 설명합니다.
-기능을 활성화 하기 위해서 tipJS.app method 에서 localSet 속성을 추가하고 true 값을 설정합니다.
-<pre>
-tipJS.app({
-    ...
-    localSet:true,
-    ...
-});
-</pre>
-controllers 등이 있는 application 폴더에 lang 폴더를 작성하고 lang폴더 안에 언어코드.js 파일을 아래와 같이 작성합니다. 언어코드는 tipJS가 브라우저 언어정보(navigator.language || navigator.systemLanguage || navigator.userLanguage)를 읽어 자동으로 기본값을 설정합니다.
-<pre>
-// lang/ko.js
-tipJS.localSet({
-    "Save":"저장",
-    "Load":"불러오기"
-});
-</pre>
-<pre>
-// lang/ja.js
-tipJS.localSet({
-    "Save":"保存",
-    "Load":"読み込み"
-});
-</pre>
-언어코드를 수동으로 설정하려면 아래와 같이 tipJS.loadApp 메소드를 호출하기 전에 tipJS.lang 속성값을 설정하려는 언어코드로 변경해 줍니다.
-<pre>
-...
-    tipJS.lang = "ja"; // set to Japaness
-    tipJS.loadApp();
-...
-</pre>
-
-해당 language set의 message 를 취득하려면 tipJS.msg 메소드를 사용합니다.
-<pre>
-tipJS.controller("someCtrler", {
-    invoke:function(params){
-        console.log( tipJS.msg("Save") ); // result "저장"
-    }
-});
-</pre>
-<pre>
-tipJS.model({
-    __name : "someApp.someModel",
-    someMethod:function(params){
-        console.log( tipJS.msg("Load") ); // result "불러오기"
-    }
-});
-</pre>
-언어코드.js 파일에서 tipJS.localSet method 로 등록되지 않은 메세지를 취득하려 하면 tipJS.msg method 는 입력한 메세지를 그대로 반환합니다.
-<pre>
-tipJS.model("someModel", {
-    someMethod:function(params){
-        console.log( tipJS.msg("Some Message") ); // result "Some Message"
-    }
-});
-</pre>
-
 #AOP(Aspect-Oriented Programming)
 여기서는 tipJS JavaScript MVC Framework 를 통한 AOP(Aspect-Oriented Programming) 기능을 설명합니다.
 
@@ -825,8 +803,7 @@ tipJS.interceptor("interceptor1", {
 });
 </pre>
 <pre>
-tipJS.interceptor({
-    __name:"someApp.interceptor2",
+tipJS.interceptor("interceptor2", {
     order:2,
     target:"controllers",
     before:function(){
@@ -880,6 +857,31 @@ tipJS.debug("someValue is " + someValue);
 
 development mode 와 상관없이 console log 를 출력하고 싶다면 browser 의 console.log method 혹은 tipJS.log method 를 사용하시기 바랍니다.
 
+##Release mode
+tipJS JavaScript MVC Framework는 당신의 Release 작업을 위한 기능을 제공합니다.
+
+간단히 설명하면 release mode 에서만 작동하는 controller/model/view/interceptor의 onefile 동작시스템을 말합니다.
+
+tipJS는 기본적으로 개발자의 개발/유지보수의 편의를 위해 controller/model/view/interceptor 의 파일을 분리하도록 강제하고 있습니다.
+그러나 모바일/네트워크상의 문제등으로 인해 js 파일의 억세스가 느릴경우 페이지 로딩시 시간이 지체되는 문제가 발생할 수 있습니다.
+release mode를 설정하면 이러한 문제를 회피할 수 있습니다.
+
+먼저 빌드툴등을 이용하여 controller/model/view/interceptor 등의 파일을 "[appPath]/tipJSFile.js" 로 합치는 작업을 합니다.
+
+그다음 tipJS.app method 에 releaseHostList 속성을 등록합니다.
+```
+tipJS.app({
+    ...
+    releaseHostList : [
+        "sub1.example.com",
+        "sub2.example.com",
+        "sub3.example.com"
+    ],
+    ...
+});
+```
+releaseHostList의 호스트에서 tipJS가 동작할시 tipJS는 나뉘어진 controller/model/view/interceptor 파일들을 대신하여 "[appPath]/tipJSFile.js" 에 등록된 controller/model/view/interceptor 를 사용하여 동작합니다.
+
 ##Benchmark
 tipJS JavaScript MVC Framework는 tipJS.benchmark 기능을 제공합니다.
 
@@ -905,7 +907,63 @@ tipJS.benchmark.elapsedTime("point1", "point2", function(startName, endName, sta
 });
 </pre>
 
-##echo
+##i18n
+tipJS JavaScript MVC Framework 를 통한 다국어지원(internationalization/i18n) 기능을 설명합니다.
+기능을 활성화 하기 위해서 tipJS.app method 에서 localSet 속성을 추가하고 true 값을 설정합니다.
+<pre>
+tipJS.app({
+    ...
+    localSet:true,
+    ...
+});
+</pre>
+controllers 등이 있는 application 폴더에 lang 폴더를 작성하고 lang폴더 안에 언어코드.js 파일을 아래와 같이 작성합니다. 언어코드는 tipJS가 브라우저 언어정보(navigator.language || navigator.systemLanguage || navigator.userLanguage)를 읽어 자동으로 기본값을 설정합니다.
+<pre>
+// lang/ko.js
+tipJS.localSet({
+    "Save":"저장",
+    "Load":"불러오기"
+});
+</pre>
+<pre>
+// lang/ja.js
+tipJS.localSet({
+    "Save":"保存",
+    "Load":"読み込み"
+});
+</pre>
+언어코드를 수동으로 설정하려면 아래와 같이 tipJS.loadApp 메소드를 호출하기 전에 tipJS.lang 속성값을 설정하려는 언어코드로 변경해 줍니다.
+<pre>
+...
+    tipJS.lang = "ja"; // set to Japaness
+    tipJS.loadApp();
+...
+</pre>
+
+해당 language set의 message 를 취득하려면 tipJS.msg 메소드를 사용합니다.
+<pre>
+tipJS.controller("someCtrler", {
+    invoke:function(params){
+        console.log( tipJS.msg("Save") ); // result "저장"
+    }
+});
+</pre>
+<pre>
+tipJS.model({
+    __name : "someApp.someModel",
+    someMethod:function(params){
+        console.log( tipJS.msg("Load") ); // result "불러오기"
+    }
+});
+</pre>
+언어코드.js 파일에서 tipJS.localSet method 로 등록되지 않은 메세지를 취득하려 하면 tipJS.msg method 는 입력한 메세지를 그대로 반환합니다.
+<pre>
+tipJS.model("someModel", {
+    someMethod:function(params){
+        console.log( tipJS.msg("Some Message") ); // result "Some Message"
+    }
+});
+</pre>
 
 #튜토리얼 - Tutorials
 - Controller
@@ -916,5 +974,5 @@ tipJS.benchmark.elapsedTime("point1", "point2", function(startName, endName, sta
 - View(HTML Template)
 - ViewExtend
 
-#예제들 - Examples
-#Contributor
+#Examples
+#Contributors
