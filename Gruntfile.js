@@ -14,7 +14,7 @@ module.exports = function(grunt) {
     banner = "/*\n <%= pkg.name %> - OpenSource Javascript MVC Framework ver.2.0.0\n" +
       " Copyright 2013.08 \n" +
       " Dual licensed under the MIT or GPL Version 2 licenses\n" +
-      " Author: SeungHyun PAEK, Hanghee Yi, Juntai Park\n" +
+      " Author: SeungHyun PAEK, Hanghee Yi, Juntai Park, Yun Jung Bu\n" +
       " HomePage: http://www.tipjs.com\n" +
       " Contact: http://www.tipjs.com/contact\n" +
       " License: MIT, GPL V2\n" +
