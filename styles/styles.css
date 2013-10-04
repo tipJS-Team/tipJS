@@ -16,9 +16,13 @@ body{
 	background: url('../noisePattern.png') repeat;
 	min-width: 320px;
 }
-    section ul {
+    .contents section ul {
         padding-left: 40px;
         margin: 1px 5px;
+    }
+
+    .contents .languageSelector ul {
+        padding-left: 5px;
     }
 
 	h1{
