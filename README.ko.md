@@ -7,7 +7,7 @@ tipJS JavaScript MVC Framework 는 작고 Simple하며 강력한 JavaScript MVC 
 ##License
 Dual licensed under the MIT or GPL Version 2 licenses.
 
-##기능 - Feature
+##Feature
 - 복잡한 JavaScript Application을 MVC Pattern 형태로 구현할 수 있습니다.
 - Back-end 개발자를 위한 최적의 JavaScript MVC Framework 입니다.
 - AOP(Aspect-Oriented Programming) 가능한 JavaScript MVC Framework 입니다.
@@ -22,7 +22,7 @@ Dual licensed under the MIT or GPL Version 2 licenses.
 - 다국어 지원(국제화/i18n) 기능을 제공합니다.
 - etc…
 
-##구조 - Structure
+##Structure
 
 #Getting Started 
 Folder Structure는 아래의 구조를 권장합니다.
@@ -71,7 +71,7 @@ tipJS.controller("hello", {
 ```
 
 #App Configuration
-##기본 - Essentional
+##Essentional
 tipJS 의 설정은 tipJS.app method 에 의해 이루어집니다. 모든 설정값에는 기본값(default value)가 존재하고, 기본값의 변경을 위해서는 thpJS.app method 의 인수 객체에 설정값을 지정하면 됩니다.
 <pre>
 tipJS.app({
