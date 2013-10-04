@@ -17,18 +17,9 @@ body{
 	min-width: 320px;
 }
     section ul {
-        padding-left: 25px;
+        padding-left: 40px;
+        margin: 1px 5px;
     }
-
-	a{
-		color: #444;
-		text-decoration: none;
-	}
-
-	a:hover{
-		color: #f05a28;
-		text-decoration: underline;
-	}
 
 	h1{
 		font-size: 30px;
@@ -44,7 +35,6 @@ body{
 		box-shadow: 3px 4px 8px rgba( 0, 0, 0, 0.4 );
 	}
 
-
 nav{
 	position: fixed;
 	top: 0;
@@ -57,19 +47,28 @@ nav{
 	z-index: 1000;
 	background-color: #333;
 	color: #ccc;
-	border: 0px solid #999;
+	border: 0 solid #999;
 	border-right-width: 1px;
-	box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.7);
+	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.7);
 }
 
 nav a{
 	color: #ccc;
 }
 
+nav a {
+    text-decoration: none;
+}
+
+nav a:hover{
+    color: #f05a28;
+    text-decoration: underline;
+}
+
 nav dt{
 	padding: 6px 10px;
 	margin: 0 0 4px;
-	border: 0px solid #444;
+	border: 0 solid #444;
 	border-bottom-width: 1px;
 	border-top-width: 1px;
 	font-weight: bold;
@@ -81,8 +80,6 @@ nav dd{
 	margin: 0;
 	font-size: 13px;
 }
-
-
 	nav a:after{
 		position: absolute;
 		right: 50px;
@@ -128,23 +125,31 @@ nav dd{
 	color: #fff;
 }
 
-.contents{
+.contents {
 	margin-left: 250px;
 	max-width: 768px;
 	padding: 30px;
 }
+
+    .contents a {
+        font-weight: bold;
+    }
 	.contents section{
 		margin-bottom: 30px;
 	}
 
-	.contents section h1{
+    .contents h1 {
 		color: #000;
+        border: 0 solid #ccc;
+        padding: 12px 0;
+        margin-bottom: 12px;
+        border-bottom-width: 1px;
 	}
 
 	.contents section h2{
 		padding: 6px 0;
 		margin: 12px 0;
-		border: 0px solid #ccc;
+		border: 0 solid #ccc;
 		border-bottom-width: 1px;
 	}
 
@@ -153,7 +158,7 @@ nav dd{
 	}
 
 	.contents p {
-		margin-left: 20px;
+		margin-left: 5px;
 	}
 
 	pre{
@@ -162,13 +167,12 @@ nav dd{
 
 .languageSelector{
 	position: relative;
-	top: -30px;
+	top: -20px;
 }
 
 .logo{
 	width: 320px;
 	text-align: center;
-	margin-top: -60px;
 }
 
 	.logo h3{
@@ -240,6 +244,12 @@ nav dd{
 	.contents{
 		margin-left: 0;
 	}
+}
+.imagebox {
+    text-align: center;
+}
+.imagebox img {
+    border: none;
 }
 
 @-ms-keyframes target {
