@@ -5,7 +5,6 @@
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
     <title>tipJS - MVC Framework</title>
-    <script src="js/locale-detector.js"></script>
     <!-- [if lt IE 9] >
           <script src="component/Respond/respond.min.js"></script>
           <script src="component/html5shiv/dist/html5shiv.js"></script>
@@ -293,6 +292,58 @@ $(document).ready(function(e){
 
     <section id="controller">
         <h1>Controller</h1>
+        <p>To invoke Controller, as follows:</p>
+        <ul>
+            <li>tipJS.action("controller name", parameter)</li>
+            <li>tipJS.action.controllerName(parameter)</li>
+        </ul>
+        <p>
+            It invokes beforeController method that defined in tipJS.app method before processing the Controller that defined in tipJS.controller method. And it is invoked afterController method that defeind in define.js after completed process of Controller.
+        </p>
+        <img src="ppt/structure.png" width="554" height="398">
+        <p>
+            <a href="http://tipjs.com/tipJS/tutorial/Controller/">Controller Tutorial</a>
+        </p>
+        <p>
+            The second argument of tipJS.action method can be used as input argument for:
+        </p>
+        <pre><code class="javascript">tipJS.app({
+    ...
+    onLoad:function(params){
+        // call Controller
+        tipJS.action("someController", "someValue");
+        // or
+        tipJS.action.someController("someValue");
+    },
+    beforeController:function(params){
+        console.log(params); // result is "someValue"
+        console.log(this.controllerName); // result is "someController"
+    },
+    afterController:function(params){
+        console.log(params); // result is "someValue"
+        console.log(this.controllerName); // result is "someController"
+    },
+    ...
+});</code></pre>
+        <pre><code class="javascript">// controllers/someController.js
+tipJS.controller("someController", {
+    beforeInvoke:function(params){
+        console.log(params); // result is "someValue"
+    },
+    invoke:function(params){
+        console.log(params); // result is "someValue"
+    },
+    afterInvoke:function(params){
+        console.log(params); // result is "someValue"
+    },
+    exceptionInvoke:function(exception, params){
+        console.log(params); // result is "someValue"
+    }
+});</code></pre>
+        <p>
+            You can invoke tipJS.action method at any location since you have invoked tipJS.loadApp method. <br/>
+            Here is a general structure of Controller:
+        </p>
     </section>
 
     <section id="model">
