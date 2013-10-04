@@ -29,9 +29,51 @@ tipJS JavaScript MVC Framework 는 작고(gzip 5.x KByte) Simple하며 강력한
 #License
 Dual licensed under the MIT or GPL Version 2 licenses.
 
-#설치하기 - Installation 
-    ...
-    ...
+#Getting Started 
+Folder Structure는 아래의 구조를 권장합니다.
+```
+/tipJS/tipJS.min.js.js
+/examples/helloWorld/index.html
+/examples/helloWorld/app.js
+/examples/helloWorld/controllers/hello.js
+```
+html file 의 tipJS.min.js file 경로를 설정합니다.
+```
+<html>
+<head>
+<script src="/tipJS/tipJS.min.js"></script>
+<script src="/examples/helloWorld/app.js"></script>
+<body>
+    <div id="contents"></div>
+    <input type="button" value="click me"
+    onclick="tipJS.action.hello('tipJS.com')"/>
+</body>
+</html>
+```
+app.js 에서 controller file 을 설정합니다.
+```
+// app.js
+tipJS.app({
+    controllers : [
+        "hello.js"
+    ]
+});
+window.onload = function(){
+    tipJS.loadApp(); // application 시작
+};
+```
+controller file 에 처리내용을 작성합니다.
+```
+// controllers/hello.js
+tipJS.controller("hello", {
+
+    invoke : function(params){
+        document.getElementById('contents').innerHTML 
+        = "Hello World!! from " + params;
+    }
+
+});
+```
 
 #App Configuration
 ##기본 - Essentional
