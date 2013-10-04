@@ -1,13 +1,11 @@
-#Language
-##KR
-    
-#about
 ##소개글 - Introduction
 tipJS JavaScript MVC Framework 는 작고(gzip 5.x KByte) Simple하며 강력한 JavaScript MVC Framework 입니다.
 당신은 tipJS 를 이용해 복잡한 구조의 Web Application 을 Controller로 제어되는 Model과 ViewModel, HTMLTemplate로 간단하게 구현할 수 있습니다. tipJS JavaScript MVC Framework로 당신의 Web Application의 개발과 Maintenance 효율을 월등히 높힐 수 있을 것입니다.
 
-
 ##다운로드 - Download
+
+#License
+Dual licensed under the MIT or GPL Version 2 licenses.
 
 ##기능 - Feature
 - 복잡한 JavaScript Application을 MVC Pattern 형태로 구현할 수 있습니다.
@@ -25,9 +23,6 @@ tipJS JavaScript MVC Framework 는 작고(gzip 5.x KByte) Simple하며 강력한
 - etc…
 
 ##구조 - Structure
-
-#License
-Dual licensed under the MIT or GPL Version 2 licenses.
 
 #Getting Started 
 Folder Structure는 아래의 구조를 권장합니다.
@@ -714,65 +709,6 @@ tipJS.controller("someController2", {
 });
 </pre>
 
-#Utility
-##i18n
-tipJS JavaScript MVC Framework 를 통한 다국어지원(internationalization/i18n) 기능을 설명합니다.
-기능을 활성화 하기 위해서 tipJS.app method 에서 localSet 속성을 추가하고 true 값을 설정합니다.
-<pre>
-tipJS.app({
-    ...
-    localSet:true,
-    ...
-});
-</pre>
-controllers 등이 있는 application 폴더에 lang 폴더를 작성하고 lang폴더 안에 언어코드.js 파일을 아래와 같이 작성합니다. 언어코드는 tipJS가 브라우저 언어정보(navigator.language || navigator.systemLanguage || navigator.userLanguage)를 읽어 자동으로 기본값을 설정합니다.
-<pre>
-// lang/ko.js
-tipJS.localSet({
-    "Save":"저장",
-    "Load":"불러오기"
-});
-</pre>
-<pre>
-// lang/ja.js
-tipJS.localSet({
-    "Save":"保存",
-    "Load":"読み込み"
-});
-</pre>
-언어코드를 수동으로 설정하려면 아래와 같이 tipJS.loadApp 메소드를 호출하기 전에 tipJS.lang 속성값을 설정하려는 언어코드로 변경해 줍니다.
-<pre>
-...
-    tipJS.lang = "ja"; // set to Japaness
-    tipJS.loadApp();
-...
-</pre>
-
-해당 language set의 message 를 취득하려면 tipJS.msg 메소드를 사용합니다.
-<pre>
-tipJS.controller("someCtrler", {
-    invoke:function(params){
-        console.log( tipJS.msg("Save") ); // result "저장"
-    }
-});
-</pre>
-<pre>
-tipJS.model({
-    __name : "someApp.someModel",
-    someMethod:function(params){
-        console.log( tipJS.msg("Load") ); // result "불러오기"
-    }
-});
-</pre>
-언어코드.js 파일에서 tipJS.localSet method 로 등록되지 않은 메세지를 취득하려 하면 tipJS.msg method 는 입력한 메세지를 그대로 반환합니다.
-<pre>
-tipJS.model("someModel", {
-    someMethod:function(params){
-        console.log( tipJS.msg("Some Message") ); // result "Some Message"
-    }
-});
-</pre>
-
 #AOP(Aspect-Oriented Programming)
 여기서는 tipJS JavaScript MVC Framework 를 통한 AOP(Aspect-Oriented Programming) 기능을 설명합니다.
 
@@ -947,7 +883,63 @@ tipJS.benchmark.elapsedTime("point1", "point2", function(startName, endName, sta
 });
 </pre>
 
-##echo
+##i18n
+tipJS JavaScript MVC Framework 를 통한 다국어지원(internationalization/i18n) 기능을 설명합니다.
+기능을 활성화 하기 위해서 tipJS.app method 에서 localSet 속성을 추가하고 true 값을 설정합니다.
+<pre>
+tipJS.app({
+    ...
+    localSet:true,
+    ...
+});
+</pre>
+controllers 등이 있는 application 폴더에 lang 폴더를 작성하고 lang폴더 안에 언어코드.js 파일을 아래와 같이 작성합니다. 언어코드는 tipJS가 브라우저 언어정보(navigator.language || navigator.systemLanguage || navigator.userLanguage)를 읽어 자동으로 기본값을 설정합니다.
+<pre>
+// lang/ko.js
+tipJS.localSet({
+    "Save":"저장",
+    "Load":"불러오기"
+});
+</pre>
+<pre>
+// lang/ja.js
+tipJS.localSet({
+    "Save":"保存",
+    "Load":"読み込み"
+});
+</pre>
+언어코드를 수동으로 설정하려면 아래와 같이 tipJS.loadApp 메소드를 호출하기 전에 tipJS.lang 속성값을 설정하려는 언어코드로 변경해 줍니다.
+<pre>
+...
+    tipJS.lang = "ja"; // set to Japaness
+    tipJS.loadApp();
+...
+</pre>
+
+해당 language set의 message 를 취득하려면 tipJS.msg 메소드를 사용합니다.
+<pre>
+tipJS.controller("someCtrler", {
+    invoke:function(params){
+        console.log( tipJS.msg("Save") ); // result "저장"
+    }
+});
+</pre>
+<pre>
+tipJS.model({
+    __name : "someApp.someModel",
+    someMethod:function(params){
+        console.log( tipJS.msg("Load") ); // result "불러오기"
+    }
+});
+</pre>
+언어코드.js 파일에서 tipJS.localSet method 로 등록되지 않은 메세지를 취득하려 하면 tipJS.msg method 는 입력한 메세지를 그대로 반환합니다.
+<pre>
+tipJS.model("someModel", {
+    someMethod:function(params){
+        console.log( tipJS.msg("Some Message") ); // result "Some Message"
+    }
+});
+</pre>
 
 #튜토리얼 - Tutorials
 - Controller
@@ -958,5 +950,5 @@ tipJS.benchmark.elapsedTime("point1", "point2", function(startName, endName, sta
 - View(HTML Template)
 - ViewExtend
 
-#예제들 - Examples
-#Contributor
+#Examples
+#Contributors
