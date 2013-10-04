@@ -860,10 +860,10 @@ development mode 와 상관없이 console log 를 출력하고 싶다면 browser
 ##Release mode
 tipJS JavaScript MVC Framework는 당신의 Release 작업을 위한 기능을 제공합니다.
 
-간단히 설명하면 release mode 에서만 작동하는 controller/model/view/interceptor의 onefile 동작을 말합니다.
+간단히 설명하면 release mode 에서만 작동하는 controller/model/view/interceptor의 onefile 동작시스템을 말합니다.
 
 tipJS는 기본적으로 개발자의 개발/유지보수의 편의를 위해 controller/model/view/interceptor 의 파일을 분리하도록 강제하고 있습니다.
-그러나 네트워크상의 문제등으로 인해 js 파일의 억세스가 느릴경우 페이지 로딩시 시간이 지체되는 문제가 발생할 수 있습니다.
+그러나 모바일/네트워크상의 문제등으로 인해 js 파일의 억세스가 느릴경우 페이지 로딩시 시간이 지체되는 문제가 발생할 수 있습니다.
 release mode를 설정하면 이러한 문제를 회피할 수 있습니다.
 
 먼저 빌드툴등을 이용하여 controller/model/view/interceptor 등의 파일을 "[appPath]/tipJSFile.js" 로 합치는 작업을 합니다.
@@ -880,7 +880,7 @@ tipJS.app({
     ...
 });
 ```
-releaseHostList의 호스트에서 tipJS가 동작할시 tipJS는 나뉘어진 controller/model/view/interceptor 파일들을 대신하여 "appPath/tipJSFile.js" 에 등록된 controller/model/view/interceptor 를 사용하여 동작합니다.
+releaseHostList의 호스트에서 tipJS가 동작할시 tipJS는 나뉘어진 controller/model/view/interceptor 파일들을 대신하여 "[appPath]/tipJSFile.js" 에 등록된 controller/model/view/interceptor 를 사용하여 동작합니다.
 
 ##Benchmark
 tipJS JavaScript MVC Framework는 tipJS.benchmark 기능을 제공합니다.
