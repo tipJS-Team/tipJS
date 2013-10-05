@@ -1,6 +1,3 @@
-tipJS
-=====
-
 #Introduction
 tipJS JavaScript MVC Framework 는 작고 Simple하며 강력한 JavaScript MVC Framework 입니다.
 당신은 tipJS 를 이용해 복잡한 구조의 Web Application 을 Controller로 제어되는 Model과 ViewModel, HTMLTemplate로 간단하게 구현할 수 있습니다. tipJS JavaScript MVC Framework로 당신의 Web Application의 개발과 Maintenance 효율을 월등히 높힐 수 있을 것입니다.
@@ -27,7 +24,7 @@ Dual licensed under the MIT or GPL Version 2 licenses.
 
 ##Structure
 
-#Getting Started
+#Getting Started 
 Folder Structure는 아래의 구조를 권장합니다.
 ```
 /tipJS/tipJS.min.js.js
@@ -66,7 +63,7 @@ controller file 에 처리내용을 작성합니다.
 tipJS.controller("hello", {
 
     invoke : function(params){
-        document.getElementById('contents').innerHTML
+        document.getElementById('contents').innerHTML 
         = "Hello World!! from " + params;
     }
 
@@ -101,15 +98,15 @@ window.onload = function() {
 </pre>
 아래는 tipJS.app method에서 설정할 수 있는 속성에 대한 설명입니다.
 
-- appPath
+- appPath  
 tipJS 의 application 실행폴더를 지정합니다. 이 옵션은 controllers, models, views, lang 폴더등의 상위폴더를 지정합니다. 기본값은 "."(tipJS를 포함한 html의 현재경로) 으로 상대/절대경로로 재설정 가능합니다.
-- controllers
+- controllers  
 array type으로 Controller file들을 정의합니다.
-- models
+- models  
 array type으로 Model file들을 정의합니다.
-- views
+- views  
 array type으로 View file들을 정의합니다.
-- onLoad
+- onLoad  
 function type으로 등록된 onLoad method 는 application 이 tipJS.loadApp method 로 load된 직후에 단 한번 실행되는 method입니다. argument로 tipJS.loadApp method 호출시 지정한 argument 인 parameter 를 사용할 수 있습니다.
 <pre>
 // tipJS
@@ -140,15 +137,15 @@ tipJS.app({
     ...
 });
 </pre>
-- afterController
+- afterController  
 function type으로 등록된 afterController method 는 application 내에서 어떤 Controller 를 호출하더라도 공통적으로 실행되는 method입니다.이 method 는 Controller 가 실행종료된 후 실행됩니다. argument로 Controller를 호출하는 tipJS.action method의 두번째 argument 인 parameter를 사용할 수 있습니다. Controller 와 동일한 method들을 사용할 수 있습니다.
-- noCache
+- noCache  
 Browser cache 를 boolean type으로 설정할 수 있으며, true일 경우 noCacheAuto, noCacheVersion, noCacheParam 속성과 연동되어 version value 가 변경 될때마다 JavaScript file을 다시 load 하게합니다.(default:false)
-- noCacheVersion
+- noCacheVersion  
 Browser cache 제어를 위한 버젼 정보를 설정합니다.(default:"1.000")
-- noCacheAuto
+- noCacheAuto  
 true로 설정된 경우 noCacheVersion option의 value와는 상관없이 version을 랜덤하게 출력하여 Browser cache를 무효하게 합니다.(default:false)
-- noCacheParam
+- noCacheParam  
 Browser cache 제어를 위한 parameter name을 설정합니다.(default:"noCacheVersion")
 
 ##Cache Control
@@ -184,7 +181,7 @@ Controller의 호출은 아래의 방식으로 이루어 집니다.
 tipJS.controller method 에서 정의된 Controller 처리가 실행되기 전에 tipJS.app method에서 정의한 beforeController method 가 실행되며 Controller 처리가 모두 완료된 후에 define.js에서 정의한 afterController method가 실행됩니다.
 
 http://tipjs.com/wp/wp-content/uploads/2012/08/tipJS_MVC_Framework_process_flow.png
-Controller Tutorial[http://tipjs.com/tipJS/tutorial/Controller/]
+Controller Tutorial[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/Controller)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/Controller/)]
 
 tipJS.action method의 두번째 argument 는 tipJS.app method에서 정의한 beforeController method, afterController method 와 호출된 Controller의 beforeInvoke, invoke, afterInvoke, exceptionInvoke method 에서 input argument로 사용가능합니다.
 
@@ -199,11 +196,11 @@ tipJS.app({
         tipJS.action.someController("someValue");
     },
     beforeController:function(params){
-        console.log(params); // result is "someValue"
+        console.log(params); // result is "someValue" 
         console.log(this.controllerName); // result is "someController"
     },
     afterController:function(params){
-        console.log(params); // result is "someValue"
+        console.log(params); // result is "someValue" 
         console.log(this.controllerName); // result is "someController"
     },
     ...
@@ -241,9 +238,9 @@ tipJS.controller("someController", {
         var initModel = this.getModel("initModel");
         // load Application ViewModel
         var initView = this.getView("initView");
-
+ 
         initView.drawBody(bodyHtml);
-
+ 
         console.log("invoke Done");
     },
     afterInvoke:function(params){
@@ -300,21 +297,21 @@ tipJS.controller("someController", {
 });
 </pre>
 아래는 Controller 에 설정된 속성에 대한 설명입니다.(기본 4 method 이외)
-- async
+- async  
 Controller 동작을 비동기모드로 실행할것인지 설정합니다.(true – 비동기모드)
-- delay
+- delay  
 Controller 비동기모드 시간을 1/1000 초 단위로 지정합니다.(defalut:15)
-- getModel(ModelName)
+- getModel(ModelName)  
 tipJS.model method에서 정의한 Application Model Object 를 load 합니다.
-- getView(ViewName)
+- getView(ViewName)  
 tipJS.view method에서 정의한 Application ViewModel Object 를 load 합니다.
-- render(options)
+- render(options)  
 HTML Template 항목 참고
-- getById(id)
+- getById(id)  
 document.getElementById 와 동일합니다.
-- getByName(name)
+- getByName(name)  
 document.getElementsByName 와 동일합니다.
-- getByTag(tagName)
+- getByTag(tagName)  
 document.getElementsByTagName 와 동일합니다.
 
 #Model
@@ -324,19 +321,19 @@ Model 에서는 같은 Layer인 다른 Model을 load할 수 있습니다.
 
 Model 정의시 Framework에 의해 자동으로 정의되는 method는 다음과 같습니다.
 
-- __init
+- __init  
 __init 메서드는 선언후 해당 Model 이 getModel 메서드에 의해 호출되어 생성되는 시점에서 단 한번 실행되는 메서드 입니다.
-- getModel(modelName)
+- getModel(modelName)  
 tipJS.model method에서 정의한 Application Model을 반환합니다.
-- getById(id)
+- getById(id)  
 document.getElementById 와 동일합니다.
-- getByName(name)
+- getByName(name)  
 document.getElementsByName 와 동일합니다.
-- getByTag(tagName)
+- getByTag(tagName)  
 document.getElementsByTagName 와 동일합니다.
 
 자동으로 정의되는 method가 필요치 않을 경우 VO(Value Object) Model 을 사용하시기 바랍니다. 자세한 설명은 VO(Value Object) Model 항목을 참고하시기 바랍니다.
-Model Tutorial[Model Tutorial]
+Model Tutorial[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/Model/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/Model/)]
 <pre>
 // models/someModel.js
 tipJS.model("someModel", {
@@ -360,7 +357,7 @@ tipJS.controller("someController", {
         var someModel = this.getModel("someModel");
         // load Application View
         var someView = this.getView("someView");
-
+ 
         someModel.someMethod();
     },
     ...
@@ -371,7 +368,7 @@ tipJS.controller("someController", {
 tipJS JavaScript MVC Framework는 Model의 동기화 기능을 제공합니다.
 Model 의 동기화 기능이란 하나의 생성된 Model Object가 소멸되지 않고 변경되어지는 값을 가진채 유지되는 것을 말합니다.
 
-ModelSync Tutorial[ModelSync Tutorial]
+ModelSync Tutorial[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/ModelSync/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/ModelSync/)]
 <pre>
 // models/someModel.js
 tipJS.model("someModel", {
@@ -387,12 +384,12 @@ tipJS.model("someModel", {
 tipJS.controller("someController1", {
     ...
     invoke:function(params){
-
+ 
         // load Application Model(normal)
         var someModel = this.getModel("someModel");
         console.log(someModel.someValue); // "foo"
         someModel.someValue = "bar";
-
+ 
         // load Application Model(synchronized)
         var someModelSync = this.getModel("someModel", true);
         console.log(someModelSync.someValue); // "foo"
@@ -406,11 +403,11 @@ tipJS.controller("someController1", {
 tipJS.controller("someController2", {
     ...
     invoke:function(params){
-
+ 
         // load Application Model(normal)
         var someModel = this.getModel("someModel");
         console.log(someModel.someValue); // "foo"
-
+ 
         // load Application Model(synchronized)
         var someModelSync = this.getModel("someModel", true);
         console.log(someModelSync.someValue); // "bar"
@@ -428,7 +425,7 @@ VO Model 은 tipJS에서 일반 model선언시 자동으로 추가되는 속성/
 VO Model 을 사용하기 위해 별도의 설정작업은 필요하지 않습니다.
 Model 선언시 Model Name 값의 마지막이 “VO”로 선언되어 있으면 해당 Model은 VO Model로 동작합니다.
 
-ModelVO Tutorial[ModelVO Tutorial]
+ModelVO Tutorial[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/ModelVO/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/ModelVO/)]
 <pre>
 // models/modelVO.js
 tipJS.model("modelVO", {
@@ -445,7 +442,7 @@ tipJS.model("modelVO", {
 tipJS.controller("someController", {
     ...
     invoke:function(params){
-
+ 
         console.dir(this.loadModel("someModel"));
         console.dir(this.loadModel("modelVO"));
 
@@ -457,7 +454,7 @@ tipJS.controller("someController", {
 ##Model 의 extension(Inheritance)
 tipJS JavaScript MVC Framework는 Model의 확장 기능을 제공합니다.
 
-ModelExtend Tutorial[ModelExtend Tutorial]
+ModelExtend Tutorial[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/ModelExtend/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/ModelExtend/)]
 <pre>
 tipJS.model("modelParent", {
     parent1 : "modelParent",
@@ -511,7 +508,7 @@ document.getElementsByTagName 와 동일합니다.
 - render(options)
 HTML Template[HTML Template] 항목을 참고합니다.
 
-View(HTML Template) Tutorial[View(HTML Template) Tutorial]
+View(HTML Template) Tutorial[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/View/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/View/)]
 <pre>
 // views/someView.js
 tipJS.view("someView", {
@@ -528,7 +525,7 @@ tipJS.controller({
     invoke:function(params){
         // load Application ViewModel
         var someView = this.loadView("someView");
-
+ 
         someView.someMethod();
     },
     ...
@@ -538,7 +535,7 @@ tipJS.controller({
 ##ViewModel 의 extension(Inheritance)
 tipJS JavaScript MVC Framework는 ViewModel의 확장 기능을 제공합니다.
 
-ViewModel Extend Tutorial[ViewModel Extend Tutorial]
+ViewModel Extend Tutorial[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/ViewExtend/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/ViewExtend/)]
 <pre>
 tipJS.view("viewParent", {
     parent1 : "viewParent",
@@ -622,7 +619,7 @@ tipJS.controller("someController", {
 });
 </pre>
 
-ViewModel(HTML Template) Tutorial[View(HTML Template) Tutorial]
+ViewModel(HTML Template) Tutorial[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/View/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/View/)]
 
 // someTpl.tpl
 <pre>
@@ -636,17 +633,17 @@ ViewModel(HTML Template) Tutorial[View(HTML Template) Tutorial]
 &lt;/div&gt;
 </pre>
 
-ViewExtend(HTML Template) Tutorial[ViewExtend(HTML Template) Tutorial]
+ViewExtend(HTML Template) Tutorial[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/ViewExtend/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/ViewExtend/)]
 
 HTML Template 에서의 값의 출력은 <@= value @> 사이에서 이루어 지며, 루프등의 제어는 <@ for(…) @> 사이에서 이루어집니다.
 종료태그 @> 앞에 종료문자(;)를 넣을 경우 에러를 발생하니 주의하십시오.
 
 render method의 argument인 설정 Object의 속성은 다음과 같습니다.
-- url
+- url  
 HTML Template file의 url를 정의합니다. file의 extention name에 대한 제한은 없습니다.
-- renderTo
+- renderTo  
 HTML Template의 내용이 data속성에 의해 mapping 된 후에 반환되는 html이 출력 될 html요소의 id를 정의합니다.(생략가능)
-- data
+- data  
 HTML Template 에서 정의한 data변수에 mapping될 data를 정의합니다.
 
 단순히 html string 과 data object 를 통해 렌더링된 html 을 받을 수도 있습니다.
@@ -895,7 +892,7 @@ tipJS.benchmark.elapsedTime method 로 두 기점간의 경과시간을 console 
 
 <pre>
 tipJS.benchmark.mark("point1");
-...
+... 
 tipJS.benchmark.mark("point2");
 tipJS.benchmark.elapsedTime("point1", "point2");
 </pre>
@@ -903,7 +900,7 @@ tipJS.benchmark.elapsedTime("point1", "point2");
 tipJS.benchmark.elapsedTime의 세번째 인수로 callback function을 지정 할 수 있습니다.
 <pre>
 tipJS.benchmark.mark("point1");
-...
+... 
 tipJS.benchmark.mark("point2");
 tipJS.benchmark.elapsedTime("point1", "point2", function(startName, endName, startTime, endTime, elapsedTime){
     ...
@@ -969,13 +966,21 @@ tipJS.model("someModel", {
 </pre>
 
 #튜토리얼 - Tutorials
-- Controller
-- Model
-- ModelSync
-- ModelVO
-- ModelExtend
-- View(HTML Template)
-- ViewExtend
+- Controller[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/Controller)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/Controller/)]
+- Model[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/Model/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/Model/)]
+- ModelSync[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/ModelSync/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/ModelSync/)]
+- ModelVO[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/ModelVO/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/ModelVO/)]
+- ModelExtend[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/ModelExtend/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/ModelExtend/)]
+- View(HTML Template)[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/View/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/View/)]
+- ViewExtend[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/ViewExtend/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/ViewExtend/)]
 
 #Examples
+- basicTemplate[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/examples/basicTemplate)][[VIEW](http://tipjs-team.github.io/tipJS/examples/basicTemplate)]
+- myBatisLogParser[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/examples/myBatisLogParser)][[VIEW](http://tipjs-team.github.io/tipJS/examples/myBatisLogParser)]
+- todoMVC[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/examples/todoMVC)][[VIEW](http://tipjs-team.github.io/tipJS/examples/todoMVC)]
 #Contributors
+- tipJS
+- javarouka
+- coma
+- iMaZiNe
+- rkJun
