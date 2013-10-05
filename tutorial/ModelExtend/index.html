@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<head>
+<title>tipJS.com - Javascript MVC Framework ModelExtend Tutorial</title>
+<script src="../../tipJS/tipJS.2.0.0.dev.js"></script>
+<script src="app.js"></script>
+<script>
+window.onload = function() {
+	var input="input value";
+	tipJS.loadApp(input);
+};
+</script>
+</head>
+<body>
+<h1>tipJS.com - Javascript MVC Framework <br />ModelExtend Tutorial</h1>
+    <div id="contents"></div>
+    <input type="button" value="Controller1"
+    onclick="tipJS.action.controller1();"/>
+    <input type="button" value="Controller2"
+    onclick="tipJS.action.controller2();"/>
+<h4><a href="app.js" target="_blank">app.js</a></h4>
+<h4>ModelExtend</h4>
+<ul>
+	<li>controllers</li>
+	<ul>
+		<li><a href="controllers/controller1.js" target="_blank">controller1.js</a></li>
+		<li><a href="controllers/controller2.js" target="_blank">controller2.js</a></li>
+	</ul>
+</ul>
+<ul>
+	<li>models</li>
+	<ul>
+		<li><a href="models/modelParent.js" target="_blank">modelParent.js</a></li>
+		<li><a href="models/modelChildVO.js" target="_blank">modelChildVO.js</a></li>
+		<li><a href="models/modelChild2VO.js" target="_blank">modelChild2VO.js</a></li>
+	</ul>
+</ul>
+</body>
+</html>

@@ -1,0 +1,31 @@
+{
+  "manifest_version": 2,
+  "name": "Chrome Website Image Viewer",
+  "version": "0.10.0",
+  "homepage_url": "http://blog.javarouka.me/",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ajax.googleapis.com/; object-src 'self';",
+  "icons":{
+    "16" : "images/16.png",
+    "24" : "images/24.png",
+    "48" : "images/48.png",
+    "128" : "images/orig.png"
+  },
+  "content_scripts": [{
+      "matches": [ "*://*/*" ],
+      "js": [ "js/extension/images.js" ],
+      "run_at": "document_end"
+  }],
+  "background" : {
+    "scripts" : ["js/extension/background.js"]
+  },
+  "browser_action": {
+    "default_title": "Time to current page",
+    "default_icon": "images/24.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "cookies",
+    "*://*/*"
+  ]
+}
