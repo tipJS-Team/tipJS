@@ -23,6 +23,7 @@ Dual licensed under the MIT or GPL Version 2 licenses.
 - etc…
 
 ##Structure
+![tipJS JavaScript MVC framework structure](http://tipjs-team.github.io/tipJS/structure.png)
 
 #Getting Started 
 Folder Structure는 아래의 구조를 권장합니다.
@@ -180,7 +181,8 @@ Controller의 호출은 아래의 방식으로 이루어 집니다.
 
 tipJS.controller method 에서 정의된 Controller 처리가 실행되기 전에 tipJS.app method에서 정의한 beforeController method 가 실행되며 Controller 처리가 모두 완료된 후에 define.js에서 정의한 afterController method가 실행됩니다.
 
-http://tipjs.com/wp/wp-content/uploads/2012/08/tipJS_MVC_Framework_process_flow.png
+![tipJS JavaScript MVC framework structure](http://tipjs-team.github.io/tipJS/structure.png)
+
 Controller Tutorial[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/Controller)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/Controller/)]
 
 tipJS.action method의 두번째 argument 는 tipJS.app method에서 정의한 beforeController method, afterController method 와 호출된 Controller의 beforeInvoke, invoke, afterInvoke, exceptionInvoke method 에서 input argument로 사용가능합니다.
