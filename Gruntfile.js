@@ -46,9 +46,13 @@ module.exports = function(grunt) {
         src: sources,
         dest: buildDirPath + destinationName + '.min.js'
       },
-      examples: {
+      examples1: {
         src: sources,
-        dest: 'examples/' + destinationName + '.min.js'
+        dest: ['examples/' + destinationName + '.min.js']
+      },
+      examples2: {
+        src: sources,
+        dest: ['examples/ImageViewerOnTab/js/extlib/' + destinationName + '.min.js']
       },
       test: {
         src: sources,
