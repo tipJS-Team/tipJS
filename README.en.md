@@ -931,7 +931,7 @@ tipJS.benchmark.elapsedTime("point1", "point2", function(startName, endName, sta
 
 ##echo
 
-#튜토리얼 - Tutorials
+# Tutorials
 - Controller
 - Model
 - ModelSync
@@ -940,5 +940,5 @@ tipJS.benchmark.elapsedTime("point1", "point2", function(startName, endName, sta
 - View(HTML Template)
 - ViewExtend
 
-#예제들 - Examples
-#Contributor
+# Examples
+# Contributor
