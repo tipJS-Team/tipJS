@@ -256,6 +256,19 @@ nav dd{
     border: none;
 }
 
+.github-logo {
+    -webkit-transition: all .25s ease;
+    -moz-transition: all .25s ease;
+    -ms-transition: all .25s ease;
+    -o-transition: all .25s ease;
+    transition: all .25s ease;
+}
+
+.github-logo:hover {
+    -webkit-transform: scale(1.1);
+    box-shadow: 1px 1px 1px 2px #999;
+}
+
 @-ms-keyframes target {
     from {
         background:#ffffff;
