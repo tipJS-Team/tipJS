@@ -982,7 +982,7 @@ tipJS.model("someModel", {
 - todoMVC with external template[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/examples/todoMVC)][[VIEW](http://tipjs-team.github.io/tipJS/examples/todoMVC)]
 - todoMVC with internal template[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/examples/todoMVC.int)][[VIEW](http://tipjs-team.github.io/tipJS/examples/todoMVC.int)]
 - base64 image encoder[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/examples/base64Image)][[VIEW](http://tipjs-team.github.io/tipJS/examples/base64Image)]
-- ImageViewerOnTab(chrome extension)[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/examples/base64Image)]
+- ImageViewerOnTab(chrome extension)[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/examples/ImageViewerOnTab)]
 
 #Contributors
 - tipJS
