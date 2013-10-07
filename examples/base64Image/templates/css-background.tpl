@@ -1,0 +1,1 @@
+background-image: url('<@=data@>');

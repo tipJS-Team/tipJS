@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>tipJS.com - Javascript MVC Framework Base64-Image encoder (HTML5)</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./assets/bootstrap.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="./assets/bootstrap-theme.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="./assets/theme.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="./assets/html5shiv.js"></script>
+      <script src="./assets/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="container theme-showcase">
+
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <h1>Base64-Image encoder with tipJS</h1>
+        <p>support IE 10+ / Chrome / Safari / Firefox / modern browser</p>
+      </div>
+
+			<div class="panel panel-primary">
+			  <div class="panel-heading">i. Select image file</div>
+			  <div class="panel-body">
+			    <div class="form-group">
+				    <input type="file" id="imageFile" accept="image/*">
+				  </div>
+			  </div>
+			</div>
+
+			<div class="panel panel-primary">
+			  <div class="panel-heading">ii. Encode Image</div>
+			  <div class="panel-body">
+			    <button type="button" id="btLoad" class="btn btn-success btn-lg btn-block">Encode Image</button><br />
+	        <div id="imageList"></div>
+					<div id="imageInfo"></div>
+			  </div>
+			</div>
+
+			<div class="panel panel-primary">
+			  <div class="panel-heading">iii. Result</div>
+			  <div class="panel-body">
+			    Base64 String<br />
+	        <textarea id="base64String" class="form-control" rows="5"></textarea>
+	        CSS Background<br />
+	        <textarea id="base64Css" class="form-control" rows="5"></textarea>
+	        img tag<br />
+	        <textarea id="base64Img" class="form-control" rows="5"></textarea>
+			  </div>
+			</div>
+
+			<div class="panel panel-default">
+			  <div class="panel-heading"><a href="http://tipjs-team.github.io/tipJS/" target="blank">tipJS JavaScript MVC framework</a> Base64-Image encoder Source</div>
+			  <div class="panel-body">
+			    <ul>
+						<li><a href="app.js" target="_blank">app.js</a></li>
+						<li>
+							controllers
+							<ul>
+								<li><a href="./controllers/init.js" target="_blank">init.js</a></li>
+								<li><a href="./controllers/onLoad.js" target="_blank">onLoad.js</a></li>
+								<li><a href="./controllers/load.js" target="_blank">load.js</a></li>
+							</ul>
+						</li>
+						<li>
+							models
+							<ul>
+								<li><a href="./models/globalModelVO.js" target="_blank">globalModelVO.js</a></li>
+								<li><a href="./models/readerEventMgr.js" target="_blank">readerEventMgr.js</a></li>
+							</ul>
+						</li>
+						<li>
+							views
+							<ul>
+								<li><a href="./views/imageInfo.js" target="_blank">imageInfo.js</a></li>
+							</ul>
+						</li>
+						<li>
+							HTML Templates
+							<ul>
+								<li><a href="./templates/imageInfo.tpl" target="_blank">imageInfo.tpl</a></li>
+								<li><a href="./templates/css-background.tpl" target="_blank">css-background.tpl</a></li>
+								<li><a href="./templates/img-tag.tpl" target="_blank">img-tag.tpl</a></li>
+							</ul>
+						</li>
+					</ul>
+			    
+			    
+			  </div>
+			</div>
+			
+    </div> <!-- /container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="./assets/jquery.js"></script>
+    <script src="./assets/bootstrap.min.js"></script>
+    <script src="./assets/holder.js"></script>
+    <script src="../tipJS.min.js"></script>
+		<script src="./app.js"></script>
+  </body>
+</html>
