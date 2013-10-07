@@ -882,9 +882,16 @@ interceptor.after #2-2 : some Message
 ##Debug Mode
 tipJS JavaScript MVC Framework는 당신의 debug 작업을 위해 tipJS.debug method 를 제공합니다.
 
+> tipJS JavaScript MVC Framework supports debug method that is tipJS.debug.
+
 tipJS.debug method 를 간단히 설명하면 development mode 에서만 작동하는 browser console logger method 입니다.
 
+> It is console logger method and it works only with developer tools likes Chrome Inspector, Firebug and another.
+
 tipJS.debug method 는 tipJS.app method에서 정의한 developmentHostList 속성에 등록된 host 의 경우 console log를 출력합니다.
+
+> It can shows console log when host is registered in developerHostList property that defined tipJS.app method.
+
 <pre>
 tipJS.app({
     ...
@@ -900,17 +907,28 @@ tipJS.app({
 var someValue = someMethod();
 tipJS.debug("someValue is " + someValue);
 </pre>
+
 만약 당신의 browser에 표시된 host name 이 developmentHostList 속성에 등록된 host의 경우 위의 source는 browser console 에 당신이 설정한 message를 출력할 것입니다.
 
+> If browser url is correct with defined host name at developmentHostList then You can see the message that you wrote.
+
 development mode 와 상관없이 console log 를 출력하고 싶다면 browser 의 console.log method 혹은 tipJS.log method 를 사용하시기 바랍니다.
+
+> You can use the tipJS.log method even if It's not on the development mode.
 
 ##Benchmark
 tipJS JavaScript MVC Framework는 tipJS.benchmark 기능을 제공합니다.
 
+> tipJS JavaScript MVC Framework supports benchmark method.
+
 tipJS.benchmark 기능을 사용하기 위한 별도의 설정작업은 필요하지 않습니다.
+
+> There are no precondition to use tipJS.benchmark method.
 
 tipJS.benchmark.mark method 로 기점들을 등록합니다.
 tipJS.benchmark.elapsedTime method 로 두 기점간의 경과시간을 console 에 출력합니다.
+
+> Use the tipJS.benchmark.mark method for register start point and Use the tipJS.bechmark.elapsedTime method where you want to see the end of duration.
 
 <pre>
 tipJS.benchmark.mark("point1");
@@ -920,6 +938,8 @@ tipJS.benchmark.elapsedTime("point1", "point2");
 </pre>
 
 tipJS.benchmark.elapsedTime의 세번째 인수로 callback function을 지정 할 수 있습니다.
+>You can use the callback function as a third agument of tipJS.benchmark.elapsedTime method.
+
 <pre>
 tipJS.benchmark.mark("point1");
 ... 
