@@ -700,6 +700,9 @@ tipJS.controller("someController2", {
 ##i18n
 tipJS JavaScript MVC Framework 를 통한 다국어지원(internationalization/i18n) 기능을 설명합니다.
 기능을 활성화 하기 위해서 tipJS.app method 에서 localSet 속성을 추가하고 true 값을 설정합니다.
+
+> tipJS JavaScript MVC Framework provides inernationalization/i18n. add 'localSet : true' property in the tipJS.app method when you want activate it.
+
 <pre>
 tipJS.app({
     ...
@@ -707,7 +710,11 @@ tipJS.app({
     ...
 });
 </pre>
+
 controllers 등이 있는 application 폴더에 lang 폴더를 작성하고 lang폴더 안에 언어코드.js 파일을 아래와 같이 작성합니다. 언어코드는 tipJS가 브라우저 언어정보(navigator.language || navigator.systemLanguage || navigator.userLanguage)를 읽어 자동으로 기본값을 설정합니다.
+
+> Create lang folder below the application folder and make each language files likes below. tipJS define default language it depends on the browser user-agent.
+
 <pre>
 // lang/ko.js
 tipJS.localSet({
@@ -731,6 +738,8 @@ tipJS.localSet({
 </pre>
 
 해당 language set의 message 를 취득하려면 tipJS.msg 메소드를 사용합니다.
+> Use the tipJS.msg method when you want to get a specified language set.
+
 <pre>
 tipJS.controller("someCtrler", {
     invoke:function(params){
@@ -882,7 +891,7 @@ interceptor.after #2-2 : some Message
 ##Debug Mode
 tipJS JavaScript MVC Framework는 당신의 debug 작업을 위해 tipJS.debug method 를 제공합니다.
 
-> tipJS JavaScript MVC Framework supports debug method that is tipJS.debug.
+> tipJS JavaScript MVC Framework provides debug method that is tipJS.debug.
 
 tipJS.debug method 를 간단히 설명하면 development mode 에서만 작동하는 browser console logger method 입니다.
 
@@ -919,7 +928,7 @@ development mode 와 상관없이 console log 를 출력하고 싶다면 browser
 ##Benchmark
 tipJS JavaScript MVC Framework는 tipJS.benchmark 기능을 제공합니다.
 
-> tipJS JavaScript MVC Framework supports benchmark method.
+> tipJS JavaScript MVC Framework provides benchmark method.
 
 tipJS.benchmark 기능을 사용하기 위한 별도의 설정작업은 필요하지 않습니다.
 
