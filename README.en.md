@@ -792,19 +792,22 @@ tipJS.interceptor("interceptor", {
 });
 </pre>
 
-target 속성은 적용할 범위(point cut)를 의미합니다.
+target property means point cut.
 
-예를 들어 Model 전체에 적용할 때는 models 를(ex:”models”)
-특정 Model을 지정하고 싶을때는 Model 명을(ex:”models.modelName” or “models.modelNam*”)
-특정 Model의 특정 method 를 지정하고 싶을때는 method 명을(ex:”models.modelName.getName” or “models.modelName.get*”) 작성합니다.
+For example,
 
-target 속성은 배열타입으로 복수개 지정 가능합니다.
+If it applies to the entire range of Model puts the models(ex:”models”).
+If it applies to a Model puts the Model Name(ex:”models.modelName” or “models.modelNam*”).
+If it applies to particular method of a particular Model puts method Name.
+(ex:”models.modelName.getName” or “models.modelName.get*”).
 
-상기 before, after 안의 this context는 target 의 context를 의미합니다.
+The target property of an array and more than one available.
 
-before, after 또한 배열타입으로 복수개 지정 가능합니다.
+This context in before and after means target's context.
 
-아래와 같은 Controller 가 있다고 가정한다면
+The Before, the after can be specify more than one, too.
+
+There is Controller code.
 <pre>
 tipJS.controller("someCtrler", {
     msg:"some Message",
@@ -814,7 +817,7 @@ tipJS.controller("someCtrler", {
 });
 </pre>
 
-상기의 Controller 의 실행결과는 아래와 같이 console에 출력됩니다.
+The result is as follows: 
 <pre>
 interceptor.before : some Message
 some Message
@@ -822,8 +825,8 @@ interceptor.after #1 : some Message
 interceptor.after #2 : some Message
 </pre>
 
-## 실행 우선순위 지정
-interceptor 의 order 속성값을 지정하여 interceptor들간의 실행 우선순위를 지정할수 있습니다.
+## Specifies the execution priority
+A order of the interceptor property can be specified execution priority of interceptors.
 <pre>
 tipJS.controller("someCtrler", {
     msg:"some Message",
@@ -868,7 +871,7 @@ tipJS.interceptor({
 });
 </pre>
 
-상기 예의 실행결과는 아래와 같습니다.
+The result is as follows: 
 <pre>
 interceptor.before #1-1 : some Message
 interceptor.before #2-1 : some Message
@@ -881,17 +884,11 @@ interceptor.after #2-2 : some Message
 
 #ETC
 ##Debug Mode
-tipJS JavaScript MVC Framework는 당신의 debug 작업을 위해 tipJS.debug method 를 제공합니다.
+tipJS JavaScript MVC Framework provides debug method that is tipJS.debug.
 
-> tipJS JavaScript MVC Framework provides debug method that is tipJS.debug.
+It is console logger method and it works only with developer tools likes Chrome Inspector, Firebug and another.
 
-tipJS.debug method 를 간단히 설명하면 development mode 에서만 작동하는 browser console logger method 입니다.
-
-> It is console logger method and it works only with developer tools likes Chrome Inspector, Firebug and another.
-
-tipJS.debug method 는 tipJS.app method에서 정의한 developmentHostList 속성에 등록된 host 의 경우 console log를 출력합니다.
-
-> It can shows console log when host is registered in developerHostList property that defined tipJS.app method.
+It can shows console log when host is registered in developerHostList property that defined tipJS.app method.
 
 <pre>
 tipJS.app({
@@ -909,27 +906,16 @@ var someValue = someMethod();
 tipJS.debug("someValue is " + someValue);
 </pre>
 
-만약 당신의 browser에 표시된 host name 이 developmentHostList 속성에 등록된 host의 경우 위의 source는 browser console 에 당신이 설정한 message를 출력할 것입니다.
+If browser url is correct with defined host name at developmentHostList then You can see the message that you wrote.
 
-> If browser url is correct with defined host name at developmentHostList then You can see the message that you wrote.
-
-development mode 와 상관없이 console log 를 출력하고 싶다면 browser 의 console.log method 혹은 tipJS.log method 를 사용하시기 바랍니다.
-
-> You can use the tipJS.log method even if It's not on the development mode.
+You can use the tipJS.log method even if It's not on the development mode.
 
 ##Benchmark
-tipJS JavaScript MVC Framework는 tipJS.benchmark 기능을 제공합니다.
+tipJS JavaScript MVC Framework provides benchmark method.
 
-> tipJS JavaScript MVC Framework provides benchmark method.
+There are no precondition to use tipJS.benchmark method.
 
-tipJS.benchmark 기능을 사용하기 위한 별도의 설정작업은 필요하지 않습니다.
-
-> There are no precondition to use tipJS.benchmark method.
-
-tipJS.benchmark.mark method 로 기점들을 등록합니다.
-tipJS.benchmark.elapsedTime method 로 두 기점간의 경과시간을 console 에 출력합니다.
-
-> Use the tipJS.benchmark.mark method for register start point and Use the tipJS.bechmark.elapsedTime method where you want to see the end of duration.
+Use the tipJS.benchmark.mark method for register start point and Use the tipJS.bechmark.elapsedTime method where you want to see the end of duration.
 
 <pre>
 tipJS.benchmark.mark("point1");
@@ -938,8 +924,7 @@ tipJS.benchmark.mark("point2");
 tipJS.benchmark.elapsedTime("point1", "point2");
 </pre>
 
-tipJS.benchmark.elapsedTime의 세번째 인수로 callback function을 지정 할 수 있습니다.
->You can use the callback function as a third agument of tipJS.benchmark.elapsedTime method.
+You can use the callback function as a third argument of tipJS.benchmark.elapsedTime method.
 
 <pre>
 tipJS.benchmark.mark("point1");
