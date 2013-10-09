@@ -329,3 +329,7 @@ nav dd{
 :target {
     -webkit-animation:target 1s linear;
 }
+
+#join-in div {
+    text-align: center;
+}

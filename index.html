@@ -14,6 +14,16 @@
     <link rel="stylesheet" href="component/highlight.js/styles/ir_black.css">
 </head>
 <body>
+<div>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/ko_KR/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+</div>
 <a href="https://github.com/tipJS-Team/tipJS" class="gitRibbon">
     <img style="position: fixed; top: 0; right: 0; border: 0;"
          src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"
@@ -31,6 +41,9 @@
             <dt>About</dt>
             <dd>
                 <a href="#introduction">Introduction</a>
+            </dd>
+            <dd>
+                <a href="#join-in">Join</a>
             </dd>
             <dd>
                 <a href="#download">Download</a>
@@ -127,6 +140,11 @@
         <img src="newLogo.png" alt="">
         <!-- <h1>tipJS 2.0</h1> -->
         <h3>JavaScript MVC Framework</h3>
+        <div>
+            <div class="fb-like" data-href="http://tipjs-team.github.io/tipJS/" data-width="250" data-height="50" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://tipjs-team.github.io/tipJS/" data-text="tipJS" data-hashtags="tipJS">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
     </section>
     <section class="about">
         <h1>개요</h1>
@@ -137,9 +155,12 @@
                 당신은 tipJS 를 이용해 복잡한 구조의 Web Application 을 Controller로 제어되는 Model과 ViewModel, HTMLTemplate로 간단하게 구현할 수 있습니다. tipJS JavaScript MVC Framework로 당신의 Web Application의 개발과 Maintenance 효율을 월등히 높힐 수 있을 것입니다.
             </p>
         </article>
-        <article>
-            <h2>프로젝트 참여하기 (Github)</h2>
-            <a href="https://github.com/tipJS-Team/tipJS" target="_blank"><img class="github-logo" src="github-tipjs.png" style="border:0;"></a>
+        <article id="join-in">
+            <h2>프로젝트 참여하기</h2>
+            <div>
+                <a href="https://github.com/tipJS-Team/tipJS" target="_blank"><img class="github-logo" src="github-tipjs.png" style="border:0;"></a>
+                <a href="gittip https://www.gittip.com/for/tipjs/"><img class="github-logo" src="gittip-logo.png" style="border:0;"></a>
+            </div>
         </article>
         <article id="download">
             <h2>
@@ -1093,6 +1114,10 @@ tipJS.loadApp();
             <li><h3>iMaZiNe</h3></li>
             <li><h3>rkJun</h3></li>
         </ul>
+    </section>
+
+    <section>
+        <div class="fb-like-box" data-href="https://www.facebook.com/pages/tipJScom-Open-Source-JavaScript-MVC-Framework/289807527791820" data-width="The pixel width of the plugin" data-height="The pixel height of the plugin" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="false" data-show-border="true"></div>
     </section>
 
 </section>
