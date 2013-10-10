@@ -47,8 +47,10 @@ a:hover{
 		font-size: 20px;
 		line-height: 24px;
 	}
-
+	
+	/* Source Code Viewer */
 	pre{
+		margin: 10px 0 40px;
 		box-shadow: 3px 4px 8px rgba( 0, 0, 0, 0.4 );
 	}
 
@@ -158,16 +160,16 @@ nav dd{
     .contents h1 {
 		color: #000;
         border: 0 solid #ccc;
-        padding: 12px 0;
+        padding: 110px 0 10px;
         margin-bottom: 12px;
-        border-bottom-width: 1px;
+        border-bottom-width: 2px;
 	}
 
 	.contents section h2{
 		padding: 6px 0;
 		margin: 12px 0;
-		border: 0 solid #ccc;
-		border-bottom-width: 1px;
+/*		border: 0 solid #ccc;
+		border-bottom-width: 1px;*/
 	}
 
 	.contents section article{
