@@ -267,6 +267,12 @@ nav dd{
 		content: '';
 	}
 
+/* Controller Section */
+
+	#controller img{
+		padding: 30px;
+	}
+
 /* Contributors Section */
 
 	#contributors ul{
