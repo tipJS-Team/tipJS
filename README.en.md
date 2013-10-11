@@ -1,3 +1,4 @@
+![tipJS JavaScript MVC framework](http://tipjs-team.github.io/tipJS/newLogo.png)
 #Introduction
 tipJS JavaScript MVC Framework is a small, simple, and effective JavaScript MVC Framework.
 You can implement Web Application with complex structure simply as Model and View using tipJS. tipJS JavaScript MVC Framework increases the maintenance efficacy of your Web Site extraordinarily.
