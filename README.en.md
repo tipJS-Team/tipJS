@@ -1,14 +1,11 @@
-#Language
-##EN
-    
-#about
-##Introduction
-tipJS JavaScript MVC Framework is a small, simple, and effective JavaScript MVC Framework. You can implement Web Application with complex structure simply as Model and View using tipJS. tipJS JavaScript MVC Framework increases the maintenance efficacy of your Web Site extraordinarily.
+#Introduction
+tipJS JavaScript MVC Framework is a small, simple, and effective JavaScript MVC Framework.
+You can implement Web Application with complex structure simply as Model and View using tipJS. tipJS JavaScript MVC Framework increases the maintenance efficacy of your Web Site extraordinarily.
 
+##[Download](https://github.com/tipJS-Team/tipJS/archive/master.zip)
 
-##Download
-- [2.0](https://github.com/tipJS-Team/tipJS/releases/tag/2.0.0) (Stable)  
-- [1.4.3](https://github.com/tipjs/tipjs-JavaScript-MVC-Framework/blob/master/last_version/tipJS-MVC-1.43-dev.js) (Support Ends)
+##License
+Dual licensed under the MIT or GPL Version 2 licenses.
 
 ##Feature
 - tipJS implements complex JavaScript Application in the form of MVC Pattern.
@@ -26,14 +23,54 @@ tipJS JavaScript MVC Framework is a small, simple, and effective JavaScript MVC 
 - tipJS is a multi-lingual(i18n) support.
 - etc...
 
-## Structure
+##Structure
+![tipJS JavaScript MVC framework structure](http://tipjs-team.github.io/tipJS/structure.png)
 
-#License
-Dual licensed under the MIT or GPL Version 2 licenses.
+#Getting Started 
+The following folder structure is recommended.
+```
+/tipJS/tipJS.min.js.js
+/examples/helloWorld/index.html
+/examples/helloWorld/app.js
+/examples/helloWorld/controllers/hello.js
+```
+Add tipJS.min.js file with path in HTML file.
+```
+<html>
+<head>
+<script src="/tipJS/tipJS.min.js"></script>
+<script src="/examples/helloWorld/app.js"></script>
+<body>
+    <div id="contents"></div>
+    <input type="button" value="click me"
+    onclick="tipJS.action.hello('tipJS.com')"/>
+</body>
+</html>
+```
+Add controller file in app.js.
+```
+// app.js
+tipJS.app({
+    controllers : [
+        "hello.js"
+    ]
+});
+window.onload = function(){
+    tipJS.loadApp(); // application is started.
+};
+```
+Write your code in controller file.
+```
+// controllers/hello.js
+tipJS.controller("hello", {
 
-# Installation 
-    ...
-    ...
+    invoke : function(params){
+        document.getElementById('contents').innerHTML 
+        = "Hello World!! from " + params;
+    }
+
+});
+```
 
 #App Configuration
 ## Essentional
@@ -63,6 +100,10 @@ window.onload = function() {
 ```
 tipJS.app method that you can set in the property description.
 
+- appPath  
+Define the folder of the application for tipJS.
+This option indicate controllers, models, views, lang folder's parent folder.
+The default is "." (the current path of HTML including tipJS) and can be changed to relative / absolute path.
 - controllers   
 Controller files are defined as the array type.
 - models  
@@ -155,9 +196,9 @@ before processing the Controller that defined in tipJS.controller method.
 And it is invoked afterController method that defeind in define.js
 after completed process of Controller.
 
-![tipJS_MVC_Framework_process_flow](http://tipjs.com/wp/wp-content/uploads/2012/08/tipJS_MVC_Framework_process_flow.png)  
-  
-[Controller Tutorial](http://tipjs.com/tipJS/tutorial/Controller/)
+![tipJS JavaScript MVC framework structure](http://tipjs-team.github.io/tipJS/structure.png)
+
+Controller Tutorial[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/Controller)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/Controller/)]
 
 The second argument of tipJS.action method can be used as input argument for:
 - beforeController method and afterController method in tipJS.define method
@@ -314,7 +355,7 @@ equivalent to document.getElementsByTagName
 
 VO (Value Object) Model should be used if you don’t need methods automatically defined. Please refer to following VO (Value Object) Model section for further details.
 
-Model Tutorial[Model Tutorial]
+Model Tutorial[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/Model/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/Model/)]
 <pre>
 // models/someModel.js
 tipJS.model("someModel", {
@@ -349,7 +390,7 @@ tipJS.controller("someController", {
 tipJS JavaScript MVC Framework has provided synchronization of Model.
 Synchronization of Model means that a Model Object created by a user remains with changed values and will not be destroyed.
 
-ModelSync Tutorial[ModelSync Tutorial]
+ModelSync Tutorial[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/ModelSync/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/ModelSync/)]
 <pre>
 // models/someModel.js
 tipJS.model("someModel", {
@@ -408,7 +449,7 @@ It will only reflect properties and methods defined by users.
 Configuration is not required to use VO Model.
 If the last value of  Model Name is “VO”, the Model will be VO Model.
 
-ModelVO Tutorial[ModelVO Tutorial]
+ModelVO Tutorial[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/ModelVO/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/ModelVO/)]
 <pre>
 // models/modelVO.js
 tipJS.model("modelVO", {
@@ -437,7 +478,7 @@ tipJS.controller("someController", {
 ##Model extension(Inheritance)
 tipJS JavaScript MVC Framework has provided functions for extension of Model.
 
-ModelExtend Tutorial[ModelExtend Tutorial]
+ModelExtend Tutorial[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/ModelExtend/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/ModelExtend/)]
 <pre>
 tipJS.model("modelParent", {
     parent1 : "someApp.modelParent",
@@ -489,7 +530,7 @@ loads Application ViewModel defined in tipJS.model method.
 - render(options)
 Please refer to following HTML Template[HTML Template] section for further details.
 
-View(HTML Template) Tutorial[View(HTML Template) Tutorial]
+View(HTML Template) Tutorial[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/View/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/View/)]
 <pre>
 // views/someView.js
 tipJS.view("someView", {
@@ -518,7 +559,7 @@ tipJS.controller({
 
 tipJS JavaScript MVC Framework has provided functions for extension of ViewModel.
 
-ViewModel Extend Tutorial[ViewModel Extend Tutorial]
+ViewModel Extend Tutorial[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/ViewExtend/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/ViewExtend/)]
 <pre>
 tipJS.view("viewParent", {
     parent1 : "viewParent",
@@ -605,7 +646,8 @@ tipJS.controller("someController", {
 });
 </pre>
 
-ViewModel(HTML Template) Tutorial[View(HTML Template) Tutorial]
+ViewModel(HTML Template) Tutorial[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/View/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/View/)]
+
 
 // someTpl.tpl
 <pre>
@@ -619,7 +661,7 @@ ViewModel(HTML Template) Tutorial[View(HTML Template) Tutorial]
 &lt;/div&gt;
 </pre>
 
-ViewExtend(HTML Template) Tutorial[ViewExtend(HTML Template) Tutorial]
+ViewExtend(HTML Template) Tutorial[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/ViewExtend/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/ViewExtend/)]
 
 tipJS prints out values to <@= value @> in HTML Template, and loop control statement should be located in <@for(…)@>.
 Please note with caution that an error occurs when you put a termination character (;) in front of a termination tag (@>).
@@ -692,69 +734,6 @@ tipJS.controller("someController2", {
             }
         };
         var returnHTML = this.render(_templateConfig); // return template02 html
-    }
-});
-</pre>
-
-#Utility
-##i18n
-
-tipJS JavaScript MVC Framework provides inernationalization/i18n. add 'localSet : true' property in the tipJS.app method when you want activate it.
-
-<pre>
-tipJS.app({
-    ...
-    localSet:true,
-    ...
-});
-</pre>
-
-Create lang folder below the application folder and make each language files likes below. tipJS define default language it depends on the browser user-agent (navigator.language || navigator.systemLanguage || navigator.userLanguage).
-
-<pre>
-// lang/ko.js
-tipJS.localSet({
-    "Save":"저장",
-    "Load":"불러오기"
-});
-</pre>
-<pre>
-// lang/ja.js
-tipJS.localSet({
-    "Save":"保存",
-    "Load":"読み込み"
-});
-</pre>
-Set the langauge to manually, change tipJS.lang property before invoke tipJS.loadApp. The code is as follows:
-<pre>
-...
-    tipJS.lang = "ja"; // set to Japaness
-    tipJS.loadApp();
-...
-</pre>
-
-Use the tipJS.msg method when you want to get a specified language set.
-
-<pre>
-tipJS.controller("someCtrler", {
-    invoke:function(params){
-        console.log( tipJS.msg("Save") ); // result "저장"
-    }
-});
-</pre>
-<pre>
-tipJS.model({
-    __name : "someApp.someModel",
-    someMethod:function(params){
-        console.log( tipJS.msg("Load") ); // result "불러오기"
-    }
-});
-</pre>
-If you do not have the language files (tipJS.localSet), the value is returned unchanged message from tipJS.msg method.
-<pre>
-tipJS.model("someModel", {
-    someMethod:function(params){
-        console.log( tipJS.msg("Some Message") ); // result "Some Message"
     }
 });
 </pre>
@@ -910,6 +889,31 @@ If browser url is correct with defined host name at developmentHostList then You
 
 You can use the tipJS.log method even if It's not on the development mode.
 
+##Release mode
+tipJS JavaScript MVC Framework provides Release mode.
+
+간단히 설명하면 release mode 에서만 작동하는 controller/model/view/interceptor의 onefile 동작시스템을 말합니다.
+
+tipJS는 기본적으로 개발자의 개발/유지보수의 편의를 위해 controller/model/view/interceptor 의 파일을 분리하도록 강제하고 있습니다.
+그러나 모바일/네트워크상의 문제등으로 인해 js 파일의 억세스가 느릴경우 페이지 로딩시 시간이 지체되는 문제가 발생할 수 있습니다.
+release mode를 설정하면 이러한 문제를 회피할 수 있습니다.
+
+먼저 빌드툴등을 이용하여 controller/model/view/interceptor 등의 파일을 "[appPath]/tipJSFile.js" 로 합치는 작업을 합니다.
+
+그다음 tipJS.app method 에 releaseHostList 속성을 등록합니다.
+```
+tipJS.app({
+    ...
+    releaseHostList : [
+        "sub1.example.com",
+        "sub2.example.com",
+        "sub3.example.com"
+    ],
+    ...
+});
+```
+releaseHostList의 호스트에서 tipJS가 동작할시 tipJS는 나뉘어진 controller/model/view/interceptor 파일들을 대신하여 "[appPath]/tipJSFile.js" 에 등록된 controller/model/view/interceptor 를 사용하여 동작합니다.
+
 ##Benchmark
 tipJS JavaScript MVC Framework provides benchmark method.
 
@@ -935,16 +939,86 @@ tipJS.benchmark.elapsedTime("point1", "point2", function(startName, endName, sta
 });
 </pre>
 
-##echo
+##i18n
+tipJS JavaScript MVC Framework provides inernationalization/i18n. add 'localSet : true' property in the tipJS.app method when you want activate it.
+<pre>
+tipJS.app({
+    ...
+    localSet:true,
+    ...
+});
+</pre>
 
-# Tutorials
-- Controller
-- Model
-- ModelSync
-- ModelVO
-- ModelExtend
-- View(HTML Template)
-- ViewExtend
+Create lang folder below the application folder and make each language files likes below. tipJS define default language it depends on the browser user-agent (navigator.language || navigator.systemLanguage || navigator.userLanguage).
 
-# Examples
-# Contributor
+<pre>
+// lang/ko.js
+tipJS.localSet({
+    "Save":"저장",
+    "Load":"불러오기"
+});
+</pre>
+<pre>
+// lang/ja.js
+tipJS.localSet({
+    "Save":"保存",
+    "Load":"読み込み"
+});
+</pre>
+Set the langauge to manually, change tipJS.lang property before invoke tipJS.loadApp. The code is as follows:
+<pre>
+...
+    tipJS.lang = "ja"; // set to Japaness
+    tipJS.loadApp();
+...
+</pre>
+
+Use the tipJS.msg method when you want to get a specified language set.
+
+<pre>
+tipJS.controller("someCtrler", {
+    invoke:function(params){
+        console.log( tipJS.msg("Save") ); // result "저장"
+    }
+});
+</pre>
+<pre>
+tipJS.model({
+    __name : "someApp.someModel",
+    someMethod:function(params){
+        console.log( tipJS.msg("Load") ); // result "불러오기"
+    }
+});
+</pre>
+If you do not have the language files (tipJS.localSet), the value is returned unchanged message from tipJS.msg method.
+<pre>
+tipJS.model("someModel", {
+    someMethod:function(params){
+        console.log( tipJS.msg("Some Message") ); // result "Some Message"
+    }
+});
+</pre>
+
+#Tutorials
+- Controller[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/Controller)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/Controller/)]
+- Model[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/Model/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/Model/)]
+- ModelSync[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/ModelSync/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/ModelSync/)]
+- ModelVO[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/ModelVO/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/ModelVO/)]
+- ModelExtend[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/ModelExtend/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/ModelExtend/)]
+- View(HTML Template)[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/View/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/View/)]
+- ViewExtend[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/ViewExtend/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/ViewExtend/)]
+
+#Examples
+- basicTemplate[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/examples/basicTemplate)][[VIEW](http://tipjs-team.github.io/tipJS/examples/basicTemplate)]
+- myBatisLogParser[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/examples/myBatisLogParser)][[VIEW](http://tipjs-team.github.io/tipJS/examples/myBatisLogParser)]
+- todoMVC with external template[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/examples/todoMVC)][[VIEW](http://tipjs-team.github.io/tipJS/examples/todoMVC)]
+- todoMVC with internal template[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/examples/todoMVC.int)][[VIEW](http://tipjs-team.github.io/tipJS/examples/todoMVC.int)]
+- base64 image encoder[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/examples/base64Image)][[VIEW](http://tipjs-team.github.io/tipJS/examples/base64Image)]
+- ImageViewerOnTab(chrome extension)[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/examples/ImageViewerOnTab)]
+
+#Contributors
+- tipJS
+- javarouka
+- coma
+- iMaZiNe
+- rkJun
