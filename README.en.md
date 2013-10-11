@@ -1,4 +1,3 @@
-![tipJS JavaScript MVC framework](http://tipjs-team.github.io/tipJS/newLogo.png)
 #Introduction
 tipJS JavaScript MVC Framework is a small, simple, and effective JavaScript MVC Framework.
 You can implement Web Application with complex structure simply as Model and View using tipJS. tipJS JavaScript MVC Framework increases the maintenance efficacy of your Web Site extraordinarily.
@@ -936,7 +935,7 @@ You can use the tipJS.log method even if It's not on the development mode.
 ##Release mode
 tipJS JavaScript MVC Framework provides Release mode.
 
-간단히 설명하면 release mode 에서만 작동하는 controller/model/view/interceptor의 onefile 동작시스템을 말합니다.
+It is Operating system of controller/model/view/interceptor and it working in release mode
 
 tipJS는 기본적으로 개발자의 개발/유지보수의 편의를 위해 controller/model/view/interceptor 의 파일을 분리하도록 강제하고 있습니다.
 그러나 모바일/네트워크상의 문제등으로 인해 js 파일의 억세스가 느릴경우 페이지 로딩시 시간이 지체되는 문제가 발생할 수 있습니다.
