@@ -69,9 +69,6 @@
                 <a href="#introduction">Introduction</a>
             </dd>
             <dd>
-                <a href="#join-in">Join</a>
-            </dd>
-            <dd>
                 <a href="#download">Download</a>
             </dd>
             <dd>
@@ -92,6 +89,7 @@
         <dl class="configuration">
             <dt><a href="#configuration">Configuration</a></dt>
             <dd><a href="#essentional">Essential</a></dd>
+            <dd><a href="#router">Router</a></dd>
             <dd><a href="#cache-control">Cache Control</a></dd>
         </dl>
 
@@ -342,6 +340,62 @@ beforeController:function(params){
                 <li>noCacheParam<br>
                     Browser cache 제어를 위한 parameter name을 설정합니다.(default:"noCacheVersion")</li>
             </ul>
+        </article>
+        <article id="router">
+            <h2>Router</h2>
+            <p>
+                tipJS JavaScript MVC Framework 는 tipJS.app method 의 설정을 통해 Router 기능을 제공합니다.
+            </p>
+            <pre><code class="javascript">tipJS.app({
+    controllers:[
+        "defaultCtrler.js",
+        "page1Ctrler.js",
+        "page2Ctrler.js",
+        "noPageCtrler.js"
+    ],
+    routes:[
+        // url hash가 존재하지 않을때 defaultCtrler가 동작합니다.
+        // http://domain.com
+        {
+            url:"/",
+            controller:"defaultCtrler"
+        },
+        // url hash가 '#/page1' 일때 page1Ctrler가 동작합니다.
+        // http://domain.com/#/page1
+        {
+            url:"#/page1",
+            controller:"page1Ctrler"
+        },
+        // url hash가 '#/page2' 일때 page2Ctrler가 동작합니다.
+        // http://domain.com/#/page2
+        {
+            url:"#/page2",
+            controller:"page2Ctrler"
+        },
+        // 라우터에 등록되지 않은 url hash 일때 noPageCtrler가 동작합니다.
+        // http://domain.com/#/pageXX
+        {
+            url:"!",
+            controller:"defaultCtrler"
+        }
+    ]
+    ...
+});</code></pre>
+            <p>
+                noCache attribute가 false일 경우 tipJS 는 아래와 같이 JavaScript file 을 읽어들입니다.
+            </p>
+            <pre><code class="javascript">&lt;script type="text/javascript" src="./controllers/some.js"&gt;&lt;/script&gt;</code></pre>
+            <p>
+                그러나 noCache attribute 가 true일 경우 아래와 같은 결과와 같습니다.
+            </p>
+            <pre><code class="javascript">&lt;script type="text/javascript" src="./controllers/some.js?noCacheVersion=1.000"&gt;&lt;/script&gt;</code></pre>
+            <p>
+                noCache attribute 가 true 그리고 noCacheAuto attribute 가 true일 경우 noCacheVersion 의 parameter 값이 random 하게 생성되어 항상 새로 JavaScript file 을 load 하게 됩니다.
+            </p>
+            <pre><code class="javascript">&lt;script type="text/javascript" src="./controllers/some.js?noCacheVersion=0.5478912648"&gt;&lt;/script&gt;</code></pre>
+            <p>
+                만약 당신의 application이 갱신되었다면 noCacheVersion 속성의 값을 변경하거나 noCacheAuto 속성의 값을 true 로 하는것 만으로 Browser는 cache 처리없이 최신의 JavaScript file을 load하게 될 것입니다.
+            </p>
         </article>
         <article id="cache-control">
             <h2>Cache Control</h2>
