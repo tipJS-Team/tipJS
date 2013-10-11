@@ -160,6 +160,49 @@ that irrespective of noCacheVersion option value.(default:false)
 - noCacheParam  
 It is set parameter name for Browser cache control.(default:"noCacheVersion")
 
+##Router
+tipJS JavaScript MVC Framework 는 tipJS.app method 의 설정을 통해 Router 기능을 제공합니다.
+(이 기능은 IE7 이하에서 작동하지 않습니다.)
+
+```
+tipJS.app({
+	...
+	controllers:[
+		"defaultCtrler.js",
+		"page1Ctrler.js",
+		"page2Ctrler.js",
+		"noPageCtrler.js"
+	],
+	routes:[
+		// url hash가 존재하지 않을때 defaultCtrler가 동작합니다.
+		// http://domain.com
+		{
+			url:"/",
+			controller:"defaultCtrler"
+		},
+		// url hash가 '#/page1' 일때 page1Ctrler가 동작합니다.
+		// http://domain.com/#/page1
+		{
+			url:"#/page1",
+			controller:"page1Ctrler"
+		},
+		// url hash가 '#/page2' 일때 page2Ctrler가 동작합니다.
+		// http://domain.com/#/page2
+		{
+			url:"#/page2",
+			controller:"page2Ctrler"
+		},
+		// 라우터에 등록되지 않은 url hash 일때 noPageCtrler가 동작합니다.
+		// http://domain.com/#/pageXX
+		{
+			url:"!",
+			controller:"noPageCtrler"
+		}
+	]
+	...
+});
+```
+
 ##Cache Control
 tipJS JavaScript MVC Framework control Browser cache through properties of tipJS.app method.
 ```javascript
