@@ -381,21 +381,6 @@ beforeController:function(params){
     ]
     ...
 });</code></pre>
-            <p>
-                noCache attribute가 false일 경우 tipJS 는 아래와 같이 JavaScript file 을 읽어들입니다.
-            </p>
-            <pre><code class="javascript">&lt;script type="text/javascript" src="./controllers/some.js"&gt;&lt;/script&gt;</code></pre>
-            <p>
-                그러나 noCache attribute 가 true일 경우 아래와 같은 결과와 같습니다.
-            </p>
-            <pre><code class="javascript">&lt;script type="text/javascript" src="./controllers/some.js?noCacheVersion=1.000"&gt;&lt;/script&gt;</code></pre>
-            <p>
-                noCache attribute 가 true 그리고 noCacheAuto attribute 가 true일 경우 noCacheVersion 의 parameter 값이 random 하게 생성되어 항상 새로 JavaScript file 을 load 하게 됩니다.
-            </p>
-            <pre><code class="javascript">&lt;script type="text/javascript" src="./controllers/some.js?noCacheVersion=0.5478912648"&gt;&lt;/script&gt;</code></pre>
-            <p>
-                만약 당신의 application이 갱신되었다면 noCacheVersion 속성의 값을 변경하거나 noCacheAuto 속성의 값을 true 로 하는것 만으로 Browser는 cache 처리없이 최신의 JavaScript file을 load하게 될 것입니다.
-            </p>
         </article>
         <article id="cache-control">
             <h2>Cache Control</h2>
