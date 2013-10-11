@@ -11,6 +11,7 @@ Dual licensed under the MIT or GPL Version 2 licenses.
 - 복잡한 JavaScript Application을 MVC Pattern 형태로 구현할 수 있습니다.
 - Back-end 개발자를 위한 최적의 JavaScript MVC Framework 입니다.
 - AOP(Aspect-Oriented Programming) 가능한 JavaScript MVC Framework 입니다.
+- Router 기능을 제공합니다.
 - HTML Template 기능을 지원하여 사용자 View 를 간단히 생성할 수 있습니다.(version 1.10 부터 지원)
 - 다양한 Browser와 호환됩니다.(IE 7/8/9, Chrome, Firefox, Safari, etc…)
 - 독립된 작동을 위해 JavaScript ECMAScript Code 로 개발되어 별도의 외부 Library도 필요로 하지 않습니다.
@@ -124,7 +125,7 @@ $(document).ready(function(e){
     tipJS.loadApp(param);
 });
 </pre>
-- beforeController
+- beforeController  
 function type으로 등록된 beforeController method 는 AOP의 개념으로 application 내에서 어떤 Controller 를 호출하더라도 공통적으로 실행되는 method입니다.이 method 는 Controller 의 그 어떤 method보다 우선적으로 실행됩니다. argument로 Controller를 호출하는 tipJS.action method의 두번째 argument 인 parameter를 사용할 수 있습니다. Controller 와 동일한 method들을 사용할 수 있습니다.
 <pre>
 tipJS.app({
@@ -148,6 +149,48 @@ Browser cache 제어를 위한 버젼 정보를 설정합니다.(default:"1.000"
 true로 설정된 경우 noCacheVersion option의 value와는 상관없이 version을 랜덤하게 출력하여 Browser cache를 무효하게 합니다.(default:false)
 - noCacheParam  
 Browser cache 제어를 위한 parameter name을 설정합니다.(default:"noCacheVersion")
+
+##Router
+tipJS JavaScript MVC Framework 는 tipJS.app method 의 설정을 통해 Router 기능을 제공합니다.
+
+```
+tipJS.app({
+	...
+	controllers:[
+		"defaultCtrler.js",
+		"page1Ctrler.js",
+		"page2Ctrler.js",
+		"noPageCtrler.js"
+	],
+	routes:[
+		// url hash가 존재하지 않을때 defaultCtrler가 동작합니다.
+		// http://domain.com
+		{
+			url:"/",
+			controller:"defaultCtrler"
+		},
+		// url hash가 '#/page1' 일때 page1Ctrler가 동작합니다.
+		// http://domain.com/#/page1
+		{
+			url:"#/page1",
+			controller:"page1Ctrler"
+		},
+		// url hash가 '#/page2' 일때 page2Ctrler가 동작합니다.
+		// http://domain.com/#/page2
+		{
+			url:"#/page2",
+			controller:"page2Ctrler"
+		},
+		// 라우터에 등록되지 않은 url hash 일때 noPageCtrler가 동작합니다.
+		// http://domain.com/#/pageXX
+		{
+			url:"!",
+			controller:"defaultCtrler"
+		}
+	]
+	...
+});
+```
 
 ##Cache Control
 tipJS JavaScript MVC Framework 는 tipJS.app method 의 설정을 통해 Browser cache를 control합니다.
