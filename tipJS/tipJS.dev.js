@@ -1,7 +1,7 @@
 /*
- * tipJS - OpenSource Javascript MVC Framework ver.2.0.0
+ * tipJS - OpenSource Javascript MVC Framework ver.2.1.0
  *
- * Copyright 2013.08 SeungHyun PAEK
+ * Copyright 2013.08 SeungHyun PAEK, tipJS-Team.
  * Dual licensed under the MIT or GPL Version 2 licenses.
  * HomePage: http://www.tipjs.com
  * Contact: http://www.tipjs.com/contact
@@ -11,7 +11,7 @@
 	"use strict";
 
 	var tipJS = {};
-	tipJS.ver = tipJS.version = tipJS.VERSION = "2.0.0";
+	tipJS.ver = tipJS.version = tipJS.VERSION = "2.1.0";
 
 	context.tipJS = tipJS;
 
@@ -66,9 +66,9 @@
 
 	/**
 	 * Array-liked-Object를 배열화함.
+	 *
 	 * @param obj
 	 * @returns Array
-	 * @private
 	 */
 	util__.toArray = function(obj) {
 		var _ret = [];
@@ -368,6 +368,30 @@
 		}
 		return __getSecs();
 	};
+
+	/**
+	 * 이벤트 바인딩
+	 *
+	 * @param target
+	 * @param type
+	 * @param fn
+	 * @param isCapture
+	 */
+	var __addEvent = function(target, type, fn, isCapture){
+		if (window.addEventListener) {
+			__addEvent = function(target, type, fn, isCapture){
+				if (isCapture === undefined) isCapture = false;
+				target.addEventListener(type, fn, isCapture);
+			};
+			__addEvent(target, type, fn, isCapture);
+		} else if (window.attachEvent) {
+			__addEvent = function(target, type, fn, isCapture){
+				target.attachEvent("on"+type, fn);
+			};
+			__addEvent(target, type, fn, isCapture);
+		}
+	};
+
 
 /*************************
  *
@@ -704,6 +728,29 @@
 	};
 
 	/**
+	 * 라우터 등록
+	 *
+	 * @param opt
+	 */
+	var __addRoute = function(opt){
+		route__[opt.url] = opt.controller;
+		__addEvent(window, "hashchange", function(){
+			var _newHash = location.hash;
+			if (oldHash__ == _newHash) {
+				return;
+			}
+			oldHash__ = _newHash;
+			if (_newHash.length == 0 && route__["/"]) {
+				tipJS.action[route__["/"]]();
+			} else if (route__[_newHash]) {
+				tipJS.action[route__[_newHash]]();
+			} else if (route__["!"]) {
+				tipJS.action[route__["!"]]();
+			}
+		});
+	};
+
+	/**
 	 * Application 이 모두 load 된후 실행되는 메소드
 	 * Application 의 모든 depart 를 재정의 후 define.js 에서 정의된 onLoad 메소드 호출
 	 *
@@ -774,6 +821,20 @@
 				_ctrler.apply(_ctrler, _action.param);
 			}
 			reservedStack__ = null;
+		}
+		for(var i=0, _routeLen=app__.define.routes.length; i<_routeLen; i++) {
+			var _route = app__.define.routes[i];
+			__addRoute(_route);
+		}
+		if (_routeLen > 0) {
+			var _newHash = oldHash__ = location.hash;
+			if (_newHash.length == 0 && route__["/"]) {
+				tipJS.action[route__["/"]]();
+			} else if (route__[_newHash]) {
+				tipJS.action[route__[_newHash]]();
+			} else if (route__["!"]) {
+				tipJS.action[route__["!"]]();
+			}
 		}
 	};
 
@@ -1185,6 +1246,7 @@
 			controllers : [],
 			models : [],
 			views : [],
+			routes : [],
 			localSet : false,
 			onLoad : function() {},
 			beforeController : function() {},
@@ -1209,6 +1271,7 @@
 	benchRecs__ = {},
 	app__ = {},
 	msg__ = {},
+	route__ = {}, oldHash__,
 	templateCache__ = {}, reservedStack__,
 	isFlat__ = {}, define__,
 	_winLoc = window.location, _pathname = _winLoc.pathname, _queryString = _winLoc.search, _isDevelopment = null, _lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage).substr(0,2);

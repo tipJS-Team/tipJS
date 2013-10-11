@@ -1,12 +1,14 @@
 {
   "name": "tipJS",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "authors": [
     "pekuid <pekuid@gmail.com>",
     "javarouka <javarouka@gmail.com>",
-    "coma333 <coma333ryu@gmail.com>"
+    "coma333 <coma333ryu@gmail.com>",
+    "rkJun <juntai81@gmail.com>",
+    "iMaZiNe <imazine@unioh.com>",
   ],
-  "license": "MIT",
+  "license": "MIT/GPLv2",
   "ignore": [
     "**/.*",
     "node_modules",

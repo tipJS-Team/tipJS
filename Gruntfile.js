@@ -5,20 +5,20 @@ module.exports = function(grunt) {
 
   var destinationName = '<%= pkg.name %>',
     sources = [
-      'tipJS/tipJS.2.0.0.dev.js'
+      'tipJS/tipJS.dev.js'
     ],
     testHostURL = 'localhost',
     livePort = 9000,
     testPort = 9001,
     buildDirPath = "build/",
-    banner = "/*\n <%= pkg.name %> - OpenSource Javascript MVC Framework ver.2.0.0\n" +
-      " Copyright 2013.08 \n" +
+    banner = "/*\n <%= pkg.name %> - OpenSource Javascript MVC Framework ver.<%= pkg.version %>\n" +
+      " Copyright 2013.08 tipJS-Team\n" +
       " Dual licensed under the MIT or GPL Version 2 licenses\n" +
       " Author: SeungHyun PAEK, Hanghee Yi, Juntai Park, Yun Jung Bu\n" +
-      " HomePage: http://www.tipjs.com\n" +
-      " Contact: http://www.tipjs.com/contact\n" +
+      " HomePage: http://tipjs-team.github.io/tipJS/\n" +
+      " GitHub: https://github.com/tipJS-Team/tipJS\n" +
       " License: MIT, GPL V2\n" +
-      " create date: <%= grunt.template.today('yyyy-mm-dd') %> */";
+      " create date: <%= grunt.template.today('yyyy-mm-dd') %> */\n";
 
   var cleanPaths = [ "test/tipJS" ],
     testURLs = [
