@@ -1,4 +1,35 @@
 ![tipJS JavaScript MVC framework](http://tipjs-team.github.io/tipJS/newLogo.png)
+
+[Introduction](#introduction)  
+- [Download](#download)
+- [License](#license)
+- [Feature](#feature)
+- [Structure](#structure)
+[Getting Started](#getting-started)  
+[App Configuration](#app-configuration)  
+- [Essential](#essentional)
+- [Router](#router)
+- [Cache Control](#cache-control)
+[Controller](#controller)  
+[Model](#model)  
+- [Syncronous Model](#syncronous-model)
+- [VO(Value Object) Model](#vovalue-object-model)
+- [Model extension(Inheritance)](#model-extensioninheritance)
+[ViewModel](#viewmodel)  
+- [ViewModel extension(Inheritance)](#viewmodel-extensioninheritance)
+[HTML Template](#html-template)  
+- [Logical split of HTML Template file](#logical-split-of-html-template-file)
+[AOP(Aspect-Oriented Programming)](#aopaspect-oriented-programming)  
+- [Specifies the execution priority](#specifies-the-execution-priority)
+[ETC](#etc)  
+- [Debug Mode](#debug-mode)
+- [Release mode](#release-mode)
+- [Benchmark](#benchmark)
+- [i18n(internationalization)](#i18n)
+[Tutorials](#tutorials)  
+[Examples](#examples)  
+[Contributors](#contributors)  
+
 #Introduction
 tipJS JavaScript MVC Framework 는 작고 Simple하며 강력한 JavaScript MVC Framework 입니다.
 당신은 tipJS 를 이용해 복잡한 구조의 Web Application 을 Controller로 제어되는 Model과 ViewModel, HTMLTemplate로 간단하게 구현할 수 있습니다. tipJS JavaScript MVC Framework로 당신의 Web Application의 개발과 Maintenance 효율을 월등히 높힐 수 있을 것입니다.
@@ -411,7 +442,7 @@ tipJS.controller("someController", {
 });
 </pre>
 
-##동기 모델 - Syncronous Model
+##Syncronous Model
 tipJS JavaScript MVC Framework는 Model의 동기화 기능을 제공합니다.
 Model 의 동기화 기능이란 하나의 생성된 Model Object가 소멸되지 않고 변경되어지는 값을 가진채 유지되는 것을 말합니다.
 
@@ -498,7 +529,7 @@ tipJS.controller("someController", {
 });
 </pre>
 
-##Model 의 extension(Inheritance)
+##Model extension(Inheritance)
 tipJS JavaScript MVC Framework는 Model의 확장 기능을 제공합니다.
 
 ModelExtend Tutorial[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/ModelExtend/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/ModelExtend/)]
@@ -579,7 +610,7 @@ tipJS.controller({
 });
 </pre>
 
-##ViewModel 의 extension(Inheritance)
+##ViewModel extension(Inheritance)
 tipJS JavaScript MVC Framework는 ViewModel의 확장 기능을 제공합니다.
 
 ViewModel Extend Tutorial[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/ViewExtend/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/ViewExtend/)]
@@ -707,7 +738,7 @@ tipJS.controller("someController", {
 });
 </pre>
 
-## HTML Template file 의 논리적 분할
+##Logical split of HTML Template file
 하나의 물리적 file 을 논리적으로 분할하여 사용하는 기능에 대해 설명합니다.
 
 논리 id 명은 tplId 속성에 지정하여 사용해야 하며 template file 의 [[#id]] 와 matching 됩니다.
@@ -822,7 +853,7 @@ interceptor.after #1 : some Message
 interceptor.after #2 : some Message
 </pre>
 
-## 실행 우선순위 지정
+##Specifies the execution priority
 interceptor 의 order 속성값을 지정하여 interceptor들간의 실행 우선순위를 지정할수 있습니다.
 <pre>
 tipJS.controller("someCtrler", {
