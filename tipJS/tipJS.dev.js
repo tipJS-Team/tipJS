@@ -1,5 +1,5 @@
 /*
- * tipJS - OpenSource Javascript MVC Framework ver.2.1.0
+ * tipJS - OpenSource Javascript MVC Framework ver.2.1.1
  *
  * Copyright 2013.08 SeungHyun PAEK, tipJS-Team.
  * Dual licensed under the MIT or GPL Version 2 licenses.
@@ -11,7 +11,7 @@
 	"use strict";
 
 	var tipJS = {};
-	tipJS.ver = tipJS.version = tipJS.VERSION = "2.1.0";
+	tipJS.ver = tipJS.version = tipJS.VERSION = "2.1.1";
 
 	context.tipJS = tipJS;
 
@@ -386,12 +386,34 @@
 			__addEvent(target, type, fn, isCapture);
 		} else if (window.attachEvent) {
 			__addEvent = function(target, type, fn, isCapture){
+				if (type == "hashchange" && !('onhashchange' in window)) {
+					onHashFn__.push(fn);
+					return;
+				}
 				target.attachEvent("on"+type, fn);
 			};
 			__addEvent(target, type, fn, isCapture);
 		}
 	};
 
+	/**
+	 * ie7 이하 hashchange event 처리
+	 *
+	 */
+	var __setOnHash = function(){
+		if ('onhashchange' in window) {
+			return;
+		}
+		var _oldHash = location.hash;
+		setInterval(function(){
+			if (_oldHash != location.hash) {
+				_oldHash = location.hash;
+				for(var i=0, fnLen=onHashFn__.length; i<fnLen; i++){
+					onHashFn__[i]();
+				}
+			}
+		}, 200);
+	};
 
 /*************************
  *
@@ -827,6 +849,7 @@
 			__addRoute(_route);
 		}
 		if (_routeLen > 0) {
+			__setOnHash();
 			var _newHash = oldHash__ = location.hash;
 			if (_newHash.length == 0 && route__["/"]) {
 				tipJS.action[route__["/"]]();
@@ -1271,7 +1294,7 @@
 	benchRecs__ = {},
 	app__ = {},
 	msg__ = {},
-	route__ = {}, oldHash__,
+	route__ = {}, oldHash__, onHashFn__ = [],
 	templateCache__ = {}, reservedStack__,
 	isFlat__ = {}, define__,
 	_winLoc = window.location, _pathname = _winLoc.pathname, _queryString = _winLoc.search, _isDevelopment = null, _lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage).substr(0,2);
