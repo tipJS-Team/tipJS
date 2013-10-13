@@ -667,7 +667,7 @@ renderTo 속성은 생략 가능하며 render method는 항상 data가 mapping�
 <pre>
 &lt;html&gt;
 &lt;head&gt;
-&lt;script type="text/javascript" src="/tipJS/tipJS-MVC-x.xx.js"&gt;
+&lt;script type="text/javascript" src="/tipJS/tipJS.min.js"&gt;
 &lt;/script&gt;
 &lt;script&gt;
 window.onload = function(){
