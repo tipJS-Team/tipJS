@@ -1057,6 +1057,7 @@ tipJS.model("someModel", {
 #Tutorials
 - Controller[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/Controller)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/Controller/)]
 - Router[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/Router/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/Router/)]
+- AOP[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/AOP)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/AOP/)]
 - Model[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/Model/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/Model/)]
 - ModelSync[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/ModelSync/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/ModelSync/)]
 - ModelVO[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/ModelVO/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/ModelVO/)]

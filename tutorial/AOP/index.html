@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<head>
+<title>tipJS.com - JavaScript MVC Framework AOP Tutorial</title>
+<script src="../../tipJS/tipJS.dev.js"></script>
+<script src="app.js"></script>
+</head>
+<body>
+<h1>tipJS.com - JavaScript MVC Framework <br />AOP Tutorial</h1>
+	<div id="contents"></div>
+	<input type="button" value="sync"
+	onclick="tipJS.action('sync','tipJS.com');"/>
+	<input type="button" value="async"
+	onclick="tipJS.action.async('tipJS.com');"/>
+	<div id="contentsHidden" style="display:none;"></div>
+<h4><a href="app.js" target="_blank">app.js</a></h4>
+<ul>
+	<li>controllers</li>
+	<ul>
+		<li><a href="controllers/sync.js" target="_blank">sync.js</a></li>
+		<li><a href="controllers/async.js" target="_blank">async.js</a></li>
+	</ul>
+	<li>interceptors</li>
+	<ul>
+		<li><a href="interceptors/controller1.js" target="_blank">controller1.js</a></li>
+		<li><a href="interceptors/controller2.js" target="_blank">controller2.js</a></li>
+	</ul>
+</ul>
+
+<script>
+	tipJS.loadApp();
+</script>
+<!-- GoogleAnalytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-44787038-1', 'tipjs-team.github.io');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>
