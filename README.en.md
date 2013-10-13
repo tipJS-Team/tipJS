@@ -54,7 +54,7 @@ Dual licensed under the MIT or GPL Version 2 licenses.
 - tipJS implements complex JavaScript Application in the form of MVC Pattern.
 - tipJS is familiar framework for Back-end Developers.
 - Supported AOP(Aspect-Oriented Programming).
-- tipJS creates a user's view simply by providing simple HTML Template (since version 1.10).
+- tipJS creates a user's view simply by providing simple HTML Template.
 - tipJS can be compatible with diverse browsers (IE 7/8/9, Chrome, Firefox, Safari, etc...)
 - tipJS does not require any external library as it was developed as JavaScript ECMAScript Code for independent operation.
 - tipJS can be compatible with diverse external JavaScript (JQuery, ExtJS, etc...)
@@ -204,8 +204,7 @@ that irrespective of noCacheVersion option value.(default:false)
 It is set parameter name for Browser cache control.(default:"noCacheVersion")
 
 ##Router
-tipJS JavaScript MVC Framework 는 tipJS.app method 의 설정을 통해 Router 기능을 제공합니다.
-(이 기능은 IE7 이하에서 작동하지 않습니다.)
+tipJS JavaScript MVC Framework support Router function through properties of tipJS.app method.
 
 ```
 tipJS.app({
@@ -691,7 +690,7 @@ If renderTo property is skipped, renderTemplate method always returns HTML strin
 <pre>
 &lt;html&gt;
 &lt;head&gt;
-&lt;script type="text/javascript" src="/tipJS/tipJS-MVC-x.xx.js"&gt;
+&lt;script type="text/javascript" src="/tipJS/tipJS.min.js"&gt;
 &lt;/script&gt;
 &lt;script&gt;
 window.onload = function(){

@@ -200,7 +200,7 @@
                 <li>Back-end 개발자를 위한 최적의 JavaScript MVC Framework 입니다.</li>
                 <li>AOP(Aspect-Oriented Programming) 가능한 JavaScript MVC Framework 입니다.</li>
                 <li>Router 기능을 제공합니다.</li>
-                <li>HTML Template 기능을 지원하여 사용자 View 를 간단히 생성할 수 있습니다.(version 1.10 부터 지원)</li>
+                <li>HTML Template 기능을 지원하여 사용자 View 를 간단히 생성할 수 있습니다.</li>
                 <li>다양한 Browser와 호환됩니다.(IE 7/8/9, Chrome, Firefox, Safari, etc…)</li>
                 <li>독립된 작동을 위해 JavaScript ECMAScript Code 로 개발되어 별도의 외부 Library도 필요로 하지 않습니다.</li>
                 <li>다양한 외부 JavaScript Library 와 호환됩니다.(JQuery, ExtJS, etc…)</li>
@@ -214,6 +214,7 @@
         </article>
         <article id="structure">
             <h2>구조</h2>
+            <img src="http://tipjs-team.github.io/tipJS/structure.png" title="tipJS JavaScript MVC framework structure" style="border:0px;">
         </article>
 
         <article id="license">
@@ -317,7 +318,7 @@ var param = {param1:"some value"}
 tipJS.loadApp(param);
 });</code></pre>
                 </li>
-                <li>beforeController
+                <li>beforeController<br>
                     function type으로 등록된 beforeController method 는 AOP의 개념으로 application 내에서 어떤 Controller 를 호출하더라도 공통적으로 실행되는 method입니다.이 method 는 Controller 의 그 어떤 method보다 우선적으로 실행됩니다. argument로 Controller를 호출하는 tipJS.action method의 두번째 argument 인 parameter를 사용할 수 있습니다. Controller 와 동일한 method들을 사용할 수 있습니다.
 <pre><code class="javascript">tipJS.app({
 ...
@@ -546,7 +547,7 @@ tipJS.controller("someController", {
             <li>getView(ViewName)<br>
                 tipJS.view method에서 정의한 Application ViewModel Object 를 load 합니다.</li>
             <li>render(options)<br>
-                HTML Template 항목 참고</li>
+                <a href="#Template">HTML Template 항목 참고</a></li>
             <li>getById(id)<br>
                 document.getElementById 와 동일합니다.</li>
             <li>getByName(name)<br>
@@ -789,7 +790,7 @@ tipJS.controller("someController", {
         <pre><code class="html">&lt;-- index.html --&gt;
 &lt;html&gt;
     &lt;head&gt;
-        &lt;script type="text/javascript" src="/tipJS/tipJS-MVC-x.xx.js"&gt;&lt;/script&gt;
+        &lt;script type="text/javascript" src="/tipJS/tipJS.min.js"&gt;&lt;/script&gt;
         &lt;script&gt;
             window.onload = function(){
                 tipJS.loadApp(["someApplication"]);

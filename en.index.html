@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
-    <title>tipJS - MVC Framework</title>
+    <title>tipJS 2 - Open Source JavaScript MVC Framework</title>
     <!-- [if lt IE 9] >
           <script src="component/Respond/respond.min.js"></script>
           <script src="component/html5shiv/dist/html5shiv.js"></script>
@@ -12,8 +12,38 @@
     <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="styles/styles.css">
     <link rel="stylesheet" href="component/highlight.js/styles/ir_black.css">
+<!-- //// -->
+<meta property="og:locale" content="en_US" />
+<meta property="og:site_name" content="tipJS 2 &ndash; Open Source JavaScript MVC Framework" />
+<meta property="og:url" content="http://tipjs-team.github.io/tipJS/" />
+<meta property="og:title" content="tipJS 2 &ndash; Open Source JavaScript MVC Framework" />
+<meta property="og:description" content="tipJS 2 JavaScript MVC Framework is a small, simple, and effective JavaScript MVC Framework. You can implement Web Application with complex structure simply as Model and View using tipJS." />
+<meta property="og:type" content="article" />
+<meta property="article:author" content="tipJS / javarouka / coma / iMaZiNe / rkJun" />
+<meta property="article:section" content="Technology" />
+<meta property="article:published_time" content="2013-10-10T06:00:00+00:00" />
+<meta property="article:modified_time" content="2013-10-10T06:00:00+00:00" />
+<meta property="og:video" content="" />
+<!-- og:image:1 --><meta property="og:image" content="http://tipjs-team.github.io/tipJS/newLogo.png" />
+<!-- og:image:1 --><meta property="og:image:height" content="124" />
+<!-- og:image:1 --><meta property="og:image:width" content="300" />
+<!-- og:image:2 --><meta property="og:image" content="http://tipjs-team.github.io/tipJS/github-tipjs.png" />
+<!-- og:image:2 --><meta property="og:image:height" content="82" />
+<!-- og:image:2 --><meta property="og:image:width" content="200" />
+<meta name="description" content="tipJS 2 JavaScript MVC Framework is a small, simple, and effective JavaScript MVC Framework. You can implement Web Application with complex structure simply as Model and View using tipJS." />
+<!-- //// -->
 </head>
 <body>
+<div>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/ko_KR/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+</div>
 <a href="https://github.com/tipJS-Team/tipJS" class="gitRibbon">
     <img style="position: fixed; top: 0; right: 0; border: 0;"
          src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"
@@ -23,10 +53,16 @@
 <header>
     <input type="checkbox" id="menuButton">
     <label for="menuButton">
-        <span class="menuButton">M</span>
+        <span class="menuButton icon-menu"></span>
     </label>
 
     <nav>
+        <ul class="snslinks">
+            <li><a href="https://twitter.com/tipJS" class="icon-twitter"></a></li>
+            <li><a href="https://www.facebook.com/pages/tipJScom-Open-Source-JavaScript-MVC-Framework/289807527791820" class="icon-facebook"></a></li>
+            <li><a href="https://github.com/tipJS-Team/tipJS" class="icon-github"></a></li>
+            <li><a href="https://www.gittip.com/for/tipjs/" class="icon-gittip"></a></li>
+        </ul>
         <dl class="about">
             <dt>About</dt>
             <dd>
@@ -47,17 +83,18 @@
         </dl>
 
         <dl class="installation">
-            <dt><a href="#installation">Installation</a></dt>
+            <dt><a href="#Getting-Started">Installation</a></dt>
         </dl>
 
         <dl class="configuration">
             <dt><a href="#configuration">Configuration</a></dt>
-            <dd><a href="#essentional">Essentional</a></dd>
+            <dd><a href="#essentional">Essential</a></dd>
+            <dd><a href="#router">Router</a></dd>
             <dd><a href="#cache-control">Cache Control</a></dd>
         </dl>
 
         <dl class="controller">
-            <dt><a href="#configuration">Controller</a></dt>
+            <dt><a href="#controller">Controller</a></dt>
         </dl>
 
         <dl class="model">
@@ -73,23 +110,20 @@
         </dl>
 
         <dl class="template">
-            <dt><a href="#Template">Template</a></dt>
-        </dl>
-
-        <dl class="utility">
-            <dt><a href="#utility">Utility</a></dt>
-            <dd><a href="#i18n">i18n</a></dd>
+            <dt><a href="#Template">HTML Template</a></dt>
         </dl>
 
         <dl class="aop">
             <dt><a href="#AOP">AOP</a></dt>
+            <dd><a href="#interceptor-order">Specifies the execution priority</a></dd>
         </dl>
 
         <dl class="etc">
             <dt><a href="#etc">Etc</a></dt>
             <dd><a href="#Debug-Mode">Debug Mode</a></dd>
+            <dd><a href="#Release-Mode">Release Mode</a></dd>
             <dd><a href="#Benchmark">Benchmark</a></dd>
-            <dd><a href="#Echo">Echo</a></dd>
+            <dd><a href="#i18n">i18n</a></dd>
         </dl>
 
         <dl class="tutorials">
@@ -118,397 +152,1082 @@
 </header>
 
 <section class="contents">
-<section class="languageSelector">
-    <b>Language : </b>
-    <ul>
-        <li><a href="en.index.html">English</a></li>
-        <li><a href="index.html">Korean</a></li>
-        <li><a href="ja.index.html">Japanese</a></li>
-    </ul>
-</section>
-<section class="logo">
-    <img src="newLogo.png" alt="">
-    <!-- <h1>tipJS 2.0</h1> -->
-    <h3>JavaScript MVC Framework</h3>
-</section>
-<section class="about">
-    <h1>About</h1>
-    <article id="introduction">
-        <h2>Introduction</h2>
-        <p>tipJS JavaScript MVC Framework is a small, simple, and effective JavaScript MVC Framework.
-            You can implement Web Application with complex structure simply as Model and View using tipJS.<br/>
-            tipJS JavaScript MVC Framework increases the maintenance efficacy of your Web Site extraordinarily.</p>
-    </article>
-    <article id="download">
-        <h2>Downloads</h2>
-        <a href="https://github.com/tipJS-Team/tipJS/releases" class="basicButton">v2.1.0</a>
-        <a href="https://github.com/tipjs/tipjs-JavaScript-MVC-Framework/" class="basicButton">v1.4.3 (Support Ends)</a>
-    </article>
-    <article id="feature">
-        <h2>Feature</h2>
+    <section class="languageSelector">
+        <b>Language : </b>
         <ul>
-            <li>tipJS implements complex JavaScript Application in the form of MVC Pattern.</li>
-            <li>tipJS is familiar framework for Back-end Developers.</li>
-            <li>Supported AOP(Aspect-Oriented Programming).</li>
-            <li>tipJS creates a user's view simply by providing simple HTML Template (since version 1.10).</li>
-            <li>tipJS can be compatible with diverse browsers (IE 7/8/9, Chrome, Firefox, Safari, etc...)</li>
-            <li>tipJS does not require any external library as it was developed as JavaScript ECMAScript Code for independent operation.</li>
-            <li>tipJS can be compatible with diverse external JavaScript (JQuery, ExtJS, etc...)</li>
-            <li>tipJS makes you control Browser Cache simply. </li>
-            <li>tipJS makes you implement your Application as Models and Views.</li>
-            <li>tipJS makes you control your Application at diverse timing.</li>
-            <li>tipJS provides you diverse development formats by operating with the minimum rules.</li>
-            <li>tipJS provides you specify operating range of the benchmark functions.</li>
-            <li>tipJS is a multi-lingual(i18n) support.</li>
+            <li><a href="en.index.html">English</a></li>
+            <li><a href="index.html">한국어</a></li>
+            <li><a href="ja.index.html">日本語</a></li>
         </ul>
-    </article>
-    <article id="structure">
-        <h2>Structure</h2>
-    </article>
+    </section>
+    <section class="logo">
+        <img src="newLogo.png" alt="">
+        <!-- <h1>tipJS 2.0</h1> -->
+        <h3>JavaScript MVC Framework</h3>
+        <div>
+            <div class="fb-like" data-href="http://tipjs-team.github.io/tipJS/" data-width="250" data-height="50" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://tipjs-team.github.io/tipJS/" data-text="tipJS" data-hashtags="tipJS">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+    </section>
+    <section class="about">
+        <h1>About</h1>
+        <article id="introduction">
+            <h2>Introduction</h2>
+            <p>
+                tipJS JavaScript MVC Framework is a small, simple, and effective JavaScript MVC Framework.<br/>
+You can implement Web Application with complex structure simply as Model and View using tipJS. tipJS JavaScript MVC Framework increases the maintenance efficacy of your Web Site extraordinarily.
+            </p>
+        </article>
+        <article id="download">
+            <h2>
+                Download
+            </h2>
+            <a href="https://github.com/tipJS-Team/tipJS/releases" class="basicButton">v2.1.0</a>
+            <a href="https://github.com/tipjs/tipjs-JavaScript-MVC-Framework" class="basicButton">v1.4.3 (지원 중단)</a>
+        </article>
+        <article id="feature">
+            <h2>Feature</h2>
+            <ul>
+                <li>tipJS implements complex JavaScript Application in the form of MVC Pattern.</li>
+                <li>tipJS is familiar framework for Back-end Developers.</li>
+                <li>Supported AOP(Aspect-Oriented Programming).</li>
+                <li>Supported Router.</li>
+                <li>tipJS creates a user's view simply by providing simple HTML Template.</li>
+                <li>tipJS can be compatible with diverse browsers (IE 7/8/9, Chrome, Firefox, Safari, etc...)</li>
+                <li>tipJS does not require any external library as it was developed as JavaScript ECMAScript Code for independent operation.</li>
+                <li>tipJS can be compatible with diverse external JavaScript (JQuery, ExtJS, etc...)</li>
+                <li>tipJS makes you control Browser Cache simply.</li>
+                <li>tipJS makes you implement your Application as Models and Views.</li>
+                <li>tipJS makes you control your Application at diverse timing.</li>
+                <li>tipJS provides you diverse development formats by operating with the minimum rules.</li>
+                <li>tipJS provides you specify operating range of the benchmark functions.</li>
+                <li>tipJS is a multi-lingual(i18n) support.</li>
+                <li>etc…</li>
+            </ul>
+        </article>
+        <article id="structure">
+            <h2>Structure</h2>
+            <img src="http://tipjs-team.github.io/tipJS/structure.png" title="tipJS JavaScript MVC framework structure" style="border:0px;">
+        </article>
 
-    <article id="license">
-        <h2>License</h2>
-        <p>Dual licensed under the MIT or GPL Version 2 licenses.</p>
-    </article>
-</section>
+        <article id="license">
+            <h2>License</h2>
+            <p>Dual licensed under the MIT or GPL Version 2 licenses.</p>
+        </article>
+    </section>
 
-<section id="installation" class="installation">
-    <h1>Installation</h1>
-</section>
+    <section id="Getting-Started" class="installation">
+        <h1>Getting Started</h1>
+        <p>The following folder structure is recommended.</p>
+        <pre><code class="shell">/tipJS/tipJS.min.js.js
+/examples/helloWorld/index.html
+/examples/helloWorld/app.js
+/examples/helloWorld/controllers/hello.js</code></pre>
+        <p>Add tipJS.min.js file with path in HTML file.</p>
+        <pre><code class="html">&lt;html&gt;
+&lt;head&gt;
+    &lt;script src="/tipJS/tipJS.min.js"&gt;&lt;/script&gt;
+    &lt;script src="/examples/helloWorld/app.js"&gt;&lt;/script&gt;
+&lt;body&gt;
+&lt;div id="contents"&gt;&lt;/div&gt;
+&lt;input type="button" value="click me"
+       onclick="tipJS.action.hello('tipJS.com')"/&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        <p>Add controller file in app.js.</p>
+        <pre><code class="html">// app.js
+tipJS.app({
+    controllers : [
+        "hello.js"
+    ]
+});
+window.onload = function(){
+    tipJS.loadApp(); // application is started.
+};</code></pre>
+        <p>Write your code in controller file.</p>
+        <pre><code class="html">// controllers/hello.js
+tipJS.controller("hello", {
 
-<section class="configuration">
-    <h1 id="configuration">Configuration</h1>
-    <article id="essentional">
-        <h2>Essentional</h2>
-        <p>
-            tipJS the setting is done by tipJS.app method.
-            In all settings to default (default value) exists,
-            tipJS.app method for changing the default settings to arguments of the object would specify.
-        </p>
+    invoke : function(params){
+        document.getElementById('contents').innerHTML
+            = "Hello World!! from " + params;
+    }
+
+});</code></pre>
+    </section>
+
+    <section class="configuration">
+        <h1 id="configuration">App Configuration</h1>
+        <article id="essentional">
+            <h2>Essential</h2>
+            <p>
+                tipJS the setting is done by tipJS.app method. In all settings to default (default value) exists, tipJS.app method for changing the default settings to arguments of the object would specify.
+            </p>
 <pre><code class="javascript">tipJS.app({
     controllers:[
-    "someController1.js",
-    "someController2.js"
+        "someController1.js",
+        "someController2.js"
     ],
     models:[
-    "someModel1.js"
-    "someModel2.js"
+        "someModel1.js"
+        "someModel2.js"
     ],
     views:[
-    "someView1.js",
-    "someView2.js"
+        "someView1.js",
+        "someView2.js"
     ],
     onLoad:function(args){
-    ...
+        ...
     },
-    ...
-    });
-    window.onload = function() {
+        ...
+});
+window.onload = function() {
     tipJS.loadApp();
-    }</code></pre>
+}</code></pre>
 
         <p>tipJS.app method that you can set in the property description.</p>
-        <ul>
-            <li>controllers<br>
-                Controller files are defined as the array type.</li>
-            <li>models<br>
-                Model files are defined as the array type.</li>
-            <li>views<br>
-                View files are defined as the array type.</li>
-            <li>onLoad<br>
-                The onLoad event occurs once after tipJS.loadApp method is called.
-                The arguments cat set from the parameters of tipJS.loadApp method.
-                    <pre><code class="javascript">// tipJS
-                        tipJS.app({
-                        ...
-                        onLoad:function(params){
-                        tipJS.debug(params.param1); // result is "some value"
-                        },
-                        ...
-                        });
-                        // JQuery
-                        $(document).ready(function(e){
-                        var param = {param1:"some value"}
-                        tipJS.loadApp(param);
-                        });
-                    </code></pre>
-            </li>
-            <li>beforeController<br>
-                The Application will invoke The beforeController method of function type when called any Controller.
-                The method is called before executing any method in Controller.
-                And the method can use the parameter of tipJS.action method's second argument, Controller's same method.
-                    <pre><code class="javascript">tipJS.app({
-                        ...
-                        onLoad:function(params){
-                        tipJS.action("someController", params);
-                        },
-                        beforeController:function(params){
-                        console.log(params.param1); // result is "some value"
-                        }
-                        ...
-                        });
-                    </code></pre>
-            </li>
-            <li>afterController<br>
-                The Application will invoke The afterController method of function type when called any Controller.<br>
-                The method is called after executing the Controller.
-                And the method can use the parameter of tipJS.action method's second argument, Controller's same method.</li>
-            <li>noCache<br>
-                Browser cache can be set to a boolean type, If value is true,
-                whenever modify version value with noCacheAuto, noCacheVersion, noCacheParam propertiy,
-                be reload JavaScript file. (default:false)</li>
-            <li>noCacheVersion<br>
-                It is set Version information for Browser cache control.(default:"1.000")</li>
-            <li>noCacheAuto<br>
-                If value is true,  Browser cache is disabled by output version random
-                that irrespective of noCacheVersion option value.(default:false)</li>
-            <li>noCacheParam<br>
-                It is set parameter name for Browser cache control.(default:"noCacheVersion")</li>
-        </ul>
-    </article>
-    <article id="cache-control">
-        <h2>Cache Control</h2>
-        <p>
-            tipJS JavaScript MVC Framework control Browser cache through properties of tipJS.app method.
-        </p>
+            <ul>
+                <li>appPath<br>
+                    Define the folder of the application for tipJS.
+This option indicate controllers, models, views, lang folder's parent folder.
+The default is "." (the current path of HTML including tipJS) and can be changed to relative / absolute path.</li>
+                <li>controllers<br>
+                    Controller files are defined as the array type.</li>
+                <li>models<br>
+                    Model files are defined as the array type.</li>
+                <li>views<br>
+                    View files are defined as the array type.</li>
+                <li>onLoad<br>
+                    The onLoad event occurs once after tipJS.loadApp method is called.
+The arguments cat set from the parameters of tipJS.loadApp method.
+<pre><code class="javascript">// tipJS
+tipJS.app({
+...
+onLoad:function(params){
+    tipJS.debug(params.param1); // result is "some value"
+},
+...
+});
+// JQuery
+$(document).ready(function(e){
+var param = {param1:"some value"}
+tipJS.loadApp(param);
+});</code></pre>
+                </li>
+                <li>beforeController<br>
+                    The Application will invoke The beforeController method of function type when called any Controller.
+The method is called before executing any method in Controller.
+And the method can use the parameter of tipJS.action method's second argument, Controller's same method.
+<pre><code class="javascript">tipJS.app({
+...
+onLoad:function(params){
+    tipJS.action("someController", params);
+},
+beforeController:function(params){
+    console.log(params.param1); // result is "some value"
+}
+...
+});</code></pre>
+                </li>
+                <li>afterController<br>
+                    The Application will invoke The afterController method of function type when called any Controller.  
+The method is called after executing the Controller.
+And the method can use the parameter of tipJS.action method's second argument, Controller's same method.</li>
+                <li>noCache<br>
+                    Browser cache can be set to a boolean type, If value is true, 
+whenever modify version value with noCacheAuto, noCacheVersion, noCacheParam propertiy, 
+be reload JavaScript file. (default:false)</li>
+                <li>noCacheVersion<br>
+                    It is set Version information for Browser cache control.(default:"1.000")</li>
+                <li>noCacheAuto<br>
+                    If value is true,  Browser cache is disabled by output version random 
+that irrespective of noCacheVersion option value.(default:false)</li>
+                <li>noCacheParam<br>
+                    It is set parameter name for Browser cache control.(default:"noCacheVersion")</li>
+            </ul>
+        </article>
+        <article id="router">
+            <h2>Router</h2>
+            <p>
+                tipJS JavaScript MVC Framework support Router function through properties of tipJS.app method.<br/>
+                Router Tutorial [<a href="https://github.com/tipJS-Team/tipJS/tree/master/tutorial/Router">src</a>] [<a href="http://tipjs-team.github.io/tipJS/tutorial/Router/">view</a>]
+            </p>
             <pre><code class="javascript">tipJS.app({
-                noCache:false,
-                noCacheVersion:"1.000",
-                noCacheAuto:true,
-                noCacheParam:"noCacheVersion",
-                ...
-                });</code></pre>
+    controllers:[
+        "defaultCtrler.js",
+        "page1Ctrler.js",
+        "page2Ctrler.js",
+        "noPageCtrler.js"
+    ],
+    routes:[
+        // url hash가 존재하지 않을때 defaultCtrler가 동작합니다.
+        // http://domain.com
+        {
+            url:"/",
+            controller:"defaultCtrler"
+        },
+        // url hash가 '#/page1' 일때 page1Ctrler가 동작합니다.
+        // http://domain.com/#/page1
+        {
+            url:"#/page1",
+            controller:"page1Ctrler"
+        },
+        // url hash가 '#/page2' 일때 page2Ctrler가 동작합니다.
+        // http://domain.com/#/page2
+        {
+            url:"#/page2",
+            controller:"page2Ctrler"
+        },
+        // 라우터에 등록되지 않은 url hash 일때 noPageCtrler가 동작합니다.
+        // http://domain.com/#/pageXX
+        {
+            url:"!",
+            controller:"noPageCtrler"
+        }
+    ]
+    ...
+});</code></pre>
+        </article>
+        <article id="cache-control">
+            <h2>Cache Control</h2>
+            <p>
+                tipJS JavaScript MVC Framework control Browser cache through properties of tipJS.app method.
+            </p>
+            <pre><code class="javascript">tipJS.app({
+    noCache:false,
+    noCacheVersion:"1.000",
+    noCacheAuto:true,
+    noCacheParam:"noCacheVersion",
+    ...
+});</code></pre>
+            <p>
+                If noCache attribute is false, tipJS will be load JavaScript file as follows
+            </p>
+            <pre><code class="javascript">&lt;script type="text/javascript" src="./controllers/some.js"&gt;&lt;/script&gt;</code></pre>
+            <p>
+                If noCache attribute is true, the result is as follows
+            </p>
+            <pre><code class="javascript">&lt;script type="text/javascript" src="./controllers/some.js?noCacheVersion=1.000"&gt;&lt;/script&gt;</code></pre>
+            <p>
+                When the noCache attribute is true and noCacheAuto attribute is true,
+any time loads a new JavaScript file by parameter of noCacheVersion generate is generated randomly.
+            </p>
+            <pre><code class="javascript">&lt;script type="text/javascript" src="./controllers/some.js?noCacheVersion=0.5478912648"&gt;&lt;/script&gt;</code></pre>
+            <p>
+                If your application is updated, Browser will load latest JavaScript file without cache through modify the value of noCacheVersion or set true of noCacheAuto.
+            </p>
+        </article>
+    </section>
+
+    <section id="controller">
+        <h1>Controller</h1>
+        <p>To invoke Controller, as follows</p>
+        <ul>
+            <li>tipJS.action("controller name", parameter)</li>
+            <li>tipJS.action.controllerName(parameter)</li>
+        </ul>
         <p>
-            If noCache attribute is false, tipJS will be load JavaScript file as follows:
+            It invokes beforeController method that defined in tipJS.app method
+before processing the Controller that defined in tipJS.controller method. 
+And it is invoked afterController method that defeind in define.js
+after completed process of Controller.
         </p>
-        <pre><code class="javascript">&lt;script type="text/javascript" src="./controllers/some.js"&gt;&lt;/script&gt;</code></pre>
+        <div class="imagebox">
+            <img src="ppt/structure.png" width="554" height="398">
+        </div>
         <p>
-            When the noCache attribute is true and noCacheAuto attribute is true, any time loads a new JavaScript file by parameter of noCacheVersion generate is generated randomly.
+            Controller Tutorial [<a href="https://github.com/tipJS-Team/tipJS/tree/master/tutorial/Controller">src</a>] [<a href="http://tipjs-team.github.io/tipJS/tutorial/Controller/">view</a>]
         </p>
-        <pre><code class="javascript">&lt;script type="text/javascript" src="./controllers/some.js?noCacheVersion=0.5478912648"&gt;&lt;/script&gt;</code></pre>
-        <p>If your application is updated, Browser will load latest JavaScript file without cache through modify the value of noCacheVersion or set true of noCacheAuto.</p>
-    </article>
-</section>
-
-<section id="controller">
-    <h1>Controller</h1>
-    <p>To invoke Controller, as follows:</p>
-    <ul>
-        <li>tipJS.action("controller name", parameter)</li>
-        <li>tipJS.action.controllerName(parameter)</li>
-    </ul>
-    <p>
-        It invokes beforeController method that defined in tipJS.app method before processing the Controller that defined in tipJS.controller method. And it is invoked afterController method that defeind in define.js after completed process of Controller.
-    </p>
-    <div class="imagebox">
-        <img src="ppt/structure.png" width="554" height="398">
-    </div>
-    <p>
-        <a href="http://tipjs.com/tipJS/tutorial/Controller/">Controller Tutorial</a>
-    </p>
-    <p>
-        The second argument of tipJS.action method can be used as input argument for:
-    </p>
+        <p>
+            The second argument of tipJS.action method can be used as input argument for:
+            <ul>
+            	<li>beforeController method and afterController method in tipJS.define method</li>
+            	<li>beforeInvoke, invoke, afterInvoke and exceptionInvoke method in Controller</li>
+            </ul>
+        </p>
+        <p>
+            An attribute “this.controllerName” in beforeController / afterController method represents a name of a controller currently running.
+        </p>
         <pre><code class="javascript">tipJS.app({
-            ...
-            onLoad:function(params){
-            // call Controller
-            tipJS.action("someController", "someValue");
-            // or
-            tipJS.action.someController("someValue");
-            },
-            beforeController:function(params){
-            console.log(params); // result is "someValue"
-            console.log(this.controllerName); // result is "someController"
-            },
-            afterController:function(params){
-            console.log(params); // result is "someValue"
-            console.log(this.controllerName); // result is "someController"
-            },
-            ...
-            });</code></pre>
+    ...
+    onLoad:function(params){
+        // call Controller
+        tipJS.action("someController", "someValue");
+        // or
+        tipJS.action.someController("someValue");
+    },
+    beforeController:function(params){
+        console.log(params); // result is "someValue"
+        console.log(this.controllerName); // result is "someController"
+    },
+    afterController:function(params){
+        console.log(params); // result is "someValue"
+        console.log(this.controllerName); // result is "someController"
+    },
+    ...
+});</code></pre>
         <pre><code class="javascript">// controllers/someController.js
-            tipJS.controller("someController", {
-            beforeInvoke:function(params){
-            console.log(params); // result is "someValue"
-            },
-            invoke:function(params){
-            console.log(params); // result is "someValue"
-            },
-            afterInvoke:function(params){
-            console.log(params); // result is "someValue"
-            },
-            exceptionInvoke:function(exception, params){
-            console.log(params); // result is "someValue"
-            }
-            });</code></pre>
-    <p>
-        You can invoke tipJS.action method at any location since you have invoked tipJS.loadApp method. <br/>
-        Here is a general structure of Controller:
-    </p>
+tipJS.controller("someController", {
+    beforeInvoke:function(params){
+        console.log(params); // result is "someValue"
+    },
+    invoke:function(params){
+        console.log(params); // result is "someValue"
+    },
+    afterInvoke:function(params){
+        console.log(params); // result is "someValue"
+    },
+    exceptionInvoke:function(exception, params){
+        console.log(params); // result is "someValue"
+    }
+});</code></pre>
+        <p>
+            You can invoke tipJS.action method at any location since you have invoked tipJS.loadApp method.
+        </p>
         <pre><code class="javascript">// controllers/someController.js
-            tipJS.controller("someController", {
-            beforeInvoke:function(params){
-            ....
-            },
-            invoke:function(params){
-            console.log("invoke Start");
-            // load Application Model
-            var initModel = this.getModel("initModel");
-            // load Application ViewModel
-            var initView = this.getView("initView");
+tipJS.controller("someController", {
+    beforeInvoke:function(params){
+    ....
+    },
+    invoke:function(params){
+        console.log("invoke Start");
+        // load Application Model
+        var initModel = this.getModel("initModel");
+        // load Application ViewModel
+        var initView = this.getView("initView");
 
-            initView.drawBody(bodyHtml);
+        initView.drawBody(bodyHtml);
 
-            console.log("invoke Done");
-            },
-            afterInvoke:function(params){
-            ....
-            },
-            exceptionInvoke:function(exception, params){
-            alert(exception);
-            }
-            });</code></pre>
+        console.log("invoke Done");
+    },
+    afterInvoke:function(params){
+        ....
+    },
+    exceptionInvoke:function(exception, params){
+        alert(exception);
+    }
+});</code></pre>
         <pre><code class="javascript">tipJS.app({
-            ...
-            onLoad:function(params){
-            tipJS.action("someController", params);
-            },
-            ...
-            });</code></pre>
-    <p>There are four basic methods in Controller. They run as below</p>
-    <p><br/>tipJS Javascript MVC Framework in general cases runs beforeInvoke method first, invoke method second and afterInvoke method last. The exceptionInvoke method is called only if 1) exceptionInvoke method is defined in Controller and 2) an exception is raised while running Controller.</p>
-    <p><br/>You can call any user defined methods in Controller.</p>
+    ...
+    onLoad:function(params){
+        tipJS.action("someController", params);
+    },
+    ...
+});</code></pre>
+        <p>There are four basic methods in Controller. They run as below.</p>
+        <p><br/>The tipJS Javascript MVC Framework in general cases runs beforeInvoke method first, invoke method second and afterInvoke method last. The exceptionInvoke method is called only if 1) exceptionInvoke method is defined in Controller and 2) an exception is raised while running Controller.</p>
+        <p><br/>You can call any user defined methods in Controller.</p>
              <pre><code class="javascript">// controllers/someController.js
-                 tipJS.controller("someController", {
-                 ...
-                 invoke:function(params){
-                 this.userFn();
-                 },
-                 userFn:function(){
-                 ...
-                 Some Process..
-                 ...
-                 }
-                 });</code></pre>
-    <p>
-        If “async” attribute is set as true when Controller declared, the controller runs in async mode. You can also set delay time with “delay” attribute. Its unit value is 1/1000 sec.
-    </p>
+tipJS.controller("someController", {
+    ...
+    invoke:function(params){
+        this.userFn();
+    },
+    userFn:function(){
+        ...
+        Some Process..
+        ...
+    }
+});</code></pre>
+        <p>
+            If “async” attribute is set as true when Controller declared, the controller runs in async mode. You can also set delay time with “delay” attribute. Its unit value is 1/1000 sec.
+        </p>
         <pre><code class="javascript">// controllers/someController.js
-            tipJS.controller("someController", {
-            async:true, // AnSynchronized Controller
-            delay:500, // 0.5 sec.
-            ...
-            invoke:function(params){
-            this.userFn();
-            },
-            userFn:function(){
-            ...
-            Some Process..
-            ...
+tipJS.controller("someController", {
+    async:true, // AnSynchronized Controller
+    delay:500, // 0.5 sec.
+    ...
+    invoke:function(params){
+        this.userFn();
+    },
+    userFn:function(){
+        ...
+        Some Process..
+        ...
+    }
+});</code></pre>
+        <p>Here are attributes details defined in Controller besides four basic methods.</p>
+        <ul>
+            <li>async<br>
+                sets async mode (true – async mode)</li>
+            <li>delay<br>
+                sets async delay in 1/1000 sec unit (default: 15)</li>
+            <li>getModel(ModelName)<br>
+                get Application Model Object defined in tipJS.model method</li>
+            <li>getView(ViewName)<br>
+                get Application View Object defined in tipJS.view method</li>
+            <li>render(options)<br>
+                <a href="#Template">see HTML Template</a></li>
+            <li>getById(id)<br>
+                equivalent to document.getElementById</li>
+            <li>getByName(name)<br>
+                equivalent to document.getElementsByName</li>
+            <li>getByTag(tagName)<br>
+                equivalent to document.getElementsByTagName</li>
+        </ul>
+    </section>
+
+    <section id="model">
+        <h1>Model</h1>
+        <p>
+            You don't necessarily have to implement Model Object in tipJS JavaScript MVC Framework.
+Model Object can be implemented if required.<br/>
+You can load a different Model in the same Layer.
+            <br/><br/>When you define Model, methods automatically defined by Framework are as follows
+        </p>
+        <ul>
+            <li>__init<br>
+                __init method will invoke only once when corresponding Model or View is created following call by loadModel or loadView.</li>
+            <li>getModel(modelName)<br>
+                get Application Model Object defined in tipJS.model method.</li>
+            <li>getById(id)<br>
+                equivalent to document.getElementById.</li>
+            <li>getByName(name)<br>
+                equivalent to document.getElementsByName.</li>
+            <li>getByTag(tagName)<br>
+                equivalent to document.getElementsByTagName.</li>
+        </ul>
+        <p>
+            VO (Value Object) Model should be used if you don't need methods automatically defined. Please refer to following <a href="#VO(Value-Object)-Model">VO (Value Object) Model</a> section for further details.
+            <br/>
+            Model Tutorial [<a href="https://github.com/tipJS-Team/tipJS/tree/master/tutorial/Model">src</a>] [<a href="http://tipjs-team.github.io/tipJS/tutorial/Model/">view</a>]
+        </p>
+        <pre><code class="javascript">// models/someModel.js
+tipJS.model("someModel", {
+    __init:function(){
+        // Object was created by the framework is executed only once and destroyed.
+        ...
+    },
+    properties:...
+    someMethods:function(){
+        var someModel2 = this.getModel("someModel2");
+        ... some process ...
+    }
+});</code></pre>
+        <article id="Syncronous">
+            <h2>Syncronous Model</h2>
+            <p>
+                tipJS JavaScript MVC Framework has provided synchronization of Model.
+Synchronization of Model means that a Model Object created by a user remains with changed values and will not be destroyed.
+                <br/>
+                ModelSync Tutorial [<a href="https://github.com/tipJS-Team/tipJS/tree/master/tutorial/ModelSync">src</a>] [<a href="http://tipjs-team.github.io/tipJS/tutorial/ModelSync/">view</a>]
+            </p>
+            <pre><code class="javascript">// models/someModel.js
+tipJS.model("someModel", {
+    __init:function(){
+        // Object was created by the framework is executed only once and destroyed.
+        ...
+    },
+    someValue:"foo"
+});</code></pre>
+            <pre><code class="javascript">// controller One
+tipJS.controller("someController1", {
+    ...
+    invoke:function(params){
+
+        // load Application Model(normal)
+        var someModel = this.getModel("someModel");
+        console.log(someModel.someValue); // "foo"
+        someModel.someValue = "bar";
+
+        // load Application Model(synchronized)
+        var someModelSync = this.getModel("someModel", true);
+        console.log(someModelSync.someValue); // "foo"
+        someModelSync.someValue = "bar";
+    },
+    ...
+});</code></pre>
+            <pre><code class="javascript">// controller Two
+tipJS.controller("someController2", {
+    ...
+    invoke:function(params){
+
+    // load Application Model(normal)
+    var someModel = this.getModel("someModel");
+    console.log(someModel.someValue); // "foo"
+
+    // load Application Model(synchronized)
+    var someModelSync = this.getModel("someModel", true);
+    console.log(someModelSync.someValue); // "bar"
+    },
+    ...
+});</code></pre>
+            <p>You can use functions for synchronization of Model when the second parameter of getModel method is defined as ‘true'.</p>
+        </article>
+        <article id="VO(Value-Object)-Model">
+            <h2>VO(Value Object) Model</h2>
+            <p>
+                tipJS Javacript MVC Framework has provided VO (Value Object) Model.
+            </p>
+            <p>
+                <br/>VO model will not introduce properties or methods added automatically when defining Model in tipJS.
+It will only reflect properties and methods defined by users.
+<br/>
+Configuration is not required to use VO Model.
+If the last value of  Model Name is “VO”, the Model will be VO Model.
+                <br/>
+                ModelVO Tutorial [<a href="https://github.com/tipJS-Team/tipJS/tree/master/tutorial/ModelVO">src</a>] [<a href="http://tipjs-team.github.io/tipJS/tutorial/ModelVO/">view</a>]
+            </p>
+            <pre><code class="javascript">// models/modelVO.js
+tipJS.model("modelVO", {
+    __init:function(){
+    // Object was created by the framework is executed only once and destroyed.
+        ...
+    },
+    value1 : "123",
+    value2 : "abcd"
+});</code></pre>
+            <pre><code class="javascript">// controllers/someController.js
+tipJS.controller("someController", {
+    ...
+    invoke:function(params){
+        console.dir(this.loadModel("someModel"));
+        console.dir(this.loadModel("modelVO"));
+    },
+    ...
+});</code></pre>
+        </article>
+        <article id="Model-extension(Inheritance)">
+            <h2>Model extension(Inheritance)</h2>
+            <p>
+                tipJS JavaScript MVC Framework has provided functions for extension of Model.
+                <br/>ModelExtend Tutorial [<a href="https://github.com/tipJS-Team/tipJS/tree/master/tutorial/ModelExtend">src</a>] [<a href="http://tipjs-team.github.io/tipJS/tutorial/ModelExtend/">view</a>]
+            </p>
+            <pre><code class="javascript">tipJS.model("modelParent", {
+    parent1 : "modelParent",
+    parentFn : function() {
+        console.log(this.parent1); // modelParent
+    }
+});</code></pre>
+            <pre><code class="javascript">tipJS.model("modelChild",{
+    __extend : "modelParent",
+    child1 : "modelChild",
+    childFn : function() {
+        console.log(this.child1); // modelChild
+    }
+});</code></pre>
+            <pre><code class="javascript">// controllers/someController.js
+tipJS.controller("someController", {
+    ...
+    invoke : function() {
+        var modelChild = this.getModel("modelChild");
+        modelChild.parentFn(); // modelParent
+        modelChild.childFn(); // modelChild
+    },
+    ...
+});</code></pre>
+        </article>
+    </section>
+
+    <section id="View-Model">
+        <h1>View Model</h1>
+        <p>
+            You don't necessarily have to implement ViewModel Object in tipJS JavaScript MVC Framework.
+Model Object and View Object can be implemented if required.
+            <br/>ViewModel is for seperating logics of HTML Template from Controller.
+            <br/>You can load a different ViewModel in the same Layer.
+            <br/><br/>When you define ViewModel, methods automatically defined by Framework are as follows.
+        </p>
+        <ul>
+            <li>__init<br/>
+                __init method will invoke only once when corresponding ViewModel is created following call by getView.</li>
+            <li>getView(viewName)<br/>
+                loads Application ViewModel defined in tipJS.model method.</li>
+            <li>getById(id)<br/>
+                getById(id) equivalent to document.getElementById.</li>
+            <li>getByName(name)<br/>
+                getByName(name) equivalent to document.getElementsByName.</li>
+            <li>getByTag(tagName)<br/>
+                getByTag(tagName) equivalent to document.getElementsByTagName.</li>
+            <li>render(options)<br/>
+                Please refer to following <a href="#Template">HTML Template</a> section for further details.</li>
+        </ul>
+        <p>View(HTML Template) Tutorial [<a href="https://github.com/tipJS-Team/tipJS/tree/master/tutorial/View">src</a>] [<a href="http://tipjs-team.github.io/tipJS/tutorial/View/">view</a>]</p>
+        <pre><code class="javascript">// views/someView.js
+tipJS.view("someView", {
+    properties:...
+    methods:function(){
+        ...
+    }
+});</code></pre>
+        <pre><code class="javascript">// controllers/someController.js
+tipJS.controller("someController", {
+    ...
+    invoke : function() {
+    var modelChild = this.getModel("modelChild");
+        modelChild.parentFn(); // modelParent
+        modelChild.childFn(); // modelChild
+    },
+    ...
+});</code></pre>
+        <article id="ViewModel-extension(Inheritance)">
+            <h2>ViewModel extension(Inheritance)</h2>
+            <p>
+                tipJS JavaScript MVC Framework has provided functions for extension of ViewModel.
+                <br/>ViewModel Extend Tutorial [<a href="https://github.com/tipJS-Team/tipJS/tree/master/tutorial/ViewExtend">src</a>] [<a href="http://tipjs-team.github.io/tipJS/tutorial/ViewExtend/">view</a>]
+            </p>
+            <pre><code class="javascript">tipJS.view("viewParent", {
+    parent1 : "viewParent",
+    parentFn : function() {
+        console.log(this.parent1); // viewParent
+    }
+});</code></pre>
+            <pre><code class="javascript">tipJS.view("viewChild",{
+    __extend : "viewParent",
+    child1 : "viewChild",
+    childFn : function() {
+        console.log(this.child1); // viewChild
+    }
+});</code></pre>
+            <pre><code class="javascript">// controllers/someController.js
+tipJS.controller("someController", {
+    ...
+    invoke : function() {
+        var viewChild = this.getView("viewChild");
+        viewChild.parentFn(); // viewParent
+        viewChild.childFn(); // viewChild
+    },
+    ...
+});</code></pre>
+        </article>
+    </section>
+
+    <section id="Template">
+        <h1>HTML Template</h1>
+        <p>
+            tipJS JavaScript MVC Framework provides HTML based template engine.
+        </p>
+        <p>
+            <br/>render method implements data mapping in HTML template
+Then, if id value is defined as renderTo property, the method will return HTML string including mapping data after printing it out to corresponding element.<br/>
+Once a HTML template file has been loaded, tipJS will load it from cache.
+if you don't want to load a template file from cache, please change templateCache property of tipJS.app method from default value to ‘false'.<strong>(default:true)</strong>
+        </p>
+        <p>
+            <br/>If renderTo property is skipped, renderTemplate method always returns HTML string including mapping data without printing it out.
+        </p>
+        <pre><code class="html">&lt;-- index.html --&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;script type="text/javascript" src="/tipJS/tipJS.min.js"&gt;&lt;/script&gt;
+        &lt;script&gt;
+            window.onload = function(){
+                tipJS.loadApp(["someApplication"]);
+            };
+        &lt;/script&gt;
+    &lt;body&gt;
+        &lt;div id="target_id"&gt;&lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        <pre><code class="html">&lt;-- someTpl.tpl --&gt;
+&lt;h1&gt;
+&lt;@= data.someString @&gt;
+&lt;/h1&gt;
+&lt;ul&gt;
+&lt;@ for(var i=0; i&lt;data.someArray.length; i++) { @&gt;
+    &lt;li&gt; &lt;@= data.someArray[i] @&gt; &lt;/li&gt;
+&lt;@ } @&gt;
+&lt;/ul&gt;</code></pre>
+        <pre><code class="javascript">// controllers/someController.js
+tipJS.controller("someController", {
+    invoke:function(params){
+        var _templateConfig = {
+            url:"/templates/someTemplate.tpl",
+            renderTo:"target_id",
+            data: {
+                someString:"some String " + params,
+                someArray:["some1","some2","some3"]
             }
-            });</code></pre>
-    <p>Here are attributes details defined in Controller besides four basic methods.</p>
-    <ul>
-        <li>async<br>
-            sets async mode (true – async mode)</li>
-        <li>delay<br>
-            sets async delay in 1/1000 sec unit (default: 15)</li>
-        <li>getModel(ModelName)<br>
-            get Application Model Object defined in tipJS.model method</li>
-        <li>getView(ViewName)<br>
-            get Application View Object defined in tipJS.view method</li>
-        <li>renderTemplate(option)<br>
-            see HTML Template</li>
-        <li>getById(id)<br>
-            equivalent to document.getElementById</li>
-        <li>getByName(name)<br>
-            equivalent to document.getElementsByName</li>
-        <li>getByTag(tagName)<br>
-            equivalent to document.getElementsByTagName</li>
-    </ul>
-</section>
+        };
+        var returnHTML = this.render(_templateConfig); // return html
+    }
+});</code></pre>
+        <p>ViewModel(HTML Template) Tutorial [<a href="https://github.com/tipJS-Team/tipJS/tree/master/tutorial/View">src</a>] [<a href="http://tipjs-team.github.io/tipJS/tutorial/View/">view</a>]</p>
+        <pre><code class="html">&lt;-- someTpl.tpl --&gt;
+&lt;div&gt;
+    &lt;ul&gt;
+    &lt;@ for(var i=0; i&lt;data.length; i++) { @&gt;
+        &lt;@ if (i != 0) {@&gt;&lt;li class="&lt;@=( (i==2) ? "foo":"bar" )@&gt;"&gt;&lt;@= data[i] @&gt;&lt;/li&gt;
+        &lt;@}else{@&gt;&lt;div class="&lt;@=( (i==2) ? "foo":"bar" )@&gt;"&gt;&lt;@= data[i] @&gt;&lt;/div&gt;&lt;@}@&gt;
+    &lt;@ } @&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+        <p>ViewExtend(HTML Template) Tutorial [<a href="https://github.com/tipJS-Team/tipJS/tree/master/tutorial/ViewExtend">src</a>] [<a href="http://tipjs-team.github.io/tipJS/tutorial/ViewExtend/">view</a>]</p>
+        <p>tipJS prints out values to &lt;@= value @&gt;  in HTML Template, and loop control statement should be located in &lt;@ for(…) @&gt; . Please note with caution that an error occurs when you put a termination character (;) in front of a termination tag (@&gt;).</p>
+        <p>
+            <br/>Properties of Object, an argument of this.renderTemplate method, are as follows:
+        </p>
+        <ul>
+            <li>url<br>
+                It defines url of HTML Template file. There is no limit on extention name of files.</li>
+            <li>renderTo<br>
+                It defines id value of HTML element in which HTML string including mapping data will be printed. (Not necessary).</li>
+            <li>data<br>
+                It defines data will be mapped.</li>
+        </ul>
+        <p>You can receive rendered HTML as formats of HTML string and data Object.</p>
+        <pre><code class="javascript">tipJS.controller("someController", {
+    invoke:function(params){
+        var htmlString = "&lt;div&gt;&lt;@= data.foo @&gt;&lt;/div&gt;";
+        var data = {
+            foo:"foo"
+        };
+        var returnHTML = this.render(htmlString, data); // return html
+    }
+});</code></pre>
+        <article id="Template-Tiles">
+            <h2>Logical split of HTML Template file</h2>
+            <p>
+                tipJS provides function spliting a file logically and using it.
+                <br/>Logical id name used in specified tplId property, it will be matching the template file with [[#id]].
+            </p>
+            <pre><code class="html">[[#template01]] &lt;!-- id : "template01" --&gt;
+&lt;ul&gt;
+    &lt;li&gt;&lt;@= data.foo @&gt;&lt;/li&gt;
+&lt;/ul&gt;
+[[#template02]] &lt;!-- id : "template02" --&gt;
+&lt;span&gt;&lt;@= data.bar @&gt;&lt;/span&gt;</code></pre>
+            <pre><code class="javascript">// someController1.js
+tipJS.controller("someController1", {
+    invoke : function(params){
+        var _templateConfig = {
+            url:"/templates/someTemplate.tpl",
+            renderTo:"target_id",
+            tplId:"template01",  // id : "template01"
+            data:{
+                foo:"foo"
+            }
+        };
+        var returnHTML = this.render(_templateConfig); // return template01 html
+    }
+});</code></pre>
+            <pre><code class="javascript">// someController2.js
+tipJS.controller("someController2", {
+    invoke : function(params){
+        var _templateConfig = {
+            url:"/templates/someTemplate.tpl",
+            renderTo:"target_id",
+            tplId:"template02", // id : "template02"
+            data:{
+                bar:"bar"
+            }
+        };
+        var returnHTML = this.render(_templateConfig); // return template02 html
+    }
+});</code></pre>
+        </article>
+    </section>
 
-<section id="model">
-    <h1>Model</h1>
-    <article id="Syncronous">
-        <h2>Syncronous</h2>
-    </article>
-    <article id="VO(Value-Object)-Model">
-        <h2>Value Object</h2>
-    </article>
-    <article id="Model-extension(Inheritance)">
-        <h2>Inheritance</h2>
-    </article>
-</section>
+    <section id="AOP">
+        <h1>AOP</h1>
+        <p>
+            tipJS JavaScript MVC Framework provides AOP(Aspect-Oriented Programming). add 'interceptors' property in the tipJS.app method when you want activate it.
+        </p>
+        <pre><code class="javascript">tipJS.app({
+    ...
+    interceptors:[
+        "interceptor.js"
+    ]
+    ...
+});</code></pre>
+        <p>
+            Create interceptors folder below the application folder and add interceptor JS
+ files. Use tipJS.interceptor method for interceptor registration.
+        </p>
+        <pre><code class="javascript">tipJS.interceptor("interceptor", {
+    target:"controllers",
+    before:function(){
+        console.log("interceptor.before : " + this.msg);
+    },
+    after:[
+        function(){
+            console.log("interceptor.after #1 : " + this.msg);
+        },
+        function(){
+            console.log("interceptor.after #2 : " + this.msg);
+        }
+    ]
+});</code></pre>
+        <p>target property means point cut.</p>
+        <p>
+            <br/>For example,
+            If it applies to the entire range of Model puts the models(ex:”models”).<br/>
+If it applies to a Model puts the Model Name(ex:”models.modelName” or “models.modelNam*”).<br/>
+If it applies to particular method of a particular Model puts method Name.<br/>
+(ex:”models.modelName.getName” or “models.modelName.get*”).
+        </p>
+        <p>
+            <br/>The target property of an array and more than one available.<br/>
+            'this' context in before and after means target's context.<br/>
+            The Before, the after can be specify more than one, too.
+        </p>
+        <p>
+            <br/>There is Controller code.
+        </p>
+        <pre><code class="javascript">tipJS.controller("someCtrler", {
+    msg:"some Message",
+    invoke:function(params){
+        console.log( this.msg ); // "some Message"
+    }
+});</code></pre>
+        <p>The result is as follows: </p>
+        <pre><code class="text">interceptor.before : some Message
+some Message
+interceptor.after #1 : some Message
+interceptor.after #2 : some Message</code></pre>
+        <article id="interceptor-order">
+            <h2>Specifies the execution priority</h2>
+            <p>A order of the interceptor property can be specified execution priority of interceptors.</p>
+            <pre><code class="javascript">tipJS.controller("someCtrler", {
+    msg:"some Message",
+    invoke:function(params){
+        console.log( this.msg ); // "some Message"
+    }
+});</code></pre>
+            <pre><code class="javascript">tipJS.interceptor("interceptor1", {
+    order:1,
+    target:"controllers",
+    before:function(){
+        console.log("interceptor.before #1-1 : " + this.msg);
+    },
+    after:[
+        function(){
+            console.log("interceptor.after #1-1 : " + this.msg);
+        },
+        function(){
+            console.log("interceptor.after #1-2 : " + this.msg);
+        }
+    ]
+});</code></pre>
+            <pre><code class="javascript">tipJS.interceptor("interceptor2", {
+    order:2,
+    target:"controllers",
+    before:function(){
+        console.log("interceptor.before #2-1 : " + this.msg);
+    },
+    after:[
+        function(){
+            console.log("interceptor.after #2-1 : " + this.msg);
+        },
+        function(){
+            console.log("interceptor.after #2-2 : " + this.msg);
+        }
+    ]
+});</code></pre>
+            <p>The result is as follows:</p>
+            <pre><code class="text">interceptor.before #1-1 : some Message
+interceptor.before #2-1 : some Message
+some Message
+interceptor.after #1-1 : some Message
+interceptor.after #1-2 : some Message
+interceptor.after #2-1 : some Message
+interceptor.after #2-2 : some Message</code></pre>
+        </article>
+    </section>
 
-<section id="View-Model">
-    <h1>View Model</h1>
-    <article id="ViewModel-extension(Inheritance)">
-        <h2>ViewModel extension(Inheritance)</h2>
-    </article>
-</section>
+    <section id="etc">
+        <h1>ETC</h1>
+        <article id="Debug-Mode">
+            <h2>Debug Mode</h2>
+            <p>
+                tipJS JavaScript MVC Framework provides debug method that is tipJS.debug.
+                <br/><br/>It is console logger method and it works only with developer tools likes Chrome Inspector, Firebug and another.<br/>
+                It can shows console log when host is registered in developerHostList property that defined tipJS.app method.
+            </p>
+            <pre><code class="javascript">tipJS.app({
+    ...
+    developmentHostList:[
+        'localhost'
+        ,'127.0.0.1'
+        ,'tipjs.com'
+    ],
+    ...
+});</code></pre>
+            <pre><code class="javascript">var someValue = someMethod();
+tipJS.debug("someValue is " + someValue);</code></pre>
+            <p>
+                If browser url is correct with defined host name at developmentHostList then You can see the message that you wrote.<br/>
+                You can use the tipJS.log method even if It's not on the development mode.
+            </p>
+        </article>
+        <article id="Release-Mode">
+            <h2>Release Mode</h2>
+            <p>
+                tipJS JavaScript MVC Framework provides Release mode.
+                <br/><br/>It is Operating system of controller/model/view/interceptor and it working in release mode
+                tipJS는 기본적으로 개발자의 개발/유지보수의 편의를 위해 controller/model/view/interceptor 의 파일을 분리하도록 강제하고 있습니다. 그러나 모바일/네트워크상의 문제등으로 인해 js 파일의 억세스가 느릴경우 페이지 로딩시 시간이 지체되는 문제가 발생할 수 있습니다. release mode를 설정하면 이러한 문제를 회피할 수 있습니다.
+                <br/><br/>먼저 빌드툴등을 이용하여 controller/model/view/interceptor 등의 파일을 "[appPath]/tipJSFile.js" 로 합치는 작업을 합니다.
+                그다음 tipJS.app method 에 releaseHostList 속성을 등록합니다.
+            </p>
+            <pre><code class="javascript">tipJS.app({
+    ...
+    releaseHostList : [
+        "sub1.example.com",
+        "sub2.example.com",
+        "sub3.example.com"
+    ],
+    ...
+});</code></pre>
+            <p>releaseHostList의 호스트에서 tipJS가 동작할시 tipJS는 나뉘어진 controller/model/view/interceptor 파일들을 대신하여 "[appPath]/tipJSFile.js" 에 등록된 controller/model/view/interceptor 를 사용하여 동작합니다.</p>
+        </article>
+        <article id="Benchmark">
+            <h2>Benchmark</h2>
+            <p>
+                tipJS JavaScript MVC Framework provides benchmark method.
+                There are no precondition to use tipJS.benchmark method.
+                <br/><br/>Use the tipJS.benchmark.mark method for register start point and Use the tipJS.bechmark.elapsedTime method where you want to see the end of duration.</p>
+            <pre><code class="javascript">tipJS.benchmark.mark("point1");
+...
+tipJS.benchmark.mark("point2");
+tipJS.benchmark.elapsedTime("point1", "point2");</code></pre>
+            <p>You can use the callback function as a third argument of tipJS.benchmark.elapsedTime method.</p>
+            <pre><code class="javascript">tipJS.benchmark.mark("point1");
+...
+tipJS.benchmark.mark("point2");
+tipJS.benchmark.elapsedTime("point1", "point2", function(startName, endName, startTime, endTime, elapsedTime){
+    ...
+});</code></pre>
+        </article>
+        <article id="i18n">
+            <h2>i18n</h2>
+            <p>tipJS JavaScript MVC Framework provides inernationalization/i18n. add 'localSet : true' property in the tipJS.app method when you want activate it.</p>
+            <pre><code class="javascript">tipJS.app({
+    ...
+    localSet:true,
+    ...
+});</code></pre>
+            <p>
+                Create lang folder below the application folder and make each language files likes below. tipJS define default language it depends on the browser user-agent (navigator.language || navigator.systemLanguage || navigator.userLanguage).
+            </p>
+            <pre><code class="javascript">// lang/ko.js
+tipJS.localSet({
+    "Save":"저장",
+    "Load":"불러오기"
+});</code></pre>
+            <pre><code class="javascript">// lang/ja.js
+tipJS.localSet({
+    "Save":"保存",
+    "Load":"読み込み"
+});</code></pre>
+            <p>
+                Set the langauge to manually, change tipJS.lang property before invoke tipJS.loadApp. The code is as follows:
+            </p>
+            <pre><code class="javascript">...
+tipJS.lang = "ja"; // set to Japaness
+tipJS.loadApp();
+...</code></pre>
+            <p>
+                Use the tipJS.msg method when you want to get a specified language set.
+            </p>
+            <pre><code class="javascript">tipJS.controller("someCtrler", {
+    invoke:function(params){
+        console.log( tipJS.msg("Save") ); // result "저장"
+    }
+});</code></pre>
+            <pre><code class="javascript">tipJS.model({
+    __name : "someApp.someModel",
+    someMethod:function(params){
+        console.log( tipJS.msg("Load") ); // result "불러오기"
+    }
+});</code></pre>
+            <p>
+                If you do not have the language files (tipJS.localSet), the value is returned unchanged message from tipJS.msg method.
+            </p>
+            <pre><code class="javascript">tipJS.model("someModel", {
+    someMethod:function(params){
+        console.log( tipJS.msg("Some Message") ); // result "Some Message"
+    }
+});</code></pre>
+        </article>
+    </section>
 
-<section id="Template">
-    <h1>Template</h1>
-</section>
+    <section id="tutorials">
+        <h1>Tutorials</h1>
+            <ul>
+            <li id="T-Controller">
+                <h3>Controller [<a href="https://github.com/tipJS-Team/tipJS/tree/master/tutorial/Controller">src</a>] [<a href="http://tipjs-team.github.io/tipJS/tutorial/Controller/">view</a>]</h3>
+            </li>
+            <li id="T-Model">
+                <h3>Model [<a href="https://github.com/tipJS-Team/tipJS/tree/master/tutorial/Model">src</a>] [<a href="http://tipjs-team.github.io/tipJS/tutorial/Model/">view</a>]</h3>
+            </li>
+            <li id="T-ModelSync">
+                <h3>ModelSync [<a href="https://github.com/tipJS-Team/tipJS/tree/master/tutorial/ModelSync">src</a>] [<a href="http://tipjs-team.github.io/tipJS/tutorial/ModelSync/">view</a>]</h3>
+            </li>
+            <li id="T-ModelVO">
+                <h3>ModelVO [<a href="https://github.com/tipJS-Team/tipJS/tree/master/tutorial/ModelVO">src</a>] [<a href="http://tipjs-team.github.io/tipJS/tutorial/ModelVO/">view</a>]</h3>
+            </li>
+            <li id="T-ModelExtend">
+                <h3>ModelExtend [<a href="https://github.com/tipJS-Team/tipJS/tree/master/tutorial/ModelExtend">src</a>] [<a href="http://tipjs-team.github.io/tipJS/tutorial/ModelExtend/">view</a>]</h3>
+            </li>
+            <li id="T-View(HTML-Template)">
+                <h3>View(HTML Template) [<a href="https://github.com/tipJS-Team/tipJS/tree/master/tutorial/View">src</a>] [<a href="http://tipjs-team.github.io/tipJS/tutorial/View/">view</a>]</h3>
+            </li>
+            <li id="T-ViewExtend">
+                <h3>ViewExtend(HTML Template) [<a href="https://github.com/tipJS-Team/tipJS/tree/master/tutorial/ViewExtend">src</a>] [<a href="http://tipjs-team.github.io/tipJS/tutorial/ViewExtend/">view</a>]</h3>
+            </li>
+        </ul>
+    </section>
 
-<section id="utility">
-    <h1>Utility</h1>
-    <article id="i18n">
-        <h2>i18n</h2>
-    </article>
-</section>
+    <section id="examples">
+        <h1>Examples</h1>
+        <ul>
+            <li>
+                <h3>basicTemplate [<a href="https://github.com/tipJS-Team/tipJS/tree/master/examples/basicTemplate">src</a>] [<a href="http://tipjs-team.github.io/tipJS/examples/basicTemplate">view</a>]</h3>
+            </li>
+            <li>
+                <h3>myBatisLogParser [<a href="https://github.com/tipJS-Team/tipJS/tree/master/examples/myBatisLogParser">src</a>] [<a href="http://tipjs-team.github.io/tipJS/examples/myBatisLogParser">view</a>]</h3>
+            </li>
+            <li>
+                <h3>todoMVC with external template [<a href="https://github.com/tipJS-Team/tipJS/tree/master/examples/todoMVC">src</a>] [<a href="http://tipjs-team.github.io/tipJS/examples/todoMVC">view</a>]</h3>
+            </li>
+            <li>
+                <h3>todoMVC with internal template [<a href="https://github.com/tipJS-Team/tipJS/tree/master/examples/todoMVC.int">src</a>] [<a href="http://tipjs-team.github.io/tipJS/examples/todoMVC.int">view</a>]</h3>
+            </li>
+            <li>
+                <h3>base64 image encoder [<a href="https://github.com/tipJS-Team/tipJS/tree/master/examples/base64Image">src</a>] [<a href="http://tipjs-team.github.io/tipJS/examples/base64Image">view</a>]</h3>
+            </li>
+            <li>
+                <h3>ImageViewerOnTab(chrome extension) [<a href="https://github.com/tipJS-Team/tipJS/tree/master/examples/ImageViewerOnTab">src</a>]</h3>
+            </li>
+        </ul>
+    </section>
 
-<section id="AOP">
-    <h1>AOP</h1>
-</section>
-
-<section id="etc">
-    <h1>ETC</h1>
-    <article id="Debug-Mode">
-        <h2>Debug Mode</h2>
-    </article>
-    <article id="Benchmark">
-        <h2>Benchmark</h2>
-    </article>
-    <article id="Echo">
-        <h2>Echo</h2>
-    </article>
-</section>
-
-<section id="tutorials">
-    <h1>Tutorials</h1>
-    <article id="T-Controller">
-        <h2>Controller</h2>
-    </article>
-    <article id="T-Model">
-        <h2>Model</h2>
-    </article>
-    <article id="T-ModelSync">
-        <h2>ModelSync</h2>
-    </article>
-    <article id="T-ModelVO">
-        <h2>ModelVO</h2>
-    </article>
-    <article id="T-ModelExtend">
-        <h2>ModelExtend</h2>
-    </article>
-    <article id="T-View(HTML-Template)">
-        <h2>View(HTML Template)</h2>
-    </article>
-    <article id="T-ViewExtend">
-        <h2>ViewExtend</h2>
-    </article>
-</section>
-
-<section id="examples">
-    <h1>Examples</h1>
-</section>
-
-<section id="contributors">
-    <h1>Contributors</h1>
-</section>
+    <section id="contributors">
+        <h1>Contributors</h1>
+        <ul>
+            <li>
+                <img src="http://www.gravatar.com/avatar/6797aabea4f1f19a7b7a48ba43ee9908" />
+                <h2>tipJS</h2>
+                <a href="https://twitter.com/tipJS" class="SNSLink icon-twitter" target="_blank">@tipJS</a>
+                <a href="https://www.facebook.com/pekuid" class="SNSLink icon-facebook" target="_blank">pekuid</a>
+            </li>
+            <li>
+                <img src="http://www.gravatar.com/avatar/ea49d570a6a8654adf6c0b8d90e51290" />
+                <h2>javarouka</h2>
+                <a href="https://twitter.com/YiHanghee" class="SNSLink icon-twitter" target="_blank">@YiHanghee</a>
+                <a href="https://www.facebook.com/hanghui.i" class="SNSLink icon-facebook" target="_blank">hanghui.i</a>
+            </li>
+            <li>
+                <img src="http://www.gravatar.com/avatar/0d1684b6dd955eeac7064013b915e850" />
+                <h2>coma</h2>
+                <a href="https://twitter.com/Coma333" class="SNSLink icon-twitter" target="_blank">@Coma333</a>
+                <a href="https://www.facebook.com/jeongbu.yun" class="SNSLink icon-facebook" target="_blank">jeongbu.yun</a>
+            </li>
+            <li>
+                <img src="http://www.gravatar.com/avatar/c43dbde67b581b385786be6436c87928" />
+                <h2>iMaZiNe</h2>
+                <a href="https://twitter.com/iMaZiNe80" class="SNSLink icon-twitter" target="_blank">@iMaZiNe80</a>
+                <a href="https://www.facebook.com/imazine80" class="SNSLink icon-facebook" target="_blank">imazine80</a>
+            </li>
+            <li>
+                <img src="http://www.gravatar.com/avatar/60b72b3d76907da99c36a3280584bb6b" />
+                <h2>rkJun</h2>
+                <a href="https://twitter.com/rkJun" class="SNSLink icon-twitter" target="_blank">@rkJun</a>
+                <a href="https://www.facebook.com/juntai81" class="SNSLink icon-facebook" target="_blank">juntai81</a>
+            </li>
+        </ul>
+    </section>
 
 </section>
 <script src="component/highlight.js/highlight.pack.js"></script>
