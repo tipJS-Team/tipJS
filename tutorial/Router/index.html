@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>tipJS.com - Javascript MVC Framework Router Tutorial</title>
+<script src="../../tipJS/tipJS.dev.js"></script>
+<script src="./app.js"></script>
+</head>
+<body>
+<ul>
+	<li><a href="./">/</a> (no hash)</li>
+	<li><a href="#!/">#!/</a></li>
+	<li><a href="#!/page1" onclick="location=this.href; return false;">#!/page1</a></li>
+	<li><a href="#!/page2" onclick="location=this.href; return false;">#!/page2</a></li>
+	<li><a href="#!/page3" onclick="location=this.href; return false;">#!/page3</a></li>
+	<li><a href="#!/page7" onclick="location=this.href; return false;">#!/page7</a> (hash, not registered)</li>
+</ul>
+<div id="content"></div>
+<script id="divTemp0" type="text/template">
+<table>
+<@for(var i=0; i<10; i++){@>
+<tr>
+	<td style='' class="bb">0<@=i@></td>
+</tr>
+<@}@>
+</table>
+</script>
+
+<script id="divTemp1" type="text/template">
+<table>
+<@for(var i=0; i<10; i++){@>
+<tr>
+	<td style='' class="bb">page1<@=i@></td>
+</tr>
+<@}@>
+</table>
+</script>
+
+<script id="divTemp2" type="text/template">
+<table>
+<@for(var i=0; i<10; i++){@>
+<tr>
+	<td style='' class="bb">page2<@=i@></td>
+</tr>
+<@}@>
+</table>
+</script>
+
+<script id="divTemp3" type="text/template">
+<table>
+<@for(var i=0; i<10; i++){@>
+<tr>
+	<td style='' class="bb">page3<@=i@></td>
+</tr>
+<@}@>
+</table> 
+</script>
+
+<script id="divTemp4" type="text/template">
+<table>
+<@for(var i=0; i<10; i++){@>
+<tr>
+	<td style='' class="bb">default</td>
+</tr>
+<@}@>
+</table> 
+</script>
+
+<script id="divTemp5" type="text/template">
+<table>
+<@for(var i=0; i<10; i++){@>
+<tr>
+	<td style='' class="bb">not registered</td>
+</tr>
+<@}@>
+</table> 
+</script>
+<ul>
+	<li><a href="app.js">app.js</a></li>
+	<ul>
+		<li><a href="controllers/print.js">controllers/print.js</a></li>
+		<li><a href="controllers/print4.js">controllers/print4.js</a></li>
+		<li><a href="controllers/print5.js">controllers/print5.js</a></li>
+	</ul>
+</ul>
+<script>
+
+</script>
+</body>
+</html>

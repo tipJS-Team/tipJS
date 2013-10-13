@@ -195,7 +195,7 @@ Browser cache 제어를 위한 parameter name을 설정합니다.(default:"noCac
 
 ##Router
 tipJS JavaScript MVC Framework 는 tipJS.app method 의 설정을 통해 Router 기능을 제공합니다.  
-(이 기능은 IE7 이하에서 작동하지 않습니다.)
+Router Tutorial[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/Router/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/Router/)]
 
 ```
 tipJS.app({
@@ -1056,6 +1056,7 @@ tipJS.model("someModel", {
 
 #Tutorials
 - Controller[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/Controller)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/Controller/)]
+- Router[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/Router/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/Router/)]
 - Model[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/Model/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/Model/)]
 - ModelSync[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/ModelSync/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/ModelSync/)]
 - ModelVO[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/ModelVO/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/ModelVO/)]
