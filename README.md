@@ -453,7 +453,7 @@ tipJS.controller("someController", {
 });
 </pre>
 
-##동기 모델 - Syncronous Model
+##Syncronous Model
 tipJS JavaScript MVC Framework는 Model의 동기화 기능을 제공합니다.
 Model 의 동기화 기능이란 하나의 생성된 Model Object가 소멸되지 않고 변경되어지는 값을 가진채 유지되는 것을 말합니다.
 
@@ -540,7 +540,7 @@ tipJS.controller("someController", {
 });
 </pre>
 
-##Model 의 extension(Inheritance)
+##Model extension(Inheritance)
 tipJS JavaScript MVC Framework는 Model의 확장 기능을 제공합니다.
 
 ModelExtend Tutorial[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/ModelExtend/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/ModelExtend/)]
@@ -621,7 +621,7 @@ tipJS.controller({
 });
 </pre>
 
-##ViewModel 의 extension(Inheritance)
+##ViewModel extension(Inheritance)
 tipJS JavaScript MVC Framework는 ViewModel의 확장 기능을 제공합니다.
 
 ViewModel Extend Tutorial[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/ViewExtend/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/ViewExtend/)]
@@ -749,7 +749,7 @@ tipJS.controller("someController", {
 });
 </pre>
 
-## HTML Template file 의 논리적 분할
+##Logical split of HTML Template file
 하나의 물리적 file 을 논리적으로 분할하여 사용하는 기능에 대해 설명합니다.
 
 논리 id 명은 tplId 속성에 지정하여 사용해야 하며 template file 의 [[#id]] 와 matching 됩니다.
@@ -864,7 +864,7 @@ interceptor.after #1 : some Message
 interceptor.after #2 : some Message
 </pre>
 
-## 실행 우선순위 지정
+##Specifies the execution priority
 interceptor 의 order 속성값을 지정하여 interceptor들간의 실행 우선순위를 지정할수 있습니다.
 <pre>
 tipJS.controller("someCtrler", {
