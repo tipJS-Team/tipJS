@@ -979,13 +979,16 @@ tipJS JavaScript MVC Framework provides Release mode.
 
 It is Operating system of controller/model/view/interceptor and it working in release mode
 
-tipJS는 기본적으로 개발자의 개발/유지보수의 편의를 위해 controller/model/view/interceptor 의 파일을 분리하도록 강제하고 있습니다.
-그러나 모바일/네트워크상의 문제등으로 인해 js 파일의 억세스가 느릴경우 페이지 로딩시 시간이 지체되는 문제가 발생할 수 있습니다.
-release mode를 설정하면 이러한 문제를 회피할 수 있습니다.
+It is your development / maintenance for the convenience of the controller / model / view / interceptor are forced to separate the file
 
-먼저 빌드툴등을 이용하여 controller/model/view/interceptor 등의 파일을 "[appPath]/tipJSFile.js" 로 합치는 작업을 합니다.
+But js file to mobile / network problems if the access is slow page load times that the delay can cause problems.
 
-그다음 tipJS.app method 에 releaseHostList 속성을 등록합니다.
+When you set the release mode to work around this problem can be.
+
+First, build tools, and the controller / model / view / interceptor file as "[appPath] / tipJSFile.js" consistent with the action.
+
+Then tipJS.app method to register the property in the releaseHostList.
+
 ```
 tipJS.app({
     ...
@@ -997,7 +1000,7 @@ tipJS.app({
     ...
 });
 ```
-releaseHostList의 호스트에서 tipJS가 동작할시 tipJS는 나뉘어진 controller/model/view/interceptor 파일들을 대신하여 "[appPath]/tipJSFile.js" 에 등록된 controller/model/view/interceptor 를 사용하여 동작합니다.
+When operating in the releaseHostList tipJS, It's the controller / model / view / interceptor file on behalf of "[appPath] / tipJSFile.js" registered in the controller / model / view / interceptor to use will work.
 
 ##Benchmark
 tipJS JavaScript MVC Framework provides benchmark method.
