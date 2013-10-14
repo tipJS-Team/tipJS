@@ -54,6 +54,7 @@ Dual licensed under the MIT or GPL Version 2 licenses.
 - tipJS implements complex JavaScript Application in the form of MVC Pattern.
 - tipJS is familiar framework for Back-end Developers.
 - Supported AOP(Aspect-Oriented Programming).
+- tipJS provides Router.
 - tipJS creates a user's view simply by providing simple HTML Template.
 - tipJS can be compatible with diverse browsers (IE 7/8/9, Chrome, Firefox, Safari, etc...)
 - tipJS does not require any external library as it was developed as JavaScript ECMAScript Code for independent operation.
@@ -205,6 +206,7 @@ It is set parameter name for Browser cache control.(default:"noCacheVersion")
 
 ##Router
 tipJS JavaScript MVC Framework support Router function through properties of tipJS.app method.
+Router Tutorial[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/Router/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/Router/)]
 
 ```
 tipJS.app({
@@ -216,25 +218,25 @@ tipJS.app({
 		"noPageCtrler.js"
 	],
 	routes:[
-		// url hash가 존재하지 않을때 defaultCtrler가 동작합니다.
+		// When url hash does not exist, defaultCtrler is invoked.
 		// http://domain.com
 		{
 			url:"/",
 			controller:"defaultCtrler"
 		},
-		// url hash가 '#/page1' 일때 page1Ctrler가 동작합니다.
+		// When url hash is '#/page1', page1Ctrler is invoked.
 		// http://domain.com/#/page1
 		{
 			url:"#/page1",
 			controller:"page1Ctrler"
 		},
-		// url hash가 '#/page2' 일때 page2Ctrler가 동작합니다.
+		// When url hash is '#/page2', page2Ctrler is invoked.
 		// http://domain.com/#/page2
 		{
 			url:"#/page2",
 			controller:"page2Ctrler"
 		},
-		// 라우터에 등록되지 않은 url hash 일때 noPageCtrler가 동작합니다.
+		// When url haash is not registered in the router, noPageCtrler is invoked.
 		// http://domain.com/#/pageXX
 		{
 			url:"!",
