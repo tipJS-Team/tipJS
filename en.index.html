@@ -354,25 +354,25 @@ that irrespective of noCacheVersion option value.(default:false)</li>
         "noPageCtrler.js"
     ],
     routes:[
-        // url hash가 존재하지 않을때 defaultCtrler가 동작합니다.
+        // When url hash does not exist, defaultCtrler is invoked.
         // http://domain.com
         {
             url:"/",
             controller:"defaultCtrler"
         },
-        // url hash가 '#/page1' 일때 page1Ctrler가 동작합니다.
+        // When url hash is '#/page1', page1Ctrler is invoked.
         // http://domain.com/#/page1
         {
             url:"#/page1",
             controller:"page1Ctrler"
         },
-        // url hash가 '#/page2' 일때 page2Ctrler가 동작합니다.
+        // When url hash is '#/page2', page2Ctrler is invoked.
         // http://domain.com/#/page2
         {
             url:"#/page2",
             controller:"page2Ctrler"
         },
-        // 라우터에 등록되지 않은 url hash 일때 noPageCtrler가 동작합니다.
+        // When url haash is not registered in the router, noPageCtrler is invoked.
         // http://domain.com/#/pageXX
         {
             url:"!",
