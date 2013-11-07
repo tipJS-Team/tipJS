@@ -236,7 +236,7 @@
 			__cloneObjN = function(o) {
 				function F() {};
 				F.prototype = o;
-				return new F();
+				return new F;
 			};
 		}
 		return __cloneObjN(target);
@@ -364,7 +364,7 @@
 		if (Date.now) {
 			__getSecs = function(){ return Date.now();};
 		} else {
-			__getSecs = function(){ return (new Date).getTime();};
+			__getSecs = function(){ return +new Date;};
 		}
 		return __getSecs();
 	};
@@ -929,7 +929,7 @@
 	var __getXMLReq = function() {
 		var _xmlreq = false;
 		if (window.XMLHttpRequest)
-			_xmlreq = new XMLHttpRequest();
+			_xmlreq = new XMLHttpRequest;
 		else if (window.ActiveXObject) {
 			try {
 				_xmlreq = new ActiveXObject("Msxml2.XMLHTTP");
@@ -1081,11 +1081,11 @@
 	 * @param prefix
 	 */
 	tipJS.log = function(msg, prefix) {
-		window.console = window.console || {
+		window['console'] = window['console'] || {
 			log : function() {},
 			error : function() {}
 		};
-		var _today = new Date(), _yyyy = _today.getFullYear(), _mm = _today.getMonth() + 1, _dd = _today.getDate(), _hh = _today.getHours(), _mi = _today.getMinutes(), _ss = _today.getSeconds(), _ms = _today.getMilliseconds();
+		var _today = __getSecs, _yyyy = _today.getFullYear(), _mm = _today.getMonth() + 1, _dd = _today.getDate(), _hh = _today.getHours(), _mi = _today.getMinutes(), _ss = _today.getSeconds(), _ms = _today.getMilliseconds();
 		console.log(((prefix) ? prefix : "") + _yyyy + '/' + _mm + '/' + _dd + ' ' + _hh + ':' + _mi + ':' + _ss + '.' + _ms + ' ' + msg);
 	};
 
