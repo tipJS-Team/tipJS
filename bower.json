@@ -1,6 +1,6 @@
 {
   "name": "tipJS",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "authors": [
     "pekuid <pekuid@gmail.com>",
     "javarouka <javarouka@gmail.com>",
@@ -15,5 +15,8 @@
     "public/components",
     "test"
   ],
-  "main": "build/tipJS.min.js"
+  "main": [
+  	"build/tipJS.min.js",
+  	"examples/tipJS.min.js",
+  ]
 }

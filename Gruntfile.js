@@ -36,6 +36,11 @@ module.exports = function(grunt) {
         files: [
           {src: sources, dest: 'test/'}
         ]
+      },
+      uglify: {
+        files: [
+          {expand: true, flatten: true, src: buildDirPath + destinationName + '.min.js', dest: 'examples/'}
+        ]
       }
     },
     uglify: {
@@ -136,5 +141,5 @@ module.exports = function(grunt) {
     ['clean:test', 'copy:test', /*'jshint',*/ 'connect:test', 'qunit']);
 
   grunt.registerTask('build',
-    ['clean:test', 'copy:test', /*'jshint',*/ 'connect:test', 'qunit', 'uglify:build']);
+    ['clean:test', 'copy:test', /*'jshint',*/ 'connect:test', 'qunit', 'uglify:build', 'copy:uglify']);
 };

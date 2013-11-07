@@ -1,5 +1,5 @@
 /*
- * tipJS - OpenSource Javascript MVC Framework ver.2.1.1
+ * tipJS - OpenSource Javascript MVC Framework ver.2.1.2
  *
  * Copyright 2013.08 SeungHyun PAEK, tipJS-Team.
  * Dual licensed under the MIT or GPL Version 2 licenses.
@@ -11,7 +11,7 @@
 	"use strict";
 
 	var tipJS = {};
-	tipJS.ver = tipJS.version = tipJS.VERSION = "2.1.1";
+	tipJS.ver = tipJS.version = tipJS.VERSION = "2.1.2";
 
 	context.tipJS = tipJS;
 
