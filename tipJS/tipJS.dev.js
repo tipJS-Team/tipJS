@@ -1,5 +1,5 @@
 /*
- * tipJS - OpenSource Javascript MVC Framework ver.2.1.2
+ * tipJS - OpenSource Javascript MVC Framework ver.2.1.3
  *
  * Copyright 2013.08 SeungHyun PAEK, tipJS-Team.
  * Dual licensed under the MIT or GPL Version 2 licenses.
@@ -11,7 +11,7 @@
 	"use strict";
 
 	var tipJS = {};
-	tipJS.ver = tipJS.version = tipJS.VERSION = "2.1.2";
+	tipJS.ver = tipJS.version = tipJS.VERSION = "2.1.3";
 
 	context.tipJS = tipJS;
 
@@ -40,9 +40,7 @@
         return __protoToString.call(obj) === '[object ' + type + ']';
       };
     };
-  for(var t = 0,len = types.length; t < len; t++) {
-    checker(types[t]);
-  }
+  for(var t = 0,len = types.length; t < len; t++) checker(types[t]);
 
 	/**
 	 * obj 가 Array 인지 체크
@@ -71,12 +69,9 @@
 	 * @returns Array
 	 */
 	util__.toArray = function(obj) {
-		var _ret = [];
-		if (obj.length) {
-			for(var i=0, len=obj.length;i<len; i++) {
-        _ret[i] = obj[i];
-      }
-		}
+		var _ret, i, len;
+		_ret = [];
+		if (obj.length) for(i=0, len=obj.length;i<len; i++) _ret[i] = obj[i];
 		return _ret;
 	};
 
@@ -121,9 +116,9 @@
 	 * @return 병합된 Object
 	 */
 	util__.mergeObject = function(overwrite, base) {
-		for (var k in base) {
-			if (overwrite[k])
-				continue;
+		var k;
+		for (k in base) {
+			if (overwrite[k]) continue;
 			overwrite[k] = base[k];
 		}
 		return overwrite;
@@ -137,22 +132,16 @@
 	 * @return Object Clone
 	 */
 	util__.cloneObject = function(obj, isFlat){
-		if (obj == null || typeof obj != "object") {
-			return obj;
-		}
+		var newObj, k;
+		if (obj == null || typeof obj != "object") return obj;
 		if (!isFlat) {
-			var newObj = (obj instanceof Array) ? [] : {};
-			for (var k in obj) {
-				if (typeof obj[k] == "object") {
-					newObj[k] = util__.cloneObject(obj[k], false);
-				} else {
-					newObj[k] = obj[k];
-				}
+			newObj = (obj instanceof Array) ? [] : {};
+			for (k in obj) {
+				if (typeof obj[k] == "object") newObj[k] = util__.cloneObject(obj[k], false);
+				else newObj[k] = obj[k];
 			}
 			return newObj;
-		} else {
-			return __cloneObjN(obj);
-		}
+		} else return __cloneObjN(obj);
 	};
 
 	/**
@@ -162,11 +151,9 @@
 	 * @return isFlatObject flag
 	 */
 	util__.hasChild = function(obj) {
-		for (var k in obj) {
-			// Array 와 Object 일때 true
-			if (typeof obj[k] == "object")
-				return true;
-		}
+		var k;
+		// Array 와 Object 일때 true
+		for (k in obj) if (typeof obj[k] == "object") return true;
 		return false;
 	};
 
@@ -177,12 +164,9 @@
 	 * @return unique 한 요소를 갖는 array
 	 */
 	util__.uniqArray = function(arr) {
-		var _ret = [], _len = arr.length;
-		for (var i = 0; i < _len; i++) {
-			for (var j = i + 1; j < _len; j++) {
-				if (arr[i] === arr[j])
-					j = ++i;
-			}
+		var _ret = [], _len = arr.length, i, j;
+		for (i = 0; i < _len; i++) {
+			for (j = i + 1; j < _len; j++) if (arr[i] === arr[j]) j = ++i;
 			_ret.push(arr[i]);
 		}
 		return _ret;
@@ -207,11 +191,7 @@
 						callbackFn(this);
 					}
 				};
-			} else {
-				_tagScript.onload = function() {
-					callbackFn(this);
-				};
-			}
+			} else _tagScript.onload = function() {callbackFn(this);};
 		}
 		util__.getByTag('head')[0].appendChild(_tagScript);
 	};
@@ -228,11 +208,8 @@
 	 * @return Object Clone
 	 */
 	var __cloneObjN = function(target) {
-		if (util__.isFunction(Object.create)) {
-			__cloneObjN = function(o) {
-				return Object.create(o);
-			};
-		} else {
+		if (util__.isFunction(Object.create)) __cloneObjN = function(o) {	return Object.create(o); };
+		else {
 			__cloneObjN = function(o) {
 				function F() {};
 				F.prototype = o;
@@ -250,39 +227,26 @@
 	 * @param parentName
 	 */
 	var __echo = tipJS.echo = function(target, filter, parentName) {
-		if (parentName && (typeof parentName != "string" || typeof parentName == "string" && (parentName.split(".").length + parentName.split("]").length) > 3))
-			return;
-
+		var k;
+		if (parentName && (typeof parentName != "string" || typeof parentName == "string" && (parentName.split(".").length + parentName.split("]").length) > 3)) return;
 		if (!filter) filter = "";
 		if (target === null || target === undefined) {
 			console.log(((parentName) ? parentName + "." : "") + target);
 			return;
 		}
 		if (typeof target != "object") {
-			if (typeof target == filter || filter === "")
-				console.log(((parentName) ? parentName + "." : "") + target + "["+ typeof target +"]");
+			if (typeof target == filter || filter === "")	console.log(((parentName) ? parentName + "." : "") + target + "["+ typeof target +"]");
 			return;
 		}
-		if (target instanceof Array) {
-			console.log(((parentName) ? parentName + ":" : "") + "[Array["+ target.length + "]]");
-		} else {
-			console.log(((parentName) ? parentName + ":" : "") + "[Object]");
-		}
-		for (var k in target) {
+		if (target instanceof Array) console.log(((parentName) ? parentName + ":" : "") + "[Array["+ target.length + "]]");
+		else console.log(((parentName) ? parentName + ":" : "") + "[Object]");
+		for (k in target) {
 			if (target instanceof Array) {
-				if (typeof target[k] == "object"){
-					__echo(target[k], filter, ((parentName) ? parentName + "[" : "[") + k + ((parentName) ? "]" : "]"));
-				} else {
-					if (typeof target[k] == filter || filter === "")
-						console.log(((parentName) ? parentName + "[" : "[") + k + ((parentName) ? "]" : "]") + ":" + target[k] + " ("+ typeof target[k] +")");
-				}
+				if (typeof target[k] == "object") __echo(target[k], filter, ((parentName) ? parentName + "[" : "[") + k + ((parentName) ? "]" : "]"));
+				else if (typeof target[k] == filter || filter === "") console.log(((parentName) ? parentName + "[" : "[") + k + ((parentName) ? "]" : "]") + ":" + target[k] + " ("+ typeof target[k] +")");
 			} else {
-				if (typeof target[k] == "object"){
-					__echo(target[k], filter, ((parentName) ? parentName + "." : "")+k);
-				} else {
-					if (typeof target[k] == filter || filter === "")
-						console.log(((parentName) ? parentName + "." : "") + k + ":" + target[k] + " ("+ typeof target[k] +")");
-				}
+				if (typeof target[k] == "object") __echo(target[k], filter, ((parentName) ? parentName + "." : "")+k);
+				else if (typeof target[k] == filter || filter === "") console.log(((parentName) ? parentName + "." : "") + k + ":" + target[k] + " ("+ typeof target[k] +")");
 			}
 		}
 	};
@@ -305,16 +269,9 @@
 	 * @return result
 	 */
 	var __isSelfExt = function(ext, name){
-		if (util__.isArray(ext)) {
-			for(var i=ext.length; i--;){
-				if (ext[i] == name) {
-					return true;
-				}
-			}
-		} else {
-			if (ext == name)
-				return true;
-		}
+		var i;
+		if (util__.isArray(ext)) for(i=ext.length; i--;) if (ext[i] == name) return true;
+		else if (ext == name) return true;
 		return false;
 	};
 
@@ -326,17 +283,10 @@
 	 * @return extended Object
 	 */
 	var __extModel = function(child, type){
-		var _parents = child.__extend;
-		if (!_parents)
-			return child;
-
-		if (util__.isString(_parents)) {
-			child = __getExtObj(child, _parents, type);
-		} else if (_parents instanceof Array) {
-			for (var i = _parents.length; i--;) {
-				child = __getExtObj(child, _parents[i], type);
-			}
-		}
+		var _parents = child.__extend, i;
+		if (!_parents) return child;
+		if (util__.isString(_parents)) child = __getExtObj(child, _parents, type);
+		else if (_parents instanceof Array) for (i = _parents.length; i--;) child = __getExtObj(child, _parents[i], type);
 		return child;
 	};
 
@@ -348,11 +298,8 @@
 	 * @return extended Object
 	 */
 	var __getExtObj = function(child, parent, type){
-		if (type == "model") {
-			return util__.mergeObject(child, util__.cloneObject(__getModel(parent)));
-		} else {
-			return util__.mergeObject(child, util__.cloneObject(__getView(parent)));
-		}
+		if (type == "model") return util__.mergeObject(child, util__.cloneObject(__getModel(parent)));
+		else return util__.mergeObject(child, util__.cloneObject(__getView(parent)));
 	};
 
 	/**
@@ -361,11 +308,8 @@
 	 * @return seconds
 	 */
 	var __getSecs = function(){
-		if (Date.now) {
-			__getSecs = function(){ return Date.now();};
-		} else {
-			__getSecs = function(){ return +new Date;};
-		}
+		if (Date.now) __getSecs = function(){ return Date.now();};
+		else __getSecs = function(){ return +new Date;};
 		return __getSecs();
 	};
 
@@ -383,7 +327,6 @@
 				if (isCapture === undefined) isCapture = false;
 				target.addEventListener(type, fn, isCapture);
 			};
-			__addEvent(target, type, fn, isCapture);
 		} else if (window.attachEvent) {
 			__addEvent = function(target, type, fn, isCapture){
 				if (type == "hashchange" && !('onhashchange' in window)) {
@@ -392,8 +335,8 @@
 				}
 				target.attachEvent("on"+type, fn);
 			};
-			__addEvent(target, type, fn, isCapture);
 		}
+		__addEvent(target, type, fn, isCapture);
 	};
 
 	/**
@@ -401,16 +344,13 @@
 	 *
 	 */
 	var __setOnHash = function(){
-		if ('onhashchange' in window) {
-			return;
-		}
-		var _oldHash = location.hash;
+		var _oldHash, i, fnLen;
+		if ('onhashchange' in window) return;
+		_oldHash = location.hash;
 		setInterval(function(){
 			if (_oldHash != location.hash) {
 				_oldHash = location.hash;
-				for(var i=0, fnLen=onHashFn__.length; i<fnLen; i++){
-					onHashFn__[i]();
-				}
+				for(i=0, fnLen=onHashFn__.length; i<fnLen; i++) onHashFn__[i]();
 			}
 		}, 200);
 	};
@@ -428,19 +368,10 @@
 	 * @param depart
 	 */
 	var __registDepart = function(departType, key, depart) {
-		if (!util__.isObject(depart))
-			throw new Error(__getDefErrMsg(departType));
-
-		if (!util__.isString(key))
-			throw new Error(__getDefErrMsg(departType));
-
-		if (depart.__extend && departType != "controllers" && departType != "interceptors" && __isSelfExt(depart.__extend, key)) {
-			throw new Error("Can't extend itself: " + key);
-		}
-
-		if (!app__)
-			throw new Error(__getDefErrMsg(departType));
-
+		if (!util__.isObject(depart)) throw new Error(__getDefErrMsg(departType));
+		if (!util__.isString(key)) throw new Error(__getDefErrMsg(departType));
+		if (depart.__extend && departType != "controllers" && departType != "interceptors" && __isSelfExt(depart.__extend, key)) throw new Error("Can't extend itself: " + key);
+		if (!app__)	throw new Error(__getDefErrMsg(departType));
 		if (app__.loadOrder.presentOrder() === departType || tipJS.isRelease) {
 			switch(departType) {
 				case "interceptors":
@@ -462,7 +393,7 @@
 	 */
 	var __getAppReqList = function(define, depart) {
 		var _path = app__.define.path[depart],
-			_appRoot = define.appPath ? define.appPath : ".";
+			_appRoot = define.appPath ? define.appPath : ".", _departs, i, _ret;
 
 		if (depart === "lang" && define.localSet) {
 			define[depart] = [_appRoot + "/" + _path + "/" + tipJS.lang + ".js"];
@@ -472,11 +403,8 @@
 			define[depart] = [_appRoot + "/" + app__.define.releaseFile];
 			return define[depart];
 		}
-		var _departs = util__.uniqArray(define[depart]),
-			_ret = [];
-		for (var i = _departs.length; i--;) {
-			_ret.push(_appRoot + "/" + _path + "/" + _departs[i]);
-		}
+		_departs = util__.uniqArray(define[depart]), _ret = [];
+		for (i = _departs.length; i--;) _ret.push(_appRoot + "/" + _path + "/" + _departs[i]);
 		return _ret;
 	};
 
@@ -486,17 +414,16 @@
 	 * @param depart
 	 */
 	var __loadDepart = function(depart) {
+		var _requireList, i;
 		require__[depart] = require__[depart] || {};
-		var _requireList = require__[depart].requireList = __getAppReqList(app__.define, depart);
+		_requireList = require__[depart].requireList = __getAppReqList(app__.define, depart);
 		if (_requireList.length > 0) {
-			for (var i = _requireList.length; i--;) {
+			for (i = _requireList.length; i--;) {
 				util__.loadJS(_requireList[i], function(scriptTag) {
-					if (__chkAppLoaded(depart, scriptTag.src))
-						__afterAppLoaded();
+					if (__chkAppLoaded(depart, scriptTag.src)) __afterAppLoaded();
 				});
 			}
-		} else
-			__afterAppLoaded();
+		} else __afterAppLoaded();
 	};
 
 	/**
@@ -507,32 +434,19 @@
 	 * @return Application Model Object
 	 */
 	var __getModel = function(modelName, loadType) {
-		var _models = depart__.models;
-
-		if (!_models[modelName] || _models[modelName] === undefined)
-			throw new Error("Can't find model: " + modelName);
-
+		var _models = depart__.models, _syncModels, _syncModel, _ret;
+		if (!_models[modelName] || _models[modelName] === undefined) throw new Error("Can't find model: " + modelName);
 		// synchronized model
 		if (loadType === true) {
-			var _syncModels = depart__.syncModels;
-			if (!_syncModels)
-				_syncModels = depart__.syncModels = {};
-
-			if (_syncModels[modelName])
-				return _syncModels[modelName];
-
-			var _syncModel = _syncModels[modelName] = util__.cloneObject(_models[modelName], isFlat__["models"+modelName]);
-
-			if (util__.isFunction(_syncModel.__init)) {
-				_syncModel.__init();
-			}
+			_syncModels = depart__.syncModels;
+			if (!_syncModels) _syncModels = depart__.syncModels = {};
+			if (_syncModels[modelName]) return _syncModels[modelName];
+			_syncModel = _syncModels[modelName] = util__.cloneObject(_models[modelName], isFlat__["models"+modelName]);
+			if (util__.isFunction(_syncModel.__init)) _syncModel.__init();
 			return _syncModel;
 		}
-		var _ret = util__.cloneObject(_models[modelName], isFlat__["models"+modelName]);
-
-		if (util__.isFunction(_ret.__init)) {
-			_ret.__init();
-		}
+		_ret = util__.cloneObject(_models[modelName], isFlat__["models"+modelName]);
+		if (util__.isFunction(_ret.__init)) _ret.__init();
 		return _ret;
 	};
 
@@ -543,14 +457,10 @@
 	 * @return Application viewModel Object
 	 */
 	var __getView = function(viewName) {
-		var _views = depart__.views;
-		if (!_views || !_views[viewName] || _views[viewName] === undefined)
-			throw new Error("Can't find view: " + viewName);
-
-		var _ret = util__.cloneObject(_views[viewName], isFlat__["views"+viewName]);
-		if (util__.isFunction(_ret.__init)) {
-			_ret.__init();
-		}
+		var _views = depart__.views, _ret;
+		if (!_views || !_views[viewName] || _views[viewName] === undefined) throw new Error("Can't find view: " + viewName);
+		_ret = util__.cloneObject(_views[viewName], isFlat__["views"+viewName]);
+		if (util__.isFunction(_ret.__init)) _ret.__init();
 		return _ret;
 	};
 
