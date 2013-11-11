@@ -485,13 +485,8 @@
 			tipJS.action[_ctrlName] = (function(wrapper, ctrler){
 				return function(){
 					var _args = arguments, _ctrlerStartTime, _runCtrler;
-					if (tipJS.isDevelopment === true)
-						_ctrlerStartTime = __getSecs();
-
-					if (app__.define.beforeController && app__.define.beforeController.apply(wrapper, arguments) === false) {
-						return;
-					}
-
+					if (tipJS.isDevelopment === true) _ctrlerStartTime = __getSecs();
+					if (app__.define.beforeController && app__.define.beforeController.apply(wrapper, arguments) === false) return;
 					_runCtrler = function() {
 						if (ctrler.exceptionInvoke) {
 							try {
@@ -500,20 +495,12 @@
 								(_args = util__.toArray(_args)).unshift(e);
 								ctrler.exceptionInvoke.apply(ctrler, _args);
 							}
-						} else
-							__runController(ctrler, _args);
-
-						if (app__.define.afterController)
-							app__.define.afterController.apply(wrapper, _args);
-
-						if (tipJS.isDevelopment === true)
-							tipJS.debug(wrapper.controllerName + " completed in " + ((__getSecs() - _ctrlerStartTime)/1000) + " seconds");
+						} else __runController(ctrler, _args);
+						if (app__.define.afterController) app__.define.afterController.apply(wrapper, _args);
+						if (tipJS.isDevelopment === true) tipJS.debug(wrapper.controllerName + " completed in " + ((__getSecs() - _ctrlerStartTime)/1000) + " seconds");
 					}; // _runCtrler
-
-					if (ctrler.async === true)
-						setTimeout(_runCtrler, (!ctrler.delay ? 15 : ctrler.delay));
-					else
-						_runCtrler();
+					if (ctrler.async === true) setTimeout(_runCtrler, (!ctrler.delay ? 15 : ctrler.delay));
+					else _runCtrler();
 				}; // return function
 			})(_ctrlerWrapper, _ctrler);
 		} // for
@@ -534,8 +521,8 @@
 	 *
 	 */
 	var __makeInterceptors = function(){
-		var _interceptor, _interceptors = depart__.interceptors, _scope, _before, _after, _order;
-		for (var k in _interceptors) {
+		var _interceptor, _interceptors = depart__.interceptors, _scope, _before, _after, _order, k;
+		for (k in _interceptors) {
 			_scope = _before = _after = [];
 			_interceptor = _interceptors[k];
 			_order = (_interceptor.order) ? _interceptor.order : 0;
@@ -549,9 +536,7 @@
 				after : _after
 			});
 		}
-		sortedInterceptors__.sort(function(l, r){
-			return l.order - r.order;
-		});
+		sortedInterceptors__.sort(function(l, r){return l.order - r.order;});
 	};
 
 	/**
@@ -564,8 +549,8 @@
 	 */
 	var __setBeforeAdvice = function(func, depart, interceptor){
 		return function(){
-			var _before = interceptor.before, _ret;
-			for (var i=0,len=_before.length; i<len; i++){
+			var _before = interceptor.before, _ret, i, len;
+			for (i=0,len=_before.length; i<len; i++){
 				_ret = _before[i].apply(depart, arguments);
 				if (_ret !== undefined) return _ret;
 			}
@@ -584,10 +569,10 @@
 	 */
 	var __setAfterAdvice = function(func, depart, interceptor){
 		return function(){
-			var _after = interceptor.after, _ret;
+			var _after = interceptor.after, _ret, i, len;
 			_ret = func.apply(depart, arguments);
 			if (_ret !== undefined) return _ret;
-			for (var i=0,len=_after.length; i<len; i++){
+			for (i=0,len=_after.length; i<len; i++){
 				_ret = _after[i].apply(depart, arguments);
 				if (_ret !== undefined) return _ret;
 			}
@@ -600,40 +585,26 @@
 	 * @param departName
 	 */
 	var __interceptScope = function(departName, scope, interceptor, setAdviceFn){
-		var _ranges = scope.split("."), _departs = depart__[departName];
+		var _ranges = scope.split("."), _departs = depart__[departName], k, kk, _depart, _className, _funcName;
 		if (_ranges.length == 1 && (departName == scope || departName+"*" == scope)) {
-			for(var k in _departs){
-				var _depart = _departs[k];
-				for(var kk in _depart) {
-					if (util__.isFunction(_depart[kk])) {
-						_depart[kk] = setAdviceFn(_depart[kk], _depart, interceptor);
-					}
-				}
+			for(k in _departs){
+				_depart = _departs[k];
+				for(kk in _depart) if (util__.isFunction(_depart[kk])) _depart[kk] = setAdviceFn(_depart[kk], _depart, interceptor);
 			}
 		} else if (_ranges.length == 2 && departName == _ranges[0]) {
-			var _className = _ranges[1];
-			for(var k in _departs){
+			_className = _ranges[1];
+			for(k in _departs){
 				if (k == _className || (_className.indexOf("*") > 0 && k.indexOf(_className.substr(0,_className.indexOf("*"))) == 0)) {
-					var _depart = _departs[k];
-					for(var kk in _depart) {
-						if (util__.isFunction(_depart[kk])) {
-							_depart[kk] = setAdviceFn(_depart[kk], _depart, interceptor);
-						}
-					}
+					_depart = _departs[k];
+					for(kk in _depart) if (util__.isFunction(_depart[kk])) _depart[kk] = setAdviceFn(_depart[kk], _depart, interceptor);
 				}
 			}
 		} else if (_ranges.length == 3 && departName == _ranges[0]) {
-			var _className = _ranges[1], _funcName = _ranges[2];
-			for(var k in _departs){
+			_className = _ranges[1], _funcName = _ranges[2];
+			for(k in _departs){
 				if (k == _className) {
-					var _depart = _departs[k];
-					for(var kk in _depart) {
-						if (kk == _funcName || (_funcName.indexOf("*") > 0 && kk.indexOf(_funcName.substr(0,_funcName.indexOf("*"))) == 0)) {
-							if (util__.isFunction(_depart[kk])) {
-								_depart[kk] = setAdviceFn(_depart[kk], _depart, interceptor);
-							}
-						}
-					}
+					_depart = _departs[k];
+					for(kk in _depart) if ( (kk == _funcName || (_funcName.indexOf("*") > 0 && kk.indexOf(_funcName.substr(0, _funcName.indexOf("*"))) == 0) ) && util__.isFunction(_depart[kk]) ) _depart[kk] = setAdviceFn(_depart[kk], _depart, interceptor);
 				}
 			}
 		}
@@ -645,17 +616,14 @@
 	 * @param departName
 	 */
 	var __interceptDepart = function(departName){
-		for (var i=sortedInterceptors__.length; i--;){
-			var _interceptor = sortedInterceptors__[i],	_scopes = _interceptor.scope;
-			for (var j=0, jlen=_scopes.length; j<jlen; j++){
-				__interceptScope(departName, _scopes[j], _interceptor, __setBeforeAdvice);
-			}
+		var i, len, j, jlen, _interceptor, _scopes;
+		for (i=sortedInterceptors__.length; i--;){
+			_interceptor = sortedInterceptors__[i],	_scopes = _interceptor.scope;
+			for (j=0, jlen=_scopes.length; j<jlen; j++) __interceptScope(departName, _scopes[j], _interceptor, __setBeforeAdvice);
 		}
-		for (var i=0, len=sortedInterceptors__.length; i<len; i++){
-			var _interceptor = sortedInterceptors__[i], _scopes = _interceptor.scope;
-			for (var j=0, jlen = _scopes.length; j<jlen; j++){
-				__interceptScope(departName, _scopes[j], _interceptor, __setAfterAdvice);
-			}
+		for (i=0, len=sortedInterceptors__.length; i<len; i++){
+			_interceptor = sortedInterceptors__[i], _scopes = _interceptor.scope;
+			for (j=0, jlen = _scopes.length; j<jlen; j++) __interceptScope(departName, _scopes[j], _interceptor, __setAfterAdvice);
 		}
 	};
 
@@ -665,20 +633,15 @@
 	 * @param opt
 	 */
 	var __addRoute = function(opt){
+		var _newHash;
 		route__[opt.url] = opt.controller;
 		__addEvent(window, "hashchange", function(){
-			var _newHash = location.hash;
-			if (oldHash__ == _newHash) {
-				return;
-			}
+			_newHash = location.hash;
+			if (oldHash__ == _newHash) return;
 			oldHash__ = _newHash;
-			if (_newHash.length == 0 && route__["/"]) {
-				tipJS.action[route__["/"]]();
-			} else if (route__[_newHash]) {
-				tipJS.action[route__[_newHash]]();
-			} else if (route__["!"]) {
-				tipJS.action[route__["!"]]();
-			}
+			if (_newHash.length == 0 && route__["/"]) tipJS.action[route__["/"]]();
+			else if (route__[_newHash]) tipJS.action[route__[_newHash]]();
+			else if (route__["!"]) tipJS.action[route__["!"]]();
 		});
 	};
 
@@ -688,7 +651,7 @@
 	 *
 	 */
 	var __afterAppLoaded = function() {
-		var k, _mdlName;
+		var k, _mdlName, _ctrlers, _mdls, _views, i, actionLen, _action, _ctrler, _routeLen, _route, _newHash;
 		if (app__.loadOrder.isLastOrder() === false) {
 			__loadDepart(app__.loadOrder.nextOrder());
 			return;
@@ -696,7 +659,7 @@
 		// 유저 인터셉터의 정형화
 		__makeInterceptors();
 		// Controller build
-		var _ctrlers = depart__.controllers;
+		_ctrlers = depart__.controllers;
 		if (_ctrlers) {
 			__interceptDepart("controllers");
 			for (k in _ctrlers) {
@@ -711,7 +674,7 @@
 			__makeActionTree();
 		}
 		// Model build
-		var _mdls = depart__.models;
+		_mdls = depart__.models;
 		if (_mdls) {
 			__interceptDepart("models");
 			for (k in _mdls) {
@@ -727,7 +690,7 @@
 			}
 		}
 		// View build
-		var _views = depart__.views;
+		_views = depart__.views;
 		if (_views) {
 			__interceptDepart("views");
 			for (k in _views) {
@@ -742,32 +705,26 @@
 			}
 		}
 		tipJS.debug("tipJS version " + tipJS.version + "[" + tipJS.lang + "]");
-		if (!util__.isArray(app__.onLoadArgs)) {
-			app__.onLoadArgs = [];
-		}
+		if (!util__.isArray(app__.onLoadArgs)) app__.onLoadArgs = [];
 		app__.define.onLoad.apply(app__.define, app__.onLoadArgs);
 		if (reservedStack__) {
-			for (var i = 0, actionLen = reservedStack__.length; i < actionLen; i++) {
-				var _action = reservedStack__[i];
-				var _ctrler = tipJS.action[_action.name];
+			for (i = 0, actionLen = reservedStack__.length; i < actionLen; i++) {
+				_action = reservedStack__[i];
+				_ctrler = tipJS.action[_action.name];
 				_ctrler.apply(_ctrler, _action.param);
 			}
 			reservedStack__ = null;
 		}
-		for(var i=0, _routeLen=app__.define.routes.length; i<_routeLen; i++) {
-			var _route = app__.define.routes[i];
+		for(i=0, _routeLen=app__.define.routes.length; i<_routeLen; i++) {
+			_route = app__.define.routes[i];
 			__addRoute(_route);
 		}
 		if (_routeLen > 0) {
 			__setOnHash();
-			var _newHash = oldHash__ = location.hash;
-			if (_newHash.length == 0 && route__["/"]) {
-				tipJS.action[route__["/"]]();
-			} else if (route__[_newHash]) {
-				tipJS.action[route__[_newHash]]();
-			} else if (route__["!"]) {
-				tipJS.action[route__["!"]]();
-			}
+			_newHash = oldHash__ = location.hash;
+			if (_newHash.length == 0 && route__["/"]) tipJS.action[route__["/"]]();
+			else if (route__[_newHash]) tipJS.action[route__[_newHash]]();
+			else if (route__["!"]) tipJS.action[route__["!"]]();
 		}
 	};
 
@@ -780,21 +737,15 @@
 	 */
 	var __chkAppLoaded = function(depart, src) {
 		var i, _requireList = require__[depart].requireList, _reqPath;
-
 		for (i = _requireList.length; i--;) {
-			if (_requireList[i] === true)
-				continue;
-
+			if (_requireList[i] === true) continue;
 			_reqPath = _requireList[i].indexOf("./") > -1 ? _requireList[i].substr(_requireList[i].lastIndexOf("./")+1):_requireList[i];
 			if (src.indexOf(_reqPath) > -1) {
 				_requireList[i] = true;
 				break;
 			}
 		}
-		for (i = _requireList.length; i--;) {
-			if (_requireList[i] !== true)
-				return false;
-		}
+		for (i = _requireList.length; i--;) if (_requireList[i] !== true) return false;
 		return true;
 	};
 
@@ -819,14 +770,13 @@
 	 * @return elapsedTime
 	 */
 	tipJS.benchmark.elapsedTime = function(startName, endName, callbackFn){
-		var _startTime = benchRecs__[startName],
+		var _startTime, _endTime, _elapsedTime;
+		_startTime = benchRecs__[startName],
 		_endTime = benchRecs__[endName],
 		_elapsedTime = (_endTime - _startTime) / 1000;
 		// if exist callback function
-		if (callbackFn)
-			callbackFn(startName, endName, _startTime, _endTime, _elapsedTime);
-		else
-			tipJS.log("elapsed time[" + startName + " to " + endName + "] : " + _elapsedTime + " seconds", "[BENCHMARK]");
+		if (callbackFn) callbackFn(startName, endName, _startTime, _endTime, _elapsedTime);
+		else tipJS.log("elapsed time[" + startName + " to " + endName + "] : " + _elapsedTime + " seconds", "[BENCHMARK]");
 		return _elapsedTime;
 	};
 
@@ -838,8 +788,7 @@
 	 */
 	var __getXMLReq = function() {
 		var _xmlreq = false;
-		if (window.XMLHttpRequest)
-			_xmlreq = new XMLHttpRequest;
+		if (window.XMLHttpRequest) _xmlreq = new XMLHttpRequest;
 		else if (window.ActiveXObject) {
 			try {
 				_xmlreq = new ActiveXObject("Msxml2.XMLHTTP");
@@ -849,9 +798,7 @@
 				} catch (e2) {}
 			}
 		}
-		__getXMLReq = function() {
-			return _xmlreq;
-		};
+		__getXMLReq = function() { return _xmlreq; };
 		return __getXMLReq();
 	};
 
@@ -863,34 +810,21 @@
 	 */
 	var __render = tipJS.render = function(config) {
 		var _retTxt;
-		if (arguments.length > 1) {
-			return __renderTpl(arguments[0], arguments[1], arguments[2]);
-		}
-
+		if (arguments.length > 1) return __renderTpl(arguments[0], arguments[1], arguments[2]);
 		if (app__.define.templateCache && templateCache__[config.url]) {
 			_retTxt = __renderTpl(templateCache__[config.url], config.data, config.tplId);
-			if (util__.isString(config.renderTo))
-				util__.getById(config.renderTo).innerHTML += _retTxt;
-
+			if (util__.isString(config.renderTo)) util__.getById(config.renderTo).innerHTML += _retTxt;
 			return _retTxt;
 		}
 		var _xmlhttp = __getXMLReq();
 		_xmlhttp.open("GET", app__.define.getNoCacheUrl(config.url), false);
-		try {
-			_xmlhttp.send(null);
-		} catch(e) {
-			return null;
-		}
-
+		try {	_xmlhttp.send(null); } catch(e) {	return null; }
 		if (_xmlhttp.readyState == 4 && _xmlhttp.status == 200) {
 			_retTxt = templateCache__[config.url] = _xmlhttp.responseText;
 			_retTxt = __renderTpl(_retTxt, config.data, config.tplId);
-			if (util__.isString(config.renderTo))
-				util__.getById(config.renderTo).innerHTML += _retTxt;
-
+			if (util__.isString(config.renderTo)) util__.getById(config.renderTo).innerHTML += _retTxt;
 			return _retTxt;
-		} else
-			throw new Error("Can't find templates file: " + config.url);
+		} else throw new Error("Can't find templates file: " + config.url);
 	};
 
 	/**
@@ -902,26 +836,18 @@
 	 * @return rendered HTML
 	 */
 	var __renderTpl = function(html, data, templateKey) {
-		html = html.replace(/\r\n/g, "\n");
-		html = html.replace(/\r/g, "\n");
-		html = html.replace(/\\/g, '\\\\');
-		html = html.replace(/\n/g, '');
-
+		var _applyAreas, _regEx, i, len, _tokens, _evalFunc;
+		html = html.replace(/\r\n/g, "\n"), html = html.replace(/\r/g, "\n"), html = html.replace(/\\/g, '\\\\'), html = html.replace(/\n/g, '');
 		if (util__.isString(templateKey)) {
-			var _applyAreas = html.split("[[#"),
-				_regEx = new RegExp("^"+templateKey+"\]\]");
+			_applyAreas = html.split("[[#"), _regEx = new RegExp("^"+templateKey+"\]\]");
 			for (var i = 0, len = _applyAreas.length; i < len; i++) {
 				if (_applyAreas[i].match(_regEx)) {
 					html = _applyAreas[i].replace(_regEx, '');
 					break;
 				}
 			}
-		} else {
-			html = html.replace(/\[\[#[a-zA-Z0-9_-]*\]\]/g, '');
-		}
-		var _tokens = html.split("@>"),
-			_evalFunc = new Function("data", __compileTpl(_tokens));
-
+		} else html = html.replace(/\[\[#[a-zA-Z0-9_-]*\]\]/g, '');
+		_tokens = html.split("@>"), _evalFunc = new Function("data", __compileTpl(_tokens));
 		return _evalFunc(data);
 	};
 
@@ -940,7 +866,6 @@
 		_ret.push('var __tempArr__ = [];');
 		for (i = 0, len = tokens.length; i < len; i++) {
 			_token = tokens[i];
-
 			if (_token.indexOf("<@=") > -1) {
 				_tokens = _token.split("<@=");
 				if (_tokens.length > 1) {
@@ -973,9 +898,8 @@
 			if (_types[i] == _TYPE_VALUE) {
 				_token = '"\"+' + _token + '+\""';
 				_ret.push(_cmdPush + _token + ");");
-			} else if (_types[i] == _TYPE_PARSE) {
-				_ret.push(_token);
-			} else {
+			} else if (_types[i] == _TYPE_PARSE) _ret.push(_token);
+			else {
 				_token = '"' + _token + '"';
 				_ret.push(_cmdPush + _token + ");");
 			}
@@ -1005,8 +929,7 @@
 	 * @param msg
 	 */
 	tipJS.debug = function(msg) {
-		if (tipJS.isDevelopment)
-			tipJS.log(msg, "[DEBUG]");
+		if (tipJS.isDevelopment) tipJS.log(msg, "[DEBUG]");
 	};
 
 	/**
@@ -1070,16 +993,12 @@
 	 * @param params
 	 */
 	tipJS.action = function(ctrlerName) {
-		var _arrName, _ctrlerName, _app, _ctrler;
-		if (!arguments.length) {
-			return tipJS.action;
-		}
-		var _appCtrlName = arguments[0];
-		var _args = util__.toArray(arguments).slice(1);
+		var _arrName, _ctrlerName, _app, _ctrler, _appCtrlName, _args;
+		if (!arguments.length) return tipJS.action;
+		_appCtrlName = arguments[0];
+		_args = util__.toArray(arguments).slice(1);
 		_arrName = _appCtrlName.split(".");
-		if (ctrlerName.length == 0)
-			throw new Error("tipJS.action : invalid parameter");
-
+		if (ctrlerName.length == 0) throw new Error("tipJS.action : invalid parameter");
 		if (!app__.loadOrder || !app__.loadOrder.isLastOrder()) {
 			reservedStack__ = reservedStack__ || [];
 			reservedStack__.push({
@@ -1098,11 +1017,10 @@
 	 * @param params
 	 */
 	tipJS.loadApp = function() {
+		var _args;
 		if (!define__) return;
-		var _args = util__.toArray(arguments);
-		if (_args.length) {
-			app__.onLoadArgs = _args;
-		}
+		_args = util__.toArray(arguments);
+		if (_args.length) app__.onLoadArgs = _args;
 		__define();
 		delete tipJS.loadApp;
 	};
@@ -1116,17 +1034,17 @@
 		define__ = define;
 	};
 	var __define = function() {
-		var _define = define__;
+		var _define = define__, i;
 		util__.mergeObject(_define, DEF_BASE__.define);
 		if (tipJS.isDevelopment === null) {
-			for (var i = _define.developmentHostList.length; i--;) {
+			for (i = _define.developmentHostList.length; i--;) {
 				if (_winLoc.hostname.match(_define.developmentHostList[i]) !== null) {
 					tipJS.isDevelopment = true;
 					break;
 				}
 			}
 			if (!tipJS.isDevelopment) {
-				for (var i = _define.releaseHostList.length; i--;) {
+				for (i = _define.releaseHostList.length; i--;) {
 					if (_winLoc.hostname.match(_define.releaseHostList[i]) !== null) {
 						tipJS.isRelease = true;
 						break;
@@ -1209,10 +1127,8 @@
 	isFlat__ = {}, define__,
 	_winLoc = window.location, _pathname = _winLoc.pathname, _queryString = _winLoc.search, _isDevelopment = null, _lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage).substr(0,2);
 
-	if (_queryString.match('(\\?|&)debug') !== null || _pathname.match('debug') !== null)
-		_isDevelopment = true;
+	if (_queryString.match('(\\?|&)debug') !== null || _pathname.match('debug') !== null) _isDevelopment = true;
 
 	tipJS.lang = _lang;
 	tipJS.isDevelopment = _isDevelopment;
-	//tipJS.isRelease = null;
 })(this);
