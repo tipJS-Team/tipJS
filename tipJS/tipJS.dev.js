@@ -11,16 +11,19 @@
 	"use strict";
 
 	// Variables
-	var tipJS, i__, len__, types__, util__,
+	var tipJS,
+	i__, len__, types__, util__,
 	require__, depart__, sortedInterceptors__,
-	DEF_BASE__,
-	benchRecs__, app__, msg__, route__, oldHash__, onHashFn__,
-	templateCache__, reservedStack__, isFlat__, define__,
+	app__, DEF_BASE__, define__,
+	benchRecs__, msg__, route__, oldHash__, onHashFn__,
+	templateCache__, reservedStack__, isFlat__,
 	_winLoc, _pathname, _queryString, _isDevelopment, _lang,
 	// Functions
 	__protoToString, __checker;
 
-	tipJS = {}, tipJS.ver = tipJS.version = tipJS.VERSION = "2.1.3", context.tipJS = tipJS,
+	tipJS = {},
+	tipJS.ver = tipJS.version = tipJS.VERSION = "2.1.3",
+	context.tipJS = tipJS,
 
 /*************************
  *
@@ -77,7 +80,8 @@
 	util__.toArray = function(obj) {
 		var _ret, i, len;
 		_ret = [];
-		if (obj.length) for(i = 0, len = obj.length; i<len; i++) _ret[i] = obj[i];
+		if (obj.length)
+			for(i = 0, len = obj.length; i<len; i++) _ret[i] = obj[i];
 		return _ret;
 	};
 
@@ -139,7 +143,9 @@
 		if (obj == null || typeof obj != "object") return obj;
 		if (!isFlat) {
 			newObj = util__.isArray(obj) ? [] : {};
-			for (k in obj) if (typeof obj[k] == "object") newObj[k] = util__.cloneObject(obj[k], false); else newObj[k] = obj[k];
+			for (k in obj)
+				if (typeof obj[k] == "object") newObj[k] = util__.cloneObject(obj[k], false);
+				else newObj[k] = obj[k];
 			return newObj;
 		} else return __cloneObjN(obj);
 	};
@@ -153,7 +159,8 @@
 	util__.hasChild = function(obj) {
 		var k;
 		// Array 와 Object 일때 true
-		for (k in obj) if (typeof obj[k] == "object") return true;
+		for (k in obj)
+			if (typeof obj[k] == "object") return true;
 		return false;
 	};
 
@@ -166,7 +173,8 @@
 	util__.uniqArray = function(arr) {
 		var _ret = [], _len = arr.length, i, j;
 		for (i = 0; i < _len; i++) {
-			for (j = i + 1; j < _len; j++) if (arr[i] === arr[j]) j = ++i;
+			for (j = i + 1; j < _len; j++)
+				if (arr[i] === arr[j]) j = ++i;
 			_ret.push(arr[i]);
 		}
 		return _ret;
@@ -184,12 +192,13 @@
 		_tagScript = document.createElement('script'),
 		_tagScript.type = 'text/javascript',
 		_tagScript.src = app__.define ? app__.define.getNoCacheUrl(file) : file;
-		if (callbackFn) {
-			if (_tagScript.readyState) _tagScript.onreadystatechange = function() {
-					if (this.readyState == 'loaded' || this.readyState == 'complete') this.onreadystatechange = null, callbackFn(this);
+		if (callbackFn)
+			if (_tagScript.readyState)
+				_tagScript.onreadystatechange = function() {
+					if (this.readyState == 'loaded' || this.readyState == 'complete')
+						this.onreadystatechange = null, callbackFn(this);
 				};
 			else _tagScript.onload = function() {callbackFn(this);};
-		}
 		util__.getByTag('head')[0].appendChild(_tagScript);
 	};
 
@@ -205,8 +214,10 @@
 	 * @return Object Clone
 	 */
 	function __cloneObjN(target) {
-		if (util__.isFunction(Object.create)) __cloneObjN = function(o) {	return Object.create(o); };
-		else __cloneObjN = function(o) {
+		if (util__.isFunction(Object.create))
+			__cloneObjN = function(o) {	return Object.create(o); };
+		else
+			__cloneObjN = function(o) {
 				function F() {};
 				return F.prototype = o, new F;
 			};
@@ -229,18 +240,22 @@
 			return;
 		}
 		if (typeof target != "object") {
-			if (typeof target == filter || filter === "")	console.log(((parentName) ? parentName + "." : "") + target + "["+ typeof target +"]");
+			if (typeof target == filter || filter === "")
+				console.log(((parentName) ? parentName + "." : "") + target + "["+ typeof target +"]");
 			return;
 		}
 		(target instanceof Array) ? console.log(((parentName) ? parentName + ":" : "") + "[Array["+ target.length + "]]") : console.log(((parentName) ? parentName + ":" : "") + "[Object]");
-		//else console.log(((parentName) ? parentName + ":" : "") + "[Object]");
 		for (k in target) {
 			if (target instanceof Array) {
-				if (typeof target[k] == "object") __echo(target[k], filter, ((parentName) ? parentName + "[" : "[") + k + ((parentName) ? "]" : "]"));
-				else if (typeof target[k] == filter || filter === "") console.log(((parentName) ? parentName + "[" : "[") + k + ((parentName) ? "]" : "]") + ":" + target[k] + " ("+ typeof target[k] +")");
+				if (typeof target[k] == "object")
+					__echo(target[k], filter, ((parentName) ? parentName + "[" : "[") + k + ((parentName) ? "]" : "]"));
+				else if (typeof target[k] == filter || filter === "")
+					console.log(((parentName) ? parentName + "[" : "[") + k + ((parentName) ? "]" : "]") + ":" + target[k] + " ("+ typeof target[k] +")");
 			} else {
-				if (typeof target[k] == "object") __echo(target[k], filter, ((parentName) ? parentName + "." : "")+k);
-				else if (typeof target[k] == filter || filter === "") console.log(((parentName) ? parentName + "." : "") + k + ":" + target[k] + " ("+ typeof target[k] +")");
+				if (typeof target[k] == "object")
+					__echo(target[k], filter, ((parentName) ? parentName + "." : "")+k);
+				else if (typeof target[k] == filter || filter === "")
+					console.log(((parentName) ? parentName + "." : "") + k + ":" + target[k] + " ("+ typeof target[k] +")");
 			}
 		}
 	};
@@ -264,7 +279,9 @@
 	 */
 	function __isSelfExt(ext, name){
 		var i;
-		if (util__.isArray(ext)) for(i=ext.length; i--;) if (ext[i] == name) return true;
+		if (util__.isArray(ext))
+			for(i = ext.length; i--;)
+				if (ext[i] == name) return true;
 		else if (ext == name) return true;
 		return false;
 	};
@@ -280,8 +297,10 @@
 		var _parents, i;
 		_parents = child.__extend;
 		if (!_parents) return child;
-		if (util__.isString(_parents)) child = __getExtObj(child, _parents, type);
-		else if (_parents instanceof Array) for (i = _parents.length; i--;) child = __getExtObj(child, _parents[i], type);
+		if (util__.isString(_parents))
+			child = __getExtObj(child, _parents, type);
+		else if (_parents instanceof Array)
+			for (i = _parents.length; i--;) child = __getExtObj(child, _parents[i], type);
 		return child;
 	};
 
@@ -293,8 +312,10 @@
 	 * @return extended Object
 	 */
 	function __getExtObj(child, parent, type){
-		if (type == "model") return util__.mergeObject(child, util__.cloneObject(__getModel(parent)));
-		else return util__.mergeObject(child, util__.cloneObject(__getView(parent)));
+		if (type == "model")
+			return util__.mergeObject(child, util__.cloneObject(__getModel(parent)));
+		else
+			return util__.mergeObject(child, util__.cloneObject(__getView(parent)));
 	};
 
 	/**
@@ -303,8 +324,8 @@
 	 * @return seconds
 	 */
 	function __getSecs(){
-		if (Date.now) __getSecs = function(){ return Date.now();};
-		else __getSecs = function(){ return +new Date;};
+		if (Date.now) __getSecs = function(){return Date.now();};
+		else __getSecs = function(){return +new Date;};
 		return __getSecs();
 	};
 
@@ -368,7 +389,7 @@
 		if (!util__.isString(key)) throw new Error(__getDefErrMsg(departType));
 		if (depart.__extend && departType != "controllers" && departType != "interceptors" && __isSelfExt(depart.__extend, key)) throw new Error("Can't extend itself: " + key);
 		if (!app__)	throw new Error(__getDefErrMsg(departType));
-		if (app__.loadOrder.presentOrder() === departType || tipJS.isRelease) {
+		if (app__.loadOrder.presentOrder() === departType || tipJS.isRelease)
 			switch(departType) {
 				case "interceptors":
 				case "controllers":
@@ -377,7 +398,6 @@
 					depart__[departType][key] = depart;
 					break;
 			}
-		}
 	};
 
 	/**
@@ -389,12 +409,16 @@
 	 */
 	function __getAppReqList(define, depart) {
 		var _path, _appRoot, _departs, i, _ret;
-		_path = app__.define.path[depart], _appRoot = define.appPath ? define.appPath : ".";
-		if (depart === "lang" && define.localSet) return define[depart] = [_appRoot + "/" + _path + "/" + tipJS.lang + ".js"];
-		if (depart === "tipJSRelease") return define[depart] = [_appRoot + "/" + app__.define.releaseFile];
+		_path = app__.define.path[depart],
+		_appRoot = define.appPath ? define.appPath : ".";
+		if (depart === "lang" && define.localSet)
+			return define[depart] = [_appRoot + "/" + _path + "/" + tipJS.lang + ".js"];
+		if (depart === "tipJSRelease")
+			return define[depart] = [_appRoot + "/" + app__.define.releaseFile];
 		_departs = util__.uniqArray(define[depart]),
 		_ret = [];
-		for (i = _departs.length; i--;) _ret.push(_appRoot + "/" + _path + "/" + _departs[i]);
+		for (i = _departs.length; i--;)
+			_ret.push(_appRoot + "/" + _path + "/" + _departs[i]);
 		return _ret;
 	};
 
@@ -407,13 +431,13 @@
 		var _requireList, i;
 		require__[depart] = require__[depart] || {},
 		_requireList = require__[depart].requireList = __getAppReqList(app__.define, depart);
-		if (_requireList.length > 0) {
+		if (_requireList.length > 0)
 			for (i = _requireList.length; i--;) {
 				util__.loadJS(_requireList[i], function(scriptTag) {
 					if (__chkAppLoaded(depart, scriptTag.src)) __afterAppLoaded();
 				});
 			}
-		} else __afterAppLoaded();
+		else __afterAppLoaded();
 	};
 
 	/**
@@ -425,16 +449,20 @@
 	 */
 	function __getModel(modelName, loadType) {
 		var _syncModels, _model, _syncModel, _ret;
-		if (!(_model = depart__.models[modelName])) throw new Error("Can't find model: " + modelName);
+		if (!(_model = depart__.models[modelName]))
+			throw new Error("Can't find model: " + modelName);
 		// synchronized model
 		if (loadType === true) {
-			if (_syncModels = depart__.syncModels, _syncModel = _syncModels[modelName]) return _syncModel;
+			if (_syncModels = depart__.syncModels, _syncModel = _syncModels[modelName])
+				return _syncModel;
 			_syncModel = _syncModels[modelName] = util__.cloneObject(_model, isFlat__["models"+modelName]);
-			if (util__.isFunction(_syncModel.__init)) _syncModel.__init();
+			if (util__.isFunction(_syncModel.__init))
+				_syncModel.__init();
 			return _syncModel;
 		}
 		_ret = util__.cloneObject(_model, isFlat__["models"+modelName]);
-		if (util__.isFunction(_ret.__init)) _ret.__init();
+		if (util__.isFunction(_ret.__init))
+			_ret.__init();
 		return _ret;
 	};
 
@@ -446,9 +474,11 @@
 	 */
 	function __getView(viewName) {
 		var _view, _ret;
-		if (!(_view = depart__.views[viewName])) throw new Error("Can't find view: " + viewName);
+		if (!(_view = depart__.views[viewName]))
+			throw new Error("Can't find view: " + viewName);
 		_ret = util__.cloneObject(_view, isFlat__["views"+viewName]);
-		if (util__.isFunction(_ret.__init)) _ret.__init();
+		if (util__.isFunction(_ret.__init))
+			_ret.__init();
 		return _ret;
 	};
 
@@ -474,8 +504,10 @@
 			tipJS.action[_ctrlName] = (function(wrapper, ctrler){
 				return function(){
 					var _args = arguments, _ctrlerStartTime, _runCtrler;
-					if (tipJS.isDevelopment === true) _ctrlerStartTime = __getSecs();
-					if (app__.define.beforeController && app__.define.beforeController.apply(wrapper, arguments) === false) return;
+					if (tipJS.isDevelopment === true)
+						_ctrlerStartTime = __getSecs();
+					if (app__.define.beforeController && app__.define.beforeController.apply(wrapper, arguments) === false)
+						return;
 					_runCtrler = function() {
 						if (ctrler.exceptionInvoke) {
 							try {
@@ -485,10 +517,13 @@
 								ctrler.exceptionInvoke.apply(ctrler, _args);
 							}
 						} else __runController(ctrler, _args);
-						if (app__.define.afterController) app__.define.afterController.apply(wrapper, _args);
-						if (tipJS.isDevelopment === true) tipJS.debug(wrapper.controllerName + " completed in " + ((__getSecs() - _ctrlerStartTime)/1000) + " seconds");
+						if (app__.define.afterController)
+							app__.define.afterController.apply(wrapper, _args);
+						if (tipJS.isDevelopment === true)
+							tipJS.debug(wrapper.controllerName + " completed in " + ((__getSecs() - _ctrlerStartTime)/1000) + " seconds");
 					}; // _runCtrler
-					if (ctrler.async === true) setTimeout(_runCtrler, (!ctrler.delay ? 15 : ctrler.delay));
+					if (ctrler.async === true)
+						setTimeout(_runCtrler, (!ctrler.delay ? 15 : ctrler.delay));
 					else _runCtrler();
 				}; // return function
 			})(_ctrlerWrapper, _ctrler);
@@ -500,9 +535,10 @@
 	 *
 	 */
 	function __runController(ctrler, args){
-		if (ctrler.beforeInvoke && ctrler.beforeInvoke.apply(ctrler, args) === false) return;
-		if (ctrler.invoke && ctrler.invoke.apply(ctrler, args) === false) return;
-		if (ctrler.afterInvoke)	ctrler.afterInvoke.apply(ctrler, args);
+		if ((ctrler.beforeInvoke && ctrler.beforeInvoke.apply(ctrler, args) === false)
+			|| (ctrler.invoke && ctrler.invoke.apply(ctrler, args) === false)) return;
+		if (ctrler.afterInvoke)
+			ctrler.afterInvoke.apply(ctrler, args);
 	};
 
 	/**
@@ -510,14 +546,18 @@
 	 *
 	 */
 	function __makeInterceptors(){
-		var _interceptor, _interceptors = depart__.interceptors, _scope, _before, _after, _order, k;
+		var _interceptor, _interceptors, _scope, _before, _after, _order, k;
+		_interceptors = depart__.interceptors;
 		for (k in _interceptors) {
 			_scope = _before = _after = [];
 			_interceptor = _interceptors[k];
 			_order = (_interceptor.order) ? _interceptor.order : 0;
-			if (_interceptor.target) _scope = (util__.isArray(_interceptor.target)) ? _interceptor.target : [_interceptor.target];
-			if (_interceptor.before) _before = (util__.isArray(_interceptor.before)) ? _interceptor.before : [_interceptor.before];
-			if (_interceptor.after) _after = (util__.isArray(_interceptor.after)) ? _interceptor.after : [_interceptor.after];
+			if (_interceptor.target)
+				_scope = (util__.isArray(_interceptor.target)) ? _interceptor.target : [_interceptor.target];
+			if (_interceptor.before)
+				_before = (util__.isArray(_interceptor.before)) ? _interceptor.before : [_interceptor.before];
+			if (_interceptor.after)
+				_after = (util__.isArray(_interceptor.after)) ? _interceptor.after : [_interceptor.after];
 			sortedInterceptors__.push({
 				order : _order,
 				scope : _scope,
@@ -540,8 +580,11 @@
 		return function(){
 			var _before, _ret, i, len;
 			_before = interceptor.before;
-			for (i = 0, len = _before.length; i < len; i++) if ((_ret = _before[i].apply(depart, arguments)) !== undefined) return _ret;
-			if ((_ret = func.apply(depart, arguments)) !== undefined) return _ret;
+			for (i = 0, len = _before.length; i < len; i++)
+				if ((_ret = _before[i].apply(depart, arguments)) !== undefined)
+					return _ret;
+			if ((_ret = func.apply(depart, arguments)) !== undefined)
+				return _ret;
 		};
 	};
 
@@ -557,8 +600,11 @@
 		return function(){
 			var _after, _ret, i, len;
 			_after = interceptor.after;
-			if ((_ret = func.apply(depart, arguments)) !== undefined) return _ret;
-			for (i = 0, len = _after.length; i < len; i++) if ((_ret = _after[i].apply(depart, arguments)) !== undefined) return _ret;
+			if ((_ret = func.apply(depart, arguments)) !== undefined)
+				return _ret;
+			for (i = 0, len = _after.length; i < len; i++)
+				if ((_ret = _after[i].apply(depart, arguments)) !== undefined)
+					return _ret;
 		};
 	};
 
@@ -569,18 +615,23 @@
 	 */
 	function __interceptScope(departName, scope, interceptor, setAdviceFn){
 		var _ranges, _departs, k, kk, _depart, _className, _funcName;
-		_ranges = scope.split("."), _departs = depart__[departName];
+		_ranges = scope.split("."),
+		_departs = depart__[departName];
 		if (_ranges.length == 1 && (departName == scope || departName+"*" == scope)) {
 			for(k in _departs){
 				_depart = _departs[k];
-				for(kk in _depart) if (util__.isFunction(_depart[kk])) _depart[kk] = setAdviceFn(_depart[kk], _depart, interceptor);
+				for(kk in _depart)
+					if (util__.isFunction(_depart[kk]))
+						_depart[kk] = setAdviceFn(_depart[kk], _depart, interceptor);
 			}
 		} else if (_ranges.length == 2 && departName == _ranges[0]) {
 			_className = _ranges[1];
 			for(k in _departs){
 				if (k == _className || (_className.indexOf("*") > 0 && k.indexOf(_className.substr(0,_className.indexOf("*"))) == 0)) {
 					_depart = _departs[k];
-					for(kk in _depart) if (util__.isFunction(_depart[kk])) _depart[kk] = setAdviceFn(_depart[kk], _depart, interceptor);
+					for(kk in _depart)
+						if (util__.isFunction(_depart[kk]))
+							_depart[kk] = setAdviceFn(_depart[kk], _depart, interceptor);
 				}
 			}
 		} else if (_ranges.length == 3 && departName == _ranges[0]) {
@@ -588,7 +639,9 @@
 			for(k in _departs){
 				if (k == _className) {
 					_depart = _departs[k];
-					for(kk in _depart) if ( (kk == _funcName || (_funcName.indexOf("*") > 0 && kk.indexOf(_funcName.substr(0, _funcName.indexOf("*"))) == 0) ) && util__.isFunction(_depart[kk]) ) _depart[kk] = setAdviceFn(_depart[kk], _depart, interceptor);
+					for(kk in _depart)
+						if ( (kk == _funcName || (_funcName.indexOf("*") > 0 && kk.indexOf(_funcName.substr(0, _funcName.indexOf("*"))) == 0) ) && util__.isFunction(_depart[kk]) )
+							_depart[kk] = setAdviceFn(_depart[kk], _depart, interceptor);
 				}
 			}
 		}
@@ -602,12 +655,16 @@
 	function __interceptDepart(departName){
 		var i, len, j, jlen, _interceptor, _scopes;
 		for (i = sortedInterceptors__.length; i--;){
-			_interceptor = sortedInterceptors__[i],	_scopes = _interceptor.scope;
-			for (j=0, jlen=_scopes.length; j < jlen; j++) __interceptScope(departName, _scopes[j], _interceptor, __setBeforeAdvice);
+			_interceptor = sortedInterceptors__[i],
+			_scopes = _interceptor.scope;
+			for (j=0, jlen=_scopes.length; j < jlen; j++)
+				__interceptScope(departName, _scopes[j], _interceptor, __setBeforeAdvice);
 		}
 		for (i = 0, len = sortedInterceptors__.length; i < len; i++){
-			_interceptor = sortedInterceptors__[i], _scopes = _interceptor.scope;
-			for (j = 0, jlen = _scopes.length; j < jlen; j++) __interceptScope(departName, _scopes[j], _interceptor, __setAfterAdvice);
+			_interceptor = sortedInterceptors__[i],
+			_scopes = _interceptor.scope;
+			for (j = 0, jlen = _scopes.length; j < jlen; j++)
+				__interceptScope(departName, _scopes[j], _interceptor, __setAfterAdvice);
 		}
 	};
 
@@ -622,9 +679,12 @@
 			var _newHash;
 			if (oldHash__ == (_newHash = location.hash)) return;
 			oldHash__ = _newHash;
-			if (_newHash.length == 0 && route__["/"]) tipJS.action[route__["/"]]();
-			else if (route__[_newHash]) tipJS.action[route__[_newHash]]();
-			else if (route__["!"]) tipJS.action[route__["!"]]();
+			if (_newHash.length == 0 && route__["/"])
+				tipJS.action[route__["/"]]();
+			else if (route__[_newHash])
+				tipJS.action[route__[_newHash]]();
+			else if (route__["!"])
+				tipJS.action[route__["!"]]();
 		});
 	};
 
@@ -685,7 +745,8 @@
 				_views[k].getByTag = util__.getByTag;
 		}
 		tipJS.debug("tipJS version " + tipJS.version + "[" + tipJS.lang + "]");
-		if (!util__.isArray(app__.onLoadArgs)) app__.onLoadArgs = [];
+		if (!util__.isArray(app__.onLoadArgs))
+			app__.onLoadArgs = [];
 		app__.define.onLoad.apply(app__.define, app__.onLoadArgs);
 		if (reservedStack__) {
 			for (i = 0, actionLen = reservedStack__.length; i < actionLen; i++)
@@ -695,14 +756,16 @@
 			reservedStack__ = null;
 		}
 		for(i=0, _routeLen=app__.define.routes.length; i<_routeLen; i++)
-			_route = app__.define.routes[i],
-			__addRoute(_route);
+			_route = app__.define.routes[i], __addRoute(_route);
 		if (_routeLen > 0) {
 			__setOnHash(),
 			_newHash = oldHash__ = location.hash;
-			if (_newHash.length == 0 && route__["/"]) tipJS.action[route__["/"]]();
-			else if (route__[_newHash]) tipJS.action[route__[_newHash]]();
-			else if (route__["!"]) tipJS.action[route__["!"]]();
+			if (_newHash.length == 0 && route__["/"])
+				tipJS.action[route__["/"]]();
+			else if (route__[_newHash])
+				tipJS.action[route__[_newHash]]();
+			else if (route__["!"])
+				tipJS.action[route__["!"]]();
 		}
 	};
 
@@ -724,7 +787,8 @@
 				break;
 			}
 		}
-		for (i = _requireList.length; i--;) if (_requireList[i] !== true) return false;
+		for (i = _requireList.length; i--;)
+			if (_requireList[i] !== true) return false;
 		return true;
 	};
 
@@ -754,8 +818,10 @@
 		_endTime = benchRecs__[endName],
 		_elapsedTime = (_endTime - _startTime) / 1000;
 		// if exist callback function
-		if (callbackFn) callbackFn(startName, endName, _startTime, _endTime, _elapsedTime);
-		else tipJS.log("elapsed time[" + startName + " to " + endName + "] : " + _elapsedTime + " seconds", "[BENCHMARK]");
+		if (callbackFn)
+			callbackFn(startName, endName, _startTime, _endTime, _elapsedTime);
+		else
+			tipJS.log("elapsed time[" + startName + " to " + endName + "] : " + _elapsedTime + " seconds", "[BENCHMARK]");
 		return _elapsedTime;
 	};
 
@@ -767,7 +833,8 @@
 	 */
 	function __getXMLReq() {
 		var _xmlreq;
-		if (window.XMLHttpRequest) _xmlreq = new XMLHttpRequest;
+		if (window.XMLHttpRequest)
+			_xmlreq = new XMLHttpRequest;
 		else if (window.ActiveXObject) {
 			try {
 				_xmlreq = new ActiveXObject("Msxml2.XMLHTTP");
@@ -789,10 +856,13 @@
 	 */
 	function __render(config) {
 		var _retTxt, _xmlhttp;
-		if (arguments.length > 1) return __renderTpl(arguments[0], arguments[1], arguments[2]);
+		if (arguments.length > 1)
+			return __renderTpl(arguments[0], arguments[1], arguments[2]);
 		if (app__.define.templateCache && templateCache__[config.url]) {
-			_retTxt = __renderTpl(templateCache__[config.url], config.data, config.tplId);
-			if (util__.isString(config.renderTo)) util__.getById(config.renderTo).innerHTML += _retTxt;
+			_retTxt = __renderTpl(templateCache__[config.url],
+			config.data, config.tplId);
+			if (util__.isString(config.renderTo))
+				util__.getById(config.renderTo).innerHTML += _retTxt;
 			return _retTxt;
 		}
 		_xmlhttp = __getXMLReq(),
@@ -801,7 +871,8 @@
 		if (_xmlhttp.readyState == 4 && _xmlhttp.status == 200) {
 			_retTxt = templateCache__[config.url] = _xmlhttp.responseText;
 			_retTxt = __renderTpl(_retTxt, config.data, config.tplId);
-			if (util__.isString(config.renderTo)) util__.getById(config.renderTo).innerHTML += _retTxt;
+			if (util__.isString(config.renderTo))
+				util__.getById(config.renderTo).innerHTML += _retTxt;
 			return _retTxt;
 		} else throw new Error("Can't find templates file: " + config.url);
 	};
@@ -816,7 +887,10 @@
 	 */
 	function __renderTpl(html, data, templateKey) {
 		var _applyAreas, _regEx, i, len, _tokens, _evalFunc;
-		html = html.replace(/\r\n/g, "\n"), html = html.replace(/\r/g, "\n"), html = html.replace(/\\/g, '\\\\'), html = html.replace(/\n/g, '');
+		html = html.replace(/\r\n/g, "\n"),
+		html = html.replace(/\r/g, "\n"),
+		html = html.replace(/\\/g, '\\\\'),
+		html = html.replace(/\n/g, '');
 		if (util__.isString(templateKey)) {
 			_applyAreas = html.split("[[#"),
 			_regEx = new RegExp("^"+templateKey+"\]\]");
@@ -872,12 +946,11 @@
 		for (i = 0, len = _newTokens.length; i < len; i++) {
 			_token = _newTokens[i];
 			if (_types[i] == _TYPE_VALUE)
-				_token = '"\"+' + _token + '+\""',
-				_ret.push(_cmdPush + _token + ");");
-			else if (_types[i] == _TYPE_PARSE) _ret.push(_token);
+				_token = '"\"+' + _token + '+\""', _ret.push(_cmdPush + _token + ");");
+			else if (_types[i] == _TYPE_PARSE)
+				_ret.push(_token);
 			else
-				_token = '"' + _token + '"',
-				_ret.push(_cmdPush + _token + ");");
+				_token = '"' + _token + '"', _ret.push(_cmdPush + _token + ");");
 		}
 		return _ret.push("return __tempArr__.join('');"), _ret.join('');
 	};
@@ -973,7 +1046,8 @@
 		_appCtrlName = arguments[0],
 		_args = util__.toArray(arguments).slice(1),
 		_arrName = _appCtrlName.split(".");
-		if (ctrlerName.length == 0) throw new Error("tipJS.action : invalid parameter");
+		if (ctrlerName.length == 0)
+			throw new Error("tipJS.action : invalid parameter");
 		if (!app__.loadOrder || !app__.loadOrder.isLastOrder()) {
 			reservedStack__ = reservedStack__ || [],
 			reservedStack__.push({
@@ -1010,8 +1084,7 @@
 	};
 	function __define() {
 		var _define, i;
-		_define = define__,
-		util__.mergeObject(_define, DEF_BASE__.define);
+		_define = define__, util__.mergeObject(_define, DEF_BASE__.define);
 		if (tipJS.isDevelopment === null) {
 			for (i = _define.developmentHostList.length; i--;) {
 				if (_winLoc.hostname.match(_define.developmentHostList[i]) !== null) {
@@ -1030,7 +1103,8 @@
 		}
 		app__.define = _define,
 		util__.mergeObject(app__.loadOrder = {}, DEF_BASE__.loadOrder);
-		if (tipJS.isRelease) app__.loadOrder.order = ["lang", "tipJSRelease"];
+		if (tipJS.isRelease)
+			app__.loadOrder.order = ["lang", "tipJSRelease"];
 		__loadDepart(app__.loadOrder.presentOrder());
 	};
 
@@ -1096,16 +1170,13 @@
 			order : ["lang", "interceptors","controllers", "models", "views"]
 		}
 	},
-	benchRecs__ = {},
-	app__ = {},
-	msg__ = {},
-	route__ = {}, onHashFn__ = [],
-	templateCache__ = {},
+	app__ = {}, msg__ = {}, route__ = {},
+	benchRecs__ = {}, onHashFn__ = [], templateCache__ = {},
 	isFlat__ = {},
 	_winLoc = window.location, _pathname = _winLoc.pathname, _queryString = _winLoc.search, _isDevelopment = null, _lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage).substr(0,2);
 
-	if (_queryString.match('(\\?|&)debug') !== null || _pathname.match('debug') !== null) _isDevelopment = true;
-
+	if (_queryString.match('(\\?|&)debug') !== null || _pathname.match('debug') !== null)
+		_isDevelopment = true;
 	tipJS.lang = _lang,
 	tipJS.isDevelopment = _isDevelopment;
 })(this);
