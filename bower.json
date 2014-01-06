@@ -6,7 +6,7 @@
     "javarouka <javarouka@gmail.com>",
     "coma333 <coma333ryu@gmail.com>",
     "rkJun <juntai81@gmail.com>",
-    "iMaZiNe <imazine@unioh.com>",
+    "iMaZiNe <imazine@unioh.com>"
   ],
   "license": "MIT/GPLv2",
   "ignore": [
@@ -17,6 +17,6 @@
   ],
   "main": [
   	"build/tipJS.min.js",
-  	"examples/tipJS.min.js",
+  	"examples/tipJS.min.js"
   ]
 }
