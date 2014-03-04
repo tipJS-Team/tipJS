@@ -433,12 +433,6 @@ When you define Model, methods automatically defined by Framework are as follows
 __init method will invoke only once when corresponding Model or View is created following call by loadModel or loadView.
 - getModel(modelName)  
 get Application Model Object defined in tipJS.model method.
-- getById(id)  
-equivalent to document.getElementById.
-- getByName(name)  
-equivalent to document.getElementsByName.
-- getByTag(tagName)  
-equivalent to document.getElementsByTagName
 
 VO (Value Object) Model should be used if you don’t need methods automatically defined. Please refer to following VO (Value Object) Model section for further details.
 
