@@ -42,8 +42,8 @@
 [Contributors](#contributors)  
 
 #Introduction
-tipJS JavaScript MVC Framework 는 작고 Simple하며 강력한 JavaScript MVC Framework 입니다.
-당신은 tipJS 를 이용해 복잡한 구조의 Web Application 을 Controller로 제어되는 Model과 ViewModel, HTMLTemplate로 간단하게 구현할 수 있습니다. tipJS JavaScript MVC Framework로 당신의 Web Application의 개발과 Maintenance 효율을 월등히 높힐 수 있을 것입니다.
+tipJS JavaScript MVC Framework is a small, simple, and effective JavaScript MVC Framework.
+You can implement Web Application with complex structure simply as Model and View using tipJS. tipJS JavaScript MVC Framework increases the maintenance efficacy of your Web Site extraordinarily.
 
 ##[Download](https://github.com/tipJS-Team/tipJS/archive/master.zip)
 
@@ -51,33 +51,34 @@ tipJS JavaScript MVC Framework 는 작고 Simple하며 강력한 JavaScript MVC 
 Dual licensed under the MIT or GPL Version 2 licenses.
 
 ##Feature
-- 복잡한 JavaScript Application을 MVC Pattern 형태로 구현할 수 있습니다.
-- Back-end 개발자를 위한 최적의 JavaScript MVC Framework 입니다.
-- AOP(Aspect-Oriented Programming) 가능한 JavaScript MVC Framework 입니다.
-- Router 기능을 제공합니다.
-- HTML Template 기능을 지원하여 사용자 View 를 간단히 생성할 수 있습니다.(version 1.10 부터 지원)
-- 다양한 Browser와 호환됩니다.(IE 7/8/9, Chrome, Firefox, Safari, etc…)
-- 독립된 작동을 위해 JavaScript ECMAScript Code 로 개발되어 별도의 외부 Library도 필요로 하지 않습니다.
-- 다양한 외부 JavaScript Library 와 호환됩니다.(JQuery, ExtJS, etc…)
-- Browser Cache를 간단하게 제어할 수 있습니다.
-- Model과 ViewModel 만이 아닌 다양한 Timing에서 당신의 Application을 제어할 수 있습니다.
-- tipJS JavaScript MVC Framework는 최소한의 Rule에 의해 작동하므로 개발형식이 자유롭습니다.
-- 지정된 작동구간의 benchmark 기능을 지원합니다.
-- 다국어 지원(국제화/i18n) 기능을 제공합니다.
-- etc…
+- tipJS implements complex JavaScript Application in the form of MVC Pattern.
+- tipJS is familiar framework for Back-end Developers.
+- Supported AOP(Aspect-Oriented Programming).
+- tipJS provides Router.
+- tipJS creates a user's view simply by providing simple HTML Template.
+- tipJS can be compatible with diverse browsers (IE 7/8/9, Chrome, Firefox, Safari, etc...)
+- tipJS does not require any external library as it was developed as JavaScript ECMAScript Code for independent operation.
+- tipJS can be compatible with diverse external JavaScript (JQuery, ExtJS, etc...)
+- tipJS makes you control Browser Cache simply.
+- tipJS makes you implement your Application as Models and Views.
+- tipJS makes you control your Application at diverse timing.
+- tipJS provides you diverse development formats by operating with the minimum rules.
+- tipJS provides you specify operating range of the benchmark functions.
+- tipJS is a multi-lingual(i18n) support.
+- etc...
 
 ##Structure
 ![tipJS JavaScript MVC framework structure](http://tipjs-team.github.io/tipJS/structure.png)
 
 #Getting Started 
-Folder Structure는 아래의 구조를 권장합니다.
+The following folder structure is recommended.
 ```
 /tipJS/tipJS.min.js.js
 /examples/helloWorld/index.html
 /examples/helloWorld/app.js
 /examples/helloWorld/controllers/hello.js
 ```
-html file 의 tipJS.min.js file 경로를 설정합니다.
+Add tipJS.min.js file with path in HTML file.
 ```
 <html>
 <head>
@@ -90,7 +91,7 @@ html file 의 tipJS.min.js file 경로를 설정합니다.
 </body>
 </html>
 ```
-app.js 에서 controller file 을 설정합니다.
+Add controller file in app.js.
 ```
 // app.js
 tipJS.app({
@@ -99,10 +100,10 @@ tipJS.app({
     ]
 });
 window.onload = function(){
-    tipJS.loadApp(); // application 시작
+    tipJS.loadApp(); // application is started.
 };
 ```
-controller file 에 처리내용을 작성합니다.
+Write your code in controller file.
 ```
 // controllers/hello.js
 tipJS.controller("hello", {
@@ -116,9 +117,9 @@ tipJS.controller("hello", {
 ```
 
 #App Configuration
-##Essential
-tipJS 의 설정은 tipJS.app method 에 의해 이루어집니다. 모든 설정값에는 기본값(default value)가 존재하고, 기본값의 변경을 위해서는 thpJS.app method 의 인수 객체에 설정값을 지정하면 됩니다.
-<pre>
+## Essentional
+tipJS the setting is done by tipJS.app method. In all settings to default (default value) exists, tipJS.app method for changing the default settings to arguments of the object would specify.
+```javascript
 tipJS.app({
     controllers:[
         "someController1.js",
@@ -140,20 +141,23 @@ tipJS.app({
 window.onload = function() {
 	tipJS.loadApp();
 }
-</pre>
-아래는 tipJS.app method에서 설정할 수 있는 속성에 대한 설명입니다.
+```
+tipJS.app method that you can set in the property description.
 
 - appPath  
-tipJS 의 application 실행폴더를 지정합니다. 이 옵션은 controllers, models, views, lang 폴더등의 상위폴더를 지정합니다. 기본값은 "."(tipJS를 포함한 html의 현재경로) 으로 상대/절대경로로 재설정 가능합니다.
-- controllers  
-array type으로 Controller file들을 정의합니다.
+Define the folder of the application for tipJS.
+This option indicate controllers, models, views, lang folder's parent folder.
+The default is "." (the current path of HTML including tipJS) and can be changed to relative / absolute path.
+- controllers   
+Controller files are defined as the array type.
 - models  
-array type으로 Model file들을 정의합니다.
+Model files are defined as the array type.
 - views  
-array type으로 View file들을 정의합니다.
+View files are defined as the array type.
 - onLoad  
-function type으로 등록된 onLoad method 는 application 이 tipJS.loadApp method 로 load된 직후에 단 한번 실행되는 method입니다. argument로 tipJS.loadApp method 호출시 지정한 argument 인 parameter 를 사용할 수 있습니다.
-<pre>
+The onLoad event occurs once after tipJS.loadApp method is called.
+The arguments cat set from the parameters of tipJS.loadApp method.
+```javascript
 // tipJS
 tipJS.app({
     ...
@@ -167,10 +171,12 @@ $(document).ready(function(e){
     var param = {param1:"some value"}
     tipJS.loadApp(param);
 });
-</pre>
+```
 - beforeController  
-function type으로 등록된 beforeController method 는 AOP의 개념으로 application 내에서 어떤 Controller 를 호출하더라도 공통적으로 실행되는 method입니다.이 method 는 Controller 의 그 어떤 method보다 우선적으로 실행됩니다. argument로 Controller를 호출하는 tipJS.action method의 두번째 argument 인 parameter를 사용할 수 있습니다. Controller 와 동일한 method들을 사용할 수 있습니다.
-<pre>
+The Application will invoke The beforeController method of function type when called any Controller.
+The method is called before executing any method in Controller.
+And the method can use the parameter of tipJS.action method's second argument, Controller's same method.
+```javascript
 tipJS.app({
     ...
     onLoad:function(params){
@@ -181,20 +187,25 @@ tipJS.app({
     }
     ...
 });
-</pre>
+```
 - afterController  
-function type으로 등록된 afterController method 는 application 내에서 어떤 Controller 를 호출하더라도 공통적으로 실행되는 method입니다.이 method 는 Controller 가 실행종료된 후 실행됩니다. argument로 Controller를 호출하는 tipJS.action method의 두번째 argument 인 parameter를 사용할 수 있습니다. Controller 와 동일한 method들을 사용할 수 있습니다.
+The Application will invoke The afterController method of function type when called any Controller.  
+The method is called after executing the Controller.
+And the method can use the parameter of tipJS.action method's second argument, Controller's same method.
 - noCache  
-Browser cache 를 boolean type으로 설정할 수 있으며, true일 경우 noCacheAuto, noCacheVersion, noCacheParam 속성과 연동되어 version value 가 변경 될때마다 JavaScript file을 다시 load 하게합니다.(default:false)
+Browser cache can be set to a boolean type, If value is true, 
+whenever modify version value with noCacheAuto, noCacheVersion, noCacheParam propertiy, 
+be reload JavaScript file. (default:false)
 - noCacheVersion  
-Browser cache 제어를 위한 버젼 정보를 설정합니다.(default:"1.000")
+It is set Version information for Browser cache control.(default:"1.000")
 - noCacheAuto  
-true로 설정된 경우 noCacheVersion option의 value와는 상관없이 version을 랜덤하게 출력하여 Browser cache를 무효하게 합니다.(default:false)
+If value is true,  Browser cache is disabled by output version random 
+that irrespective of noCacheVersion option value.(default:false)
 - noCacheParam  
-Browser cache 제어를 위한 parameter name을 설정합니다.(default:"noCacheVersion")
+It is set parameter name for Browser cache control.(default:"noCacheVersion")
 
 ##Router
-tipJS JavaScript MVC Framework 는 tipJS.app method 의 설정을 통해 Router 기능을 제공합니다.  
+tipJS JavaScript MVC Framework support Router function through properties of tipJS.app method.
 Router Tutorial[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/Router/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/Router/)]
 
 ```
@@ -207,25 +218,25 @@ tipJS.app({
 		"noPageCtrler.js"
 	],
 	routes:[
-		// url hash가 존재하지 않을때 defaultCtrler가 동작합니다.
+		// When url hash does not exist, defaultCtrler is invoked.
 		// http://domain.com
 		{
 			url:"/",
 			controller:"defaultCtrler"
 		},
-		// url hash가 '#/page1' 일때 page1Ctrler가 동작합니다.
+		// When url hash is '#/page1', page1Ctrler is invoked.
 		// http://domain.com/#/page1
 		{
 			url:"#/page1",
 			controller:"page1Ctrler"
 		},
-		// url hash가 '#/page2' 일때 page2Ctrler가 동작합니다.
+		// When url hash is '#/page2', page2Ctrler is invoked.
 		// http://domain.com/#/page2
 		{
 			url:"#/page2",
 			controller:"page2Ctrler"
 		},
-		// 라우터에 등록되지 않은 url hash 일때 noPageCtrler가 동작합니다.
+		// When url haash is not registered in the router, noPageCtrler is invoked.
 		// http://domain.com/#/pageXX
 		{
 			url:"!",
@@ -237,8 +248,8 @@ tipJS.app({
 ```
 
 ##Cache Control
-tipJS JavaScript MVC Framework 는 tipJS.app method 의 설정을 통해 Browser cache를 control합니다.
-<pre>
+tipJS JavaScript MVC Framework control Browser cache through properties of tipJS.app method.
+```javascript
 tipJS.app({
     noCache:false,
     noCacheVersion:"1.000",
@@ -246,36 +257,43 @@ tipJS.app({
     noCacheParam:"noCacheVersion",
     ...
 });
-</pre>
-noCache attribute가 false일 경우 tipJS 는 아래와 같이 JavaScript file 을 읽어들입니다.
-<pre>
-&lt;script type="text/javascript" src="./controllers/some.js"&gt;&lt;/script&gt;
-</pre>
-그러나 noCache attribute 가 true일 경우 아래와 같은 결과와 같습니다.
-<pre>
-&lt;script type="text/javascript" src="./controllers/some.js?noCacheVersion=1.000"&gt;&lt;/script&gt;
-</pre>
-noCache attribute 가 true 그리고 noCacheAuto attribute 가 true일 경우 noCacheVersion 의 parameter 값이 random 하게 생성되어 항상 새로 JavaScript file 을 load 하게 됩니다.
-<pre>
-&lt;script type="text/javascript" src="./controllers/some.js?noCacheVersion=0.5478912648"&gt;&lt;/script&gt;
-</pre>
-만약 당신의 application이 갱신되었다면 noCacheVersion 속성의 값을 변경하거나 noCacheAuto 속성의 값을 true 로 하는것 만으로 Browser는 cache 처리없이 최신의JavaScript file을 load하게 될 것입니다.
+```
+If noCache attribute is false, tipJS will be load JavaScript file as follows:
+```javascript
+<script type="text/javascript" src="./controllers/some.js"></script>
+```
+If noCache attribute is true, the result is as follows:
+```javascript
+<script type="text/javascript" src="./controllers/some.js?noCacheVersion=1.000"></script>
+```
+When the noCache attribute is true and noCacheAuto attribute is true,
+any time loads a new JavaScript file by parameter of noCacheVersion generate is generated randomly.
+```javascript
+<script type="text/javascript" src="./controllers/some.js?noCacheVersion=0.5478912648"></script>
+```
+If your application is updated, Browser will load latest JavaScript file without cache through modify the value of noCacheVersion or set true of noCacheAuto.
 
 #Controller
-Controller의 호출은 아래의 방식으로 이루어 집니다.
-- tipJS.action("controller name", parameter)
-- tipJS.action.controllerName(parameter)
+To invoke Controller, as follows:
+- ```tipJS.action("controller name", parameter)```
+- ```tipJS.action.controllerName(parameter)```
 
-tipJS.controller method 에서 정의된 Controller 처리가 실행되기 전에 tipJS.app method에서 정의한 beforeController method 가 실행되며 Controller 처리가 모두 완료된 후에 define.js에서 정의한 afterController method가 실행됩니다.
+It invokes beforeController method that defined in tipJS.app method
+before processing the Controller that defined in tipJS.controller method. 
+And it is invoked afterController method that defeind in define.js
+after completed process of Controller.
 
 ![tipJS JavaScript MVC framework structure](http://tipjs-team.github.io/tipJS/structure.png)
 
 Controller Tutorial[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/Controller)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/Controller/)]
 
-tipJS.action method의 두번째 argument 는 tipJS.app method에서 정의한 beforeController method, afterController method 와 호출된 Controller의 beforeInvoke, invoke, afterInvoke, exceptionInvoke method 에서 input argument로 사용가능합니다.
+The second argument of tipJS.action method can be used as input argument for:
+- beforeController method and afterController method in tipJS.define method
+- beforeInvoke, invoke, afterInvoke and exceptionInvoke method in Controller
 
-beforeController / afterController method 안에서 this.controllerName 속성으로 현재 처리중인 controller 명이 참조 가능합니다.
-<pre>
+An attribute “this.controllerName” in beforeController / afterController method represents a name of a controller currently running.
+
+```javascript
 tipJS.app({
     ...
     onLoad:function(params){
@@ -294,8 +312,8 @@ tipJS.app({
     },
     ...
 });
-</pre>
-<pre>
+```
+```javascript
 // controllers/someController.js
 tipJS.controller("someController", {
     beforeInvoke:function(params){
@@ -311,11 +329,11 @@ tipJS.controller("someController", {
         console.log(params); // result is "someValue"
     }
 });
-</pre>
-tipJS.action method 의 호출 위치는 tipJS.loadApp method 호출 이후 자유롭습니다.
+```
+You can invoke tipJS.action method at any location since you have invoked tipJS.loadApp method.
 
-Controller 는 보통 아래와 같은 구성으로 이루어 집니다.
-<pre>
+Here is a general structure of Controller:
+```javascript
 // controllers/someController.js
 tipJS.controller("someController", {
     beforeInvoke:function(params){
@@ -339,8 +357,8 @@ tipJS.controller("someController", {
         alert(exception);
     }
 });
-</pre>
-<pre>
+```
+```javascript
 tipJS.app({
     ...
     onLoad:function(params){
@@ -348,13 +366,13 @@ tipJS.app({
     },
     ...
 });
-</pre>
-Controller는 기본 4가지의 method 가 조건에 의해 실행됩니다.
+```
+There are four basic methods in Controller. They run as below.
 
-기본적으로 Controller 는 tipJS Javascript MVC Framework에 의해 beforeInvoke, invoke, afterInvoke method 의 순서로 자동호출되며 exceptionInvoke method 는 Controller에 exceptionInvoke method가 정의되어 있고 Controller 실행중 exception 이 발생할 경우에만 호출됩니다.
+The tipJS Javascript MVC Framework in general cases runs beforeInvoke method first, invoke method second and afterInvoke method last. The exceptionInvoke method is called only if 1) exceptionInvoke method is defined in Controller and 2) an exception is raised while running Controller.
 
-물론 Controller 내부에서 사용자가 작성한 method 를 호출하는 것도 가능합니다.
-<pre>
+You can call any user defined methods in Controller.
+```javascript
 // controllers/someController.js
 tipJS.controller("someController", {
     ...
@@ -367,9 +385,9 @@ tipJS.controller("someController", {
         ...
     }
 });
-</pre>
-Controller 선언시 async 속성을 true로 설정하면 Controller 호출시 비동기 모드로 작동합니다. delay 속성을 1/1000 초단위 로 지정하여 비동기 지연시간을 지정할 수 있습니다.
-<pre>
+```
+If “async” attribute is set as true when Controller declared, the controller runs in async mode. You can also set delay time with “delay” attribute. Its unit value is 1/1000 sec.
+```javascript
 // controllers/someController.js
 tipJS.controller("someController", {
     async:true, // AnSynchronized Controller
@@ -384,44 +402,46 @@ tipJS.controller("someController", {
         ...
     }
 });
-</pre>
-아래는 Controller 에 설정된 속성에 대한 설명입니다.(기본 4 method 이외)
+```
+Here are attributes details defined in Controller besides four basic methods.
 - async  
-Controller 동작을 비동기모드로 실행할것인지 설정합니다.(true – 비동기모드)
+sets async mode (true – async mode)
 - delay  
-Controller 비동기모드 시간을 1/1000 초 단위로 지정합니다.(defalut:15)
+sets async delay in 1/1000 sec unit (default: 15)
 - getModel(ModelName)  
-tipJS.model method에서 정의한 Application Model Object 를 load 합니다.
+get Application Model Object defined in tipJS.model method
 - getView(ViewName)  
-tipJS.view method에서 정의한 Application ViewModel Object 를 load 합니다.
-- render(options)  
-HTML Template 항목 참고
+get Application View Object defined in tipJS.view method
+- renderTemplate(option)  
+see HTML Template
 - getById(id)  
-document.getElementById 와 동일합니다.
+equivalent to document.getElementById
 - getByName(name)  
-document.getElementsByName 와 동일합니다.
+equivalent to document.getElementsByName
 - getByTag(tagName)  
-document.getElementsByTagName 와 동일합니다.
+equivalent to document.getElementsByTagName
 
 #Model
-tipJS JavaScript MVC Framework 서 Model Object 는 필요에 따라 구현하시기 바랍니다.
+You don’t necessarily have to implement Model Object in tipJS JavaScript MVC Framework.
+Model Object can be implemented if required.
 
-Model 에서는 같은 Layer인 다른 Model을 load할 수 있습니다.
+You can load a different Model in the same Layer.
 
-Model 정의시 Framework에 의해 자동으로 정의되는 method는 다음과 같습니다.
+When you define Model, methods automatically defined by Framework are as follows:
 
 - __init  
-__init 메서드는 선언후 해당 Model 이 getModel 메서드에 의해 호출되어 생성되는 시점에서 단 한번 실행되는 메서드 입니다.
+__init method will invoke only once when corresponding Model or View is created following call by loadModel or loadView.
 - getModel(modelName)  
-tipJS.model method에서 정의한 Application Model을 반환합니다.
+get Application Model Object defined in tipJS.model method.
 
-자동으로 정의되는 method가 필요치 않을 경우 VO(Value Object) Model 을 사용하시기 바랍니다. 자세한 설명은 VO(Value Object) Model 항목을 참고하시기 바랍니다.
+VO (Value Object) Model should be used if you don’t need methods automatically defined. Please refer to following VO (Value Object) Model section for further details.
+
 Model Tutorial[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/Model/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/Model/)]
 <pre>
 // models/someModel.js
 tipJS.model("someModel", {
     __init:function(){
-        // Object 생성시 framework에 의해 한번만 실행되고 소멸한다.
+        // Object was created by the framework is executed only once and destroyed.
         ...
     },
     properties:...
@@ -447,16 +467,16 @@ tipJS.controller("someController", {
 });
 </pre>
 
-##Syncronous Model
-tipJS JavaScript MVC Framework는 Model의 동기화 기능을 제공합니다.
-Model 의 동기화 기능이란 하나의 생성된 Model Object가 소멸되지 않고 변경되어지는 값을 가진채 유지되는 것을 말합니다.
+## Syncronous Model
+tipJS JavaScript MVC Framework has provided synchronization of Model.
+Synchronization of Model means that a Model Object created by a user remains with changed values and will not be destroyed.
 
 ModelSync Tutorial[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/ModelSync/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/ModelSync/)]
 <pre>
 // models/someModel.js
 tipJS.model("someModel", {
     __init:function(){
-        // Object 생성시 framework에 의해 한번만 실행되고 소멸한다.
+        // Object was created by the framework is executed only once and destroyed.
         ...
     },
     someValue:"foo"
@@ -498,22 +518,24 @@ tipJS.controller("someController2", {
     ...
 });
 </pre>
-getModel method 의 두번째 인자에 true를 설정하였을 경우 사용 할 수 있습니다.
+You can use functions for synchronization of Model when the second parameter of getModel method is defined as ‘true’.
+
 
 ##VO(Value Object) Model
-tipJS JavaScript MVC Framework는 VO(Value Object) Model 기능을 제공합니다.
+tipJS Javacript MVC Framework has provided VO (Value Object) Model.
 
-VO Model 은 tipJS에서 일반 model선언시 자동으로 추가되는 속성/method 를 추가하지 않습니다. 사용자가 선언한 내용만이 반환되는 model입니다.
+VO model will not introduce properties or methods added automatically when defining Model in tipJS.
+It will only reflect properties and methods defined by users.
 
-VO Model 을 사용하기 위해 별도의 설정작업은 필요하지 않습니다.
-Model 선언시 Model Name 값의 마지막이 “VO”로 선언되어 있으면 해당 Model은 VO Model로 동작합니다.
+Configuration is not required to use VO Model.
+If the last value of  Model Name is “VO”, the Model will be VO Model.
 
 ModelVO Tutorial[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/ModelVO/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/ModelVO/)]
 <pre>
 // models/modelVO.js
 tipJS.model("modelVO", {
     __init:function(){
-        // Object 생성시 framework에 의해 한번만 실행되고 소멸한다.
+        // Object was created by the framework is executed only once and destroyed.
         ...
     },
     value1 : "123",
@@ -535,23 +557,23 @@ tipJS.controller("someController", {
 </pre>
 
 ##Model extension(Inheritance)
-tipJS JavaScript MVC Framework는 Model의 확장 기능을 제공합니다.
+tipJS JavaScript MVC Framework has provided functions for extension of Model.
 
 ModelExtend Tutorial[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/ModelExtend/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/ModelExtend/)]
 <pre>
 tipJS.model("modelParent", {
-    parent1 : "modelParent",
+    parent1 : "someApp.modelParent",
     parentFn : function() {
-        console.log(this.parent1); // modelParent
+        console.log(this.parent1); // someApp.modelParent
     }
 });
 </pre>
 <pre>
 tipJS.model("modelChild",{
     __extend : "modelParent",
-    child1 : "modelChild",
+    child1 : "someApp.modelChild",
     childFn : function() {
-        console.log(this.child1); // modelChild
+        console.log(this.child1); // someApp.modelChild
     }
 });
 </pre>
@@ -561,8 +583,8 @@ tipJS.controller("someController", {
     ...
     invoke : function() {
         var modelChild = this.getModel("modelChild");
-        modelChild.parentFn(); // modelParent
-        modelChild.childFn(); // modelChild
+        modelChild.parentFn(); // someApp.modelParent
+        modelChild.childFn(); // someApp.modelChild
     },
     ...
 });
@@ -570,26 +592,24 @@ tipJS.controller("someController", {
 
 
 #ViewModel
-tipJS JavaScript MVC Framework 서 ViewModel Object 는 필요에 따라 구현하시기 바랍니다.
+You don’t necessarily have to implement ViewModel Object in tipJS JavaScript MVC Framework.
+Model Object and View Object can be implemented if required.
 
-ViewModel 은 HTML Template 기능을 Controller로 부터 분리하여 수행하기 위한 Model 입니다.
+ViewModel is for seperating logics of HTML Template from Controller.
 
-ViewModel 에서는 같은 Layer인 다른 ViewModel을 load할 수 있습니다.
+You can load a different ViewModel in the same Layer.
 
-ViewModel 정의시 Framework에 의해 자동으로 정의되는 method는 다음과 같습니다.
+When you define ViewModel, methods automatically defined by Framework are as follows.
 
 - __init
-__init 메서드는 선언후 해당 ViewModel 이 getView 메서드에 의해 호출되어 생성되는 시점에서 단 한번 실행되는 메서드 입니다.
+__init method will invoke only once when corresponding ViewModel is created following call by getView.
 - getView(viewName)
-tipJS.model method에서 정의한 Application ViewModel을 반환합니다.
-- getById(id)
-document.getElementById 와 동일합니다.
-- getByName(name)
-document.getElementsByName 와 동일합니다.
-- getByTag(tagName)
-document.getElementsByTagName 와 동일합니다.
+loads Application ViewModel defined in tipJS.model method.
+- getById(id) equivalent to document.getElementById.
+- getByName(name) equivalent to document.getElementsByName.
+- getByTag(tagName) equivalent to document.getElementsByTagName
 - render(options)
-HTML Template[HTML Template] 항목을 참고합니다.
+Please refer to following HTML Template[HTML Template] section for further details.
 
 View(HTML Template) Tutorial[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/View/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/View/)]
 <pre>
@@ -615,8 +635,10 @@ tipJS.controller({
 });
 </pre>
 
+
 ##ViewModel extension(Inheritance)
-tipJS JavaScript MVC Framework는 ViewModel의 확장 기능을 제공합니다.
+
+tipJS JavaScript MVC Framework has provided functions for extension of ViewModel.
 
 ViewModel Extend Tutorial[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/ViewExtend/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/ViewExtend/)]
 <pre>
@@ -650,12 +672,15 @@ tipJS.controller("someController", {
 </pre>
 
 #HTML Template
-tipJS JavaScript MVC Framework는 Model과 View의 분리를 위한 HTML 형식의 Template 기능을 제공합니다.
+tipJS JavaScript MVC Framework provides HTML based template engine.
 
-render method 는 HTML Template 에 data를 맵핑한후 renderTo 속성에 id 값이 지정되어 있으면 해당 element에 HTML Template 의 내용을 출력한 후  data가 mapping된 html 을 반환합니다. 한번 읽어들인 HTML template file은 tipJS에 의해 cache 처리됩니다.
-만약 template의 cache 처리를 원하지 않을경우에는 tipJS.app method 의 templateCache 속성값을 false로 설정하시기 바랍니다.(default:true)
+render method implements data mapping in HTML template
+Then, if id value is defined as renderTo property, the method will return HTML string including mapping data after printing it out to corresponding element.
 
-renderTo 속성은 생략 가능하며 render method는 항상 data가 mapping된 html 을 반환합니다.
+Once a HTML template file has been loaded, tipJS will load it from cache.
+if you don’t want to load a template file from cache, please change templateCache property of tipJS.app method from default value to ‘false’.(default:true)
+
+If renderTo property is skipped, renderTemplate method always returns HTML string including mapping data without printing it out.
 
 // index.html
 <pre>
@@ -704,6 +729,7 @@ tipJS.controller("someController", {
 
 ViewModel(HTML Template) Tutorial[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/View/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/View/)]
 
+
 // someTpl.tpl
 <pre>
 &lt;div&gt;
@@ -718,18 +744,19 @@ ViewModel(HTML Template) Tutorial[[SRC](https://github.com/tipJS-Team/tipJS/tree
 
 ViewExtend(HTML Template) Tutorial[[SRC](https://github.com/tipJS-Team/tipJS/tree/master/tutorial/ViewExtend/)][[VIEW](http://tipjs-team.github.io/tipJS/tutorial/ViewExtend/)]
 
-HTML Template 에서의 값의 출력은 <@= value @> 사이에서 이루어 지며, 루프등의 제어는 <@ for(…) @> 사이에서 이루어집니다.
-종료태그 @> 앞에 종료문자(;)를 넣을 경우 에러를 발생하니 주의하십시오.
+tipJS prints out values to <@= value @> in HTML Template, and loop control statement should be located in <@for(…)@>.
+Please note with caution that an error occurs when you put a termination character (;) in front of a termination tag (@>).
 
-render method의 argument인 설정 Object의 속성은 다음과 같습니다.
+Properties of Object, an argument of this.renderTemplate method, are as follows:
+
 - url  
-HTML Template file의 url를 정의합니다. file의 extention name에 대한 제한은 없습니다.
+It defines url of HTML Template file. There is no limit on extention name of files.
 - renderTo  
-HTML Template의 내용이 data속성에 의해 mapping 된 후에 반환되는 html이 출력 될 html요소의 id를 정의합니다.(생략가능)
+It defines id value of HTML element in which HTML string including mapping data will be printed. (Not necessary).
 - data  
-HTML Template 에서 정의한 data변수에 mapping될 data를 정의합니다.
+It defines data will be mapped.
 
-단순히 html string 과 data object 를 통해 렌더링된 html 을 받을 수도 있습니다.
+You can receive rendered HTML as formats of HTML string and data Object.
 
 <pre>
 tipJS.controller("someController", {
@@ -743,10 +770,10 @@ tipJS.controller("someController", {
 });
 </pre>
 
-##Logical split of HTML Template file
-하나의 물리적 file 을 논리적으로 분할하여 사용하는 기능에 대해 설명합니다.
+## Logical split of HTML Template file
+tipJS provides function spliting a file logically and using it.
 
-논리 id 명은 tplId 속성에 지정하여 사용해야 하며 template file 의 [[#id]] 와 matching 됩니다.
+Logical id name used in specified tplId property, it will be matching the template file with [[#id]].
 
 // someTpl.tpl
 <pre>
@@ -793,9 +820,7 @@ tipJS.controller("someController2", {
 </pre>
 
 #AOP(Aspect-Oriented Programming)
-여기서는 tipJS JavaScript MVC Framework 를 통한 AOP(Aspect-Oriented Programming) 기능을 설명합니다.
-
-AOP 를 활성화 하기 위해서 tipJS.app method 에 interceptors 속성을 추가합니다.
+tipJS JavaScript MVC Framework provides AOP(Aspect-Oriented Programming). add 'interceptors' property in the tipJS.app method when you want activate it.
 
 <pre>
 tipJS.app({
@@ -807,9 +832,8 @@ tipJS.app({
 });
 </pre>
 
-application 폴더 하위에 interceptors 폴더를 작성하고 interceptor JS 파일을 작성합니다.
-
-interceptor 의 등록은 tipJS.interceptor method를 사용합니다.
+Create interceptors folder below the application folder and add interceptor JS
+ files. Use tipJS.interceptor method for interceptor registration.
 
 <pre>
 tipJS.interceptor("interceptor", {
@@ -828,19 +852,22 @@ tipJS.interceptor("interceptor", {
 });
 </pre>
 
-target 속성은 적용할 범위(point cut)를 의미합니다.
+target property means point cut.
 
-예를 들어 Model 전체에 적용할 때는 models 를(ex:”models”)
-특정 Model을 지정하고 싶을때는 Model 명을(ex:”models.modelName” or “models.modelNam*”)
-특정 Model의 특정 method 를 지정하고 싶을때는 method 명을(ex:”models.modelName.getName” or “models.modelName.get*”) 작성합니다.
+For example,
 
-target 속성은 배열타입으로 복수개 지정 가능합니다.
+If it applies to the entire range of Model puts the models(ex:”models”).
+If it applies to a Model puts the Model Name(ex:”models.modelName” or “models.modelNam*”).
+If it applies to particular method of a particular Model puts method Name.
+(ex:”models.modelName.getName” or “models.modelName.get*”).
 
-상기 before, after 안의 this context는 target 의 context를 의미합니다.
+The target property of an array and more than one available.
 
-before, after 또한 배열타입으로 복수개 지정 가능합니다.
+This context in before and after means target's context.
 
-아래와 같은 Controller 가 있다고 가정한다면
+The Before, the after can be specify more than one, too.
+
+There is Controller code.
 <pre>
 tipJS.controller("someCtrler", {
     msg:"some Message",
@@ -850,7 +877,7 @@ tipJS.controller("someCtrler", {
 });
 </pre>
 
-상기의 Controller 의 실행결과는 아래와 같이 console에 출력됩니다.
+The result is as follows: 
 <pre>
 interceptor.before : some Message
 some Message
@@ -858,8 +885,8 @@ interceptor.after #1 : some Message
 interceptor.after #2 : some Message
 </pre>
 
-##Specifies the execution priority
-interceptor 의 order 속성값을 지정하여 interceptor들간의 실행 우선순위를 지정할수 있습니다.
+## Specifies the execution priority
+A order of the interceptor property can be specified execution priority of interceptors.
 <pre>
 tipJS.controller("someCtrler", {
     msg:"some Message",
@@ -886,7 +913,8 @@ tipJS.interceptor("interceptor1", {
 });
 </pre>
 <pre>
-tipJS.interceptor("interceptor2", {
+tipJS.interceptor({
+    __name:"someApp.interceptor2",
     order:2,
     target:"controllers",
     before:function(){
@@ -903,7 +931,7 @@ tipJS.interceptor("interceptor2", {
 });
 </pre>
 
-상기 예의 실행결과는 아래와 같습니다.
+The result is as follows: 
 <pre>
 interceptor.before #1-1 : some Message
 interceptor.before #2-1 : some Message
@@ -916,11 +944,12 @@ interceptor.after #2-2 : some Message
 
 #ETC
 ##Debug Mode
-tipJS JavaScript MVC Framework는 당신의 debug 작업을 위해 tipJS.debug method 를 제공합니다.
+tipJS JavaScript MVC Framework provides debug method that is tipJS.debug.
 
-tipJS.debug method 를 간단히 설명하면 development mode 에서만 작동하는 browser console logger method 입니다.
+It is console logger method and it works only with developer tools likes Chrome Inspector, Firebug and another.
 
-tipJS.debug method 는 tipJS.app method에서 정의한 developmentHostList 속성에 등록된 host 의 경우 console log를 출력합니다.
+It can shows console log when host is registered in developerHostList property that defined tipJS.app method.
+
 <pre>
 tipJS.app({
     ...
@@ -936,22 +965,26 @@ tipJS.app({
 var someValue = someMethod();
 tipJS.debug("someValue is " + someValue);
 </pre>
-만약 당신의 browser에 표시된 host name 이 developmentHostList 속성에 등록된 host의 경우 위의 source는 browser console 에 당신이 설정한 message를 출력할 것입니다.
 
-development mode 와 상관없이 console log 를 출력하고 싶다면 browser 의 console.log method 혹은 tipJS.log method 를 사용하시기 바랍니다.
+If browser url is correct with defined host name at developmentHostList then You can see the message that you wrote.
+
+You can use the tipJS.log method even if It's not on the development mode.
 
 ##Release mode
-tipJS JavaScript MVC Framework는 당신의 Release 작업을 위한 기능을 제공합니다.
+tipJS JavaScript MVC Framework provides Release mode.
 
-간단히 설명하면 release mode 에서만 작동하는 controller/model/view/interceptor의 onefile 동작시스템을 말합니다.
+It is Operating system of controller/model/view/interceptor and it working in release mode
 
-tipJS는 기본적으로 개발자의 개발/유지보수의 편의를 위해 controller/model/view/interceptor 의 파일을 분리하도록 강제하고 있습니다.
-그러나 모바일/네트워크상의 문제등으로 인해 js 파일의 억세스가 느릴경우 페이지 로딩시 시간이 지체되는 문제가 발생할 수 있습니다.
-release mode를 설정하면 이러한 문제를 회피할 수 있습니다.
+It is your development / maintenance for the convenience of the controller / model / view / interceptor are forced to separate the file
 
-먼저 빌드툴등을 이용하여 controller/model/view/interceptor 등의 파일을 "[appPath]/tipJSFile.js" 로 합치는 작업을 합니다.
+But js file to mobile / network problems if the access is slow page load times that the delay can cause problems.
 
-그다음 tipJS.app method 에 releaseHostList 속성을 등록합니다.
+When you set the release mode to work around this problem can be.
+
+First, build tools, and the controller / model / view / interceptor file as "[appPath] / tipJSFile.js" consistent with the action.
+
+Then tipJS.app method to register the property in the releaseHostList.
+
 ```
 tipJS.app({
     ...
@@ -963,15 +996,14 @@ tipJS.app({
     ...
 });
 ```
-releaseHostList의 호스트에서 tipJS가 동작할시 tipJS는 나뉘어진 controller/model/view/interceptor 파일들을 대신하여 "[appPath]/tipJSFile.js" 에 등록된 controller/model/view/interceptor 를 사용하여 동작합니다.
+When operating in the releaseHostList tipJS, It's the controller / model / view / interceptor file on behalf of "[appPath] / tipJSFile.js" registered in the controller / model / view / interceptor to use will work.
 
 ##Benchmark
-tipJS JavaScript MVC Framework는 tipJS.benchmark 기능을 제공합니다.
+tipJS JavaScript MVC Framework provides benchmark method.
 
-tipJS.benchmark 기능을 사용하기 위한 별도의 설정작업은 필요하지 않습니다.
+There are no precondition to use tipJS.benchmark method.
 
-tipJS.benchmark.mark method 로 기점들을 등록합니다.
-tipJS.benchmark.elapsedTime method 로 두 기점간의 경과시간을 console 에 출력합니다.
+Use the tipJS.benchmark.mark method for register start point and Use the tipJS.bechmark.elapsedTime method where you want to see the end of duration.
 
 <pre>
 tipJS.benchmark.mark("point1");
@@ -980,7 +1012,8 @@ tipJS.benchmark.mark("point2");
 tipJS.benchmark.elapsedTime("point1", "point2");
 </pre>
 
-tipJS.benchmark.elapsedTime의 세번째 인수로 callback function을 지정 할 수 있습니다.
+You can use the callback function as a third argument of tipJS.benchmark.elapsedTime method.
+
 <pre>
 tipJS.benchmark.mark("point1");
 ... 
@@ -991,8 +1024,7 @@ tipJS.benchmark.elapsedTime("point1", "point2", function(startName, endName, sta
 </pre>
 
 ##i18n
-tipJS JavaScript MVC Framework 를 통한 다국어지원(internationalization/i18n) 기능을 설명합니다.
-기능을 활성화 하기 위해서 tipJS.app method 에서 localSet 속성을 추가하고 true 값을 설정합니다.
+tipJS JavaScript MVC Framework provides inernationalization/i18n. add 'localSet : true' property in the tipJS.app method when you want activate it.
 <pre>
 tipJS.app({
     ...
@@ -1000,7 +1032,9 @@ tipJS.app({
     ...
 });
 </pre>
-controllers 등이 있는 application 폴더에 lang 폴더를 작성하고 lang폴더 안에 언어코드.js 파일을 아래와 같이 작성합니다. 언어코드는 tipJS가 브라우저 언어정보(navigator.language || navigator.systemLanguage || navigator.userLanguage)를 읽어 자동으로 기본값을 설정합니다.
+
+Create lang folder below the application folder and make each language files likes below. tipJS define default language it depends on the browser user-agent (navigator.language || navigator.systemLanguage || navigator.userLanguage).
+
 <pre>
 // lang/ko.js
 tipJS.localSet({
@@ -1015,7 +1049,7 @@ tipJS.localSet({
     "Load":"読み込み"
 });
 </pre>
-언어코드를 수동으로 설정하려면 아래와 같이 tipJS.loadApp 메소드를 호출하기 전에 tipJS.lang 속성값을 설정하려는 언어코드로 변경해 줍니다.
+Set the langauge to manually, change tipJS.lang property before invoke tipJS.loadApp. The code is as follows:
 <pre>
 ...
     tipJS.lang = "ja"; // set to Japaness
@@ -1023,7 +1057,8 @@ tipJS.localSet({
 ...
 </pre>
 
-해당 language set의 message 를 취득하려면 tipJS.msg 메소드를 사용합니다.
+Use the tipJS.msg method when you want to get a specified language set.
+
 <pre>
 tipJS.controller("someCtrler", {
     invoke:function(params){
@@ -1039,7 +1074,7 @@ tipJS.model({
     }
 });
 </pre>
-언어코드.js 파일에서 tipJS.localSet method 로 등록되지 않은 메세지를 취득하려 하면 tipJS.msg method 는 입력한 메세지를 그대로 반환합니다.
+If you do not have the language files (tipJS.localSet), the value is returned unchanged message from tipJS.msg method.
 <pre>
 tipJS.model("someModel", {
     someMethod:function(params){
