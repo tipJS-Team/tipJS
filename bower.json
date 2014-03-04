@@ -24,7 +24,7 @@
     "tests"
   ],
   "main": [
-  	"build/tipJS.min.js",
-  	"examples/tipJS.min.js"
+		"build/tipJS.min.js",
+		"examples/tipJS.min.js"
   ]
 }
